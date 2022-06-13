@@ -74,7 +74,6 @@ const Login = () => {
           localStorage.removeItem("adanianuser");
           let user = JSON.stringify(response);
           localStorage.setItem("adanianuser", user);
-          // console.log(localStorage.getItem("smstequser"));
           setTimeout(function () {
             // navigate('/home');
 
