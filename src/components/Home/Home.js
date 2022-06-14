@@ -31,7 +31,7 @@ const Home = () => {
     axios.get(Variables.apiURL + 'api/get_all_posts', { headers: headers })
       .then(response => {
         setLoading(false);
-        // console.log(response.data.success);
+        console.log(response.data.success);
 
         if (response.status == 200) {
           setPosts(response.data.success);
@@ -96,7 +96,7 @@ const Home = () => {
               <div class="col-12 mb-100">
                 <article data-file="articles/b.html" data-target="article" class="article-full-width">
                   <div class="post-image">
-                    <img class="img-fluid" src="images/masonary-post/post-2.jpg" alt="post-thumb" />
+                    <img class="img-fluid" src={Variables.apiURL + post.image} alt="post-thumb" />
                   </div>
                   <div class="post-content">
                     <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">

@@ -1,3 +1,4 @@
 export const Variables = {
-    apiURL: 'https://adanian.dennisweru.co.ke/'
+    apiURL: 'http://127.0.0.1:8000/'
+    ///'https://adanian.dennisweru.co.ke/'
 };
