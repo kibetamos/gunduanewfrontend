@@ -60,12 +60,12 @@ const Login = () => {
       'Content-Type': 'application/json',
     }
     setLoading(true);
-    axios.post(Variables.apiURL + 'api/login/', submitPayload, { headers: headers })
+    axios.post(Variables.apiURL + 'api/login', submitPayload, { headers: headers })
       .then(response => {
         // $('#EmailExistsError').hide();
 
         setLoading(false);
-        // console.log(response);
+        console.log(response);
 
         if (response.status == 200) {
           $('#EmailAbsentError').hide();

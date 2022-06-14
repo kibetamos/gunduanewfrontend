@@ -78,9 +78,9 @@ const Register = () => {
           $('#SubmitError').hide();
           $('.alert-success').show();
 
-          localStorage.removeItem("adanianuser");
-          let user = JSON.stringify(response);
-          localStorage.setItem("adanianuser", user);
+          // localStorage.removeItem("adanianuser");
+          // let user = JSON.stringify(response);
+          // localStorage.setItem("adanianuser", user);
           setTimeout(function () {
             // navigate('/home');
             // $("#register-form").fadeOut();
