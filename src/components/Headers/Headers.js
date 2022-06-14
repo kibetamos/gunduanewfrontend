@@ -35,8 +35,8 @@ function Headers() {
 
   return (
     <div className={styles.Headers} data-testid="Headers">
-      <header class="navigation">
-        <nav class="navbar navbar-expand-lg navbar-light">
+      <header class="navigation ">
+        <nav class="navbar navbar-expand-lg fixed-top background-white box-shadow-header navbar-light">
           <a class="navbar-brand" href="/home"><img class="img-fluid" src="images/adalogo.webp" alt="parsa" /></a>
           <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
             aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,19 +48,19 @@ function Headers() {
               loggedIn ?
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link"  > <button>New Post</button> </a>
+                    <a class="nav-link" href='/upload-post'> <button class="btn-success btn">+ New Post</button> </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" onClick={logOut} > <button>Logout</button> </a>
+                    <a class="nav-link" onClick={logOut} > <button class="btn btn-secondary">Logout</button> </a>
                   </li>
                 </ul>
                 :
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href='/login'> <button>Login</button> </a>
+                    <a class="nav-link" href='/login'> <button class="btn-success btn">Login</button> </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href='/register'> Register</a>
+                    <a class="nav-link" href='/register'> <button class="btn btn-secondary"> Register</button></a>
                   </li>
                 </ul>
             }

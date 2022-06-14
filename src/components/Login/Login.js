@@ -128,8 +128,8 @@ const Login = () => {
       <Headers></Headers>
       <div class="authincation mt-5 mb-5 h-100">
         <div class="container pb-5 login-container h-100">
-          <div class="row justify-content-center h-100 align-items-center">
-            <div class="col-md-10 col-sm-12">
+          <div class="row pt-5 justify-content-center h-100 align-items-center">
+            <div class="col-md-10 pt-5  background-white col-sm-12">
               <div class="authincation-content">
                 <div class="row no-gutters">
                   <div class="col-xl-12">

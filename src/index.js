@@ -8,15 +8,19 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import SinglePost from './components/SinglePost/SinglePost';
+import UploadPost from './components/UploadPost/UploadPost';
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route exact path="/register" element={<Register />} />
       <Route exact path="/" element={<Login />} />
-      <Route exact path="/login" element={<Login />} />
-      <Route exact path="/home" element={<Home />} />
-      <Route exact path="/single-post/:id" element={<SinglePost />} />
+      <Route exact path="login" element={<Login />} />
+      <Route exact path="home" element={<Home />} />
+      <Route path="single-post" element={<SinglePost />} >
+        {/* <Route exact path=":id" element={<SinglePost />} /> */}
+      </Route>
+      <Route exact path="upload-post" element={<UploadPost />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

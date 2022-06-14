@@ -185,7 +185,7 @@ const Register = () => {
       <Headers></Headers>
 
 
-      <body style={bodyStyle} className="h-100 pt-5">
+      <body style={bodyStyle} className="h-100 mt-5 pt-5">
         <div className="authincation mt-5 mb-5 h-100">
           <div className="container login-container h-100">
             <div className="row justify-content-center h-100 align-items-center">

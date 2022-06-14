@@ -16,6 +16,19 @@ const SinglePost = () => (
 
     <Headers></Headers>
 
+    {/* <!-- page-title --> */}
+    <section class="section bg-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>As a Designer, I Refuse to Call People ‘Users’</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    {/* <!-- /page-title --> */}
+
+
     {/* <!-- blog single --> */}
     <section>
       <div class="container">
