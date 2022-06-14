@@ -103,7 +103,7 @@ const Home = () => {
                       <li class="list-inline-item"><i class="ti-calendar mr-2"></i>  {Moment(post.updated_at).format('d MMM YYYY')} </li>
                       {/* <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span class="eta">8 min</span> read</li> */}
                     </ul>
-                    <h4 class="mb-4"><a href="blog-single.html" class="text-dark">{post.title}</a></h4>
+                    <h4 class="mb-4"><a class="text-dark">{post.title}</a></h4>
                     <p class="mb-0 post-summary">{post.description}</p>
                     {/* <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a> */}
                   </div>
