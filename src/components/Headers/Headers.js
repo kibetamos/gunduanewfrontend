@@ -48,9 +48,6 @@ function Headers() {
               loggedIn ?
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href='/upload-post'> <button class="btn-success btn">+ New Post</button> </a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link" onClick={logOut} > <button class="btn btn-secondary">Logout</button> </a>
                   </li>
                 </ul>

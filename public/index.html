@@ -1,70 +1,84 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Adanian Social</title>
-
-  <!-- mobile responsive meta -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <!-- ** Plugins Needed for the Project ** -->
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
-  <!-- slick slider -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  <!-- themefy-icon -->
-  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
-
-  <!-- Main Stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
-
-  <!--Favicon-->
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegalAnalytics</title>
+  <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <!-- https://fonts.google.com/ -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/templatemo-xtra-blog.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner&family=PT+Sans&display=swap" rel="stylesheet">
+  <link href="css/cases.css" rel="stylesheet">
 </head>
 
 <body>
-  <!-- preloader -->
-  <div class="preloader">
-    <div class="loader">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
+  <header class="tm-header" id="tm-header">
+    <div class="tm-header-wrapper">
+      <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="tm-site-header">
+        <div class="mb-3 mx-auto tm-site-logo"><i class="fa fa-gavel" aria-hidden="true"></i></div>
+        <h2 class="text-center" style="font-family: 'Commissioner', sans-serif;">Legal Analytics</h2>
       </div>
+      <nav class="tm-nav" id="tm-nav">
+        <ul>
+          <li class="tm-nav-item active"><a href="index.html" class="tm-nav-link">
+              <i class="fas fa-home"></i>
+              Home
+            </a></li>
+          <li class="tm-nav-item"><a href="uploadnotes.html" class="tm-nav-link">
+              <i class="fa fa-upload" aria-hidden="true"></i>
+              Upload Notes
+            </a></li>
+        </ul>
+      </nav>
+
     </div>
-  </div>
-  <!-- /preloader -->
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  </header>
+
   <div>
     <div id="root">
 
     </div>
   </div>
+  <div class="container-fluid">
+    <main class="tm-main">
+      <!-- Search form -->
+      <div class="row tm-row">
+        <div class="col-12">
+          <form method="" class="form-inline tm-mb-80 tm-search-form full-text-form"
+            style="justify-content:space-between;width:100%;">
+            <input class="form-control tm-search-input full-search-input" name="query" type="text"
+              placeholder="Search..." aria-label="Search" id="search-field">
+            <button class="tm-search-button" type="submit" id="search-btn">
+              <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="cases-container">
+        <h2 class="cases-h2"> Cases</h2>
+      </div>
 
-  <!-- jQuery -->
-  <script src="plugins/jQuery/jquery.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="plugins/bootstrap/bootstrap.min.js"></script>
-  <!-- slick slider -->
-  <script src="plugins/slick/slick.min.js"></script>
-  <!-- masonry -->
-  <script src="plugins/masonry/masonry.js"></script>
-  <!-- instafeed -->
-  <script src="plugins/instafeed/instafeed.min.js"></script>
-  <!-- smooth scroll -->
-  <script src="plugins/smooth-scroll/smooth-scroll.js"></script>
-  <!-- headroom -->
-  <script src="plugins/headroom/headroom.js"></script>
-  <!-- reading time -->
-  <script src="plugins/reading-time/readingTime.min.js"></script>
+      <div class="row tm-row" id="case-container">
+      </div>
 
-  <!-- Main Script -->
-  <script src="js/script.js"></script>
+      <footer class="row tm-row">
+        <hr class="col-12">
+        <!-- xtr -->
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/templatemo-script.js"></script>
+  <script src="js/cases.js"></script>
 
 </body>
 

@@ -9,8 +9,7 @@ const Footers = () => (
       <div class="text-center pb-3">
         <p class="mb-0">Copyright ©
           <script>var CurrentYear = new Date().getFullYear()
-            document.write(CurrentYear)</script> <br /> A project by <a href="https://dennisweru.co.ke/">Dennis
-              Weru</a>
+            document.write(CurrentYear)</script> <br /> A project by <a href="https://homelandteq.com/">Homeland Teq Solutions</a>
         </p>
       </div>
     </footer>
