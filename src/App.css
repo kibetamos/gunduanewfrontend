@@ -1,0 +1,19 @@
+.top-search-bar {
+    width: 600px;
+}
+
+.top-search-bar .form-control {
+    border-radius: 0px;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.top-search-bar .input-group-text {
+    border-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.header-right .header-profile img {
+    border-radius: 0% !important;
+}

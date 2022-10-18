@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Register.module.css';
-import Headers from '../Headers/Headers';
-import Footers from '../Footers/Footers';
+import Headers from '../_layouts/Headers/Headers';
+import Footers from '../_layouts/Footers/Footers';
 import {
   Link, useNavigate
 } from "react-router-dom";

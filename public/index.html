@@ -4,82 +4,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LegalAnalytics</title>
-  <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-  <!-- https://fonts.google.com/ -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/templatemo-xtra-blog.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Commissioner&family=PT+Sans&display=swap" rel="stylesheet">
-  <link href="css/cases.css" rel="stylesheet">
+  <title>Gundua</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+  <link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+  <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+  <link href="./vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <header class="tm-header" id="tm-header">
-    <div class="tm-header-wrapper">
-      <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="tm-site-header">
-        <div class="mb-3 mx-auto tm-site-logo"><i class="fa fa-gavel" aria-hidden="true"></i></div>
-        <h2 class="text-center" style="font-family: 'Commissioner', sans-serif;">Legal Analytics</h2>
-      </div>
-      <nav class="tm-nav" id="tm-nav">
-        <ul>
-          <li class="tm-nav-item active"><a href="index.html" class="tm-nav-link">
-              <i class="fas fa-home"></i>
-              Home
-            </a></li>
-          <li class="tm-nav-item"><a href="uploadnotes.html" class="tm-nav-link">
-              <i class="fa fa-upload" aria-hidden="true"></i>
-              Upload Notes
-            </a></li>
-        </ul>
-      </nav>
-
+  <!--*******************
+      Preloader start
+  ********************-->
+  <div id="preloader">
+    <div class="sk-three-bounce">
+      <div class="sk-child sk-bounce1"></div>
+      <div class="sk-child sk-bounce2"></div>
+      <div class="sk-child sk-bounce3"></div>
     </div>
-  </header>
+  </div>
+  <!--*******************
+      Preloader end
+  ********************-->
 
-  <div>
+  <!--**********************************
+        Main wrapper start
+    ***********************************-->
+  <div id="main-wrapper">
     <div id="root">
 
     </div>
   </div>
-  <div class="container-fluid">
-    <main class="tm-main">
-      <!-- Search form -->
-      <div class="row tm-row">
-        <div class="col-12">
-          <form method="" class="form-inline tm-mb-80 tm-search-form full-text-form"
-            style="justify-content:space-between;width:100%;">
-            <input class="form-control tm-search-input full-search-input" name="query" type="text"
-              placeholder="Search..." aria-label="Search" id="search-field">
-            <button class="tm-search-button" type="submit" id="search-btn">
-              <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-      <div class="cases-container">
-        <h2 class="cases-h2"> Cases</h2>
-      </div>
+  <!--**********************************
+      Main wrapper end
+  ***********************************-->
 
-      <div class="row tm-row" id="case-container">
-      </div>
+  <!-- Required vendors -->
+  <script src="./vendor/global/global.min.js"></script>
+  <script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+  <script src="./vendor/chart.js/Chart.bundle.min.js"></script>
+  <script src="./js/custom.js"></script>
+  <script src="./js/deznav-init.js"></script>
+  <script src="./vendor/owl-carousel/owl.carousel.js"></script>
 
-      <footer class="row tm-row">
-        <hr class="col-12">
-        <!-- xtr -->
-      </footer>
-    </main>
-  </div>
+  <!-- Chart piety plugin files -->
+  <script src="./vendor/peity/jquery.peity.min.js"></script>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/templatemo-script.js"></script>
-  <script src="js/cases.js"></script>
+  <!-- Apex Chart -->
+  <script src="./vendor/apexchart/apexchart.js"></script>
 
+  <!-- Dashboard 1 -->
+  <script src="./js/dashboard/dashboard-1.js"></script>
+
+  <script>
+    function carouselReview() {
+      /*  event-bx one function by = owl.carousel.js */
+      jQuery('.event-bx').owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: true,
+        center: true,
+        autoplaySpeed: 3000,
+        navSpeed: 3000,
+        paginationSpeed: 3000,
+        slideSpeed: 3000,
+        smartSpeed: 3000,
+        autoplay: false,
+        navText: ['<i class="fa fa-caret-left" aria-hidden="true"></i>', '<i class="fa fa-caret-right" aria-hidden="true"></i>'],
+        dots: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          720: {
+            items: 2
+          },
+
+          1150: {
+            items: 3
+          },
+
+          1200: {
+            items: 2
+          },
+          1749: {
+            items: 3
+          }
+        }
+      })
+    }
+    jQuery(window).on('load', function () {
+      setTimeout(function () {
+        carouselReview();
+      }, 1000);
+    });
+  </script>
 </body>
 
 </html>
