@@ -15,7 +15,7 @@ const Home = () => {
 
   //when page loads
   useEffect(() => {
-    getPosts();
+    // getPosts();
   }, []);
 
   //get all posts

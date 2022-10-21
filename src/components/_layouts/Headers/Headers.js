@@ -17,7 +17,7 @@ function Headers() {
       if (window.location.pathname != "/register") {
         //redirect to login 
         if (window.location.pathname != "/login") {
-          window.location.href = "/login";
+          // window.location.href = "/login";
           setLoggedIn(false);
         }
       }

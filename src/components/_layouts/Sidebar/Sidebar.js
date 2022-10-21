@@ -27,7 +27,31 @@ const Sidebar = () => (
           <li >
             <a href="/schedules" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-upload-1"></i>
-              <span class="nav-text">Upload Notes</span>
+              <span class="nav-text">Text Summarizer</span>
+            </a>
+          </li>
+          <li >
+            <a href="/schedules" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-upload-1"></i>
+              <span class="nav-text">Similarity Search</span>
+            </a>
+          </li>
+          <li >
+            <a href="/schedules" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-upload-1"></i>
+              <span class="nav-text">Summaries</span>
+            </a>
+          </li>
+          <li >
+            <a href="/schedules" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-upload-1"></i>
+              <span class="nav-text">Statutory Docs</span>
+            </a>
+          </li>
+          <li >
+            <a href="/schedules" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-upload-1"></i>
+              <span class="nav-text">User Profile</span>
             </a>
           </li>
         </ul>
