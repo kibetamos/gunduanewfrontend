@@ -4,7 +4,6 @@ import {
   Link, useNavigate
 } from "react-router-dom";
 
-
 const Sidebar = () => (
   <div className='sidebar-main' id='sidebar-main'>
     <div class="deznav">

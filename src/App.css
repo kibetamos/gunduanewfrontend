@@ -17,3 +17,7 @@
 .header-right .header-profile img {
     border-radius: 0% !important;
 }
+
+@media screen and (max-width: 1000px) {
+    .top-search-bar {}
+}

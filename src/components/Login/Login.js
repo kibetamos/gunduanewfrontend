@@ -77,7 +77,7 @@ const Login = () => {
           setTimeout(function () {
             // navigate('/home');
 
-            window.location.href = "/home";
+            // window.location.href = "/home";
           }, 1000);
         } else {
           $('.alert-success').hide();
