@@ -18,45 +18,39 @@ const Sidebar = () => (
           class="btn btn-primary shadow btn-xs sharp mr-1 d-none" id="showEditContactModal"  > </a> */}
 
         <ul class="metismenu" id="menu">
-          <li class="mm-active">
+          <li > 
             <a href="/" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-home-3"></i>
               <span class="nav-text">Home</span>
             </a>
           </li>
           <li >
-            <a href="/schedules" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-upload-1"></i>
-              <span class="nav-text"> Summarizer</span>
+            <a href="/summaries" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-clock-1"></i>
+              <span class="nav-text"> Summaries</span>
             </a>
           </li>
           <li >
-            <a href="/schedules" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-upload-1"></i>
+            <a href="/search" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-search-1"></i>
               <span class="nav-text"> Search</span>
             </a>
           </li>
           <li >
-            <a href="/schedules" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-upload-1"></i>
-              <span class="nav-text">Summaries</span>
-            </a>
-          </li>
-          <li >
-            <a href="/schedules" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-upload-1"></i>
+            <a href="/docs" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-notepad-1"></i>
               <span class="nav-text"> Docs</span>
             </a>
           </li>
           <li >
-            <a href="/schedules" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-upload-1"></i>
+            <a href="/editor" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-edit-1"></i>
               <span class="nav-text"> Editor</span>
             </a>
           </li>
           <li >
-            <a href="/schedules" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-upload-1"></i>
+            <a href="/profile" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-user-1"></i>
               <span class="nav-text">User Profile</span>
             </a>
           </li>
