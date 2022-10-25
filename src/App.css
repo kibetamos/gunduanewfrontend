@@ -28,3 +28,8 @@
 .menu-button {
     right: 0;
 }
+  .btn-primary:hover,.btn-primary:active,.btn-primary:focus,.btn-primary:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #162036;
+    border-color: #162036;
+}
