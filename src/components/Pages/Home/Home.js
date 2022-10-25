@@ -11,46 +11,63 @@ import Moment from 'moment';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const[items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const[isLoading, setIsLoading] = useState(true);
+  const[query, setQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const[itemsPerPage] = useState(6);
 
   //when page loads
+  // useEffect(() => {
+  //   // getPosts();
+  // }, []);
   useEffect(() => {
-    // getPosts();
-  }, []);
-
-  //get all posts
-  const getPosts = () => {
-    let gotten = JSON.parse(localStorage.getItem("adanianuser"));
-    let token = gotten.data.success.token;
-
-
-    const headers = {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': "Bearer " + token
+    const fetchItems = async () => {
+      setIsLoading(true)
+      // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
+      const result = await axios('http://127.0.0.1:8000/cases/')
+      console.log(result.data)
+      setItems(result.data)
+      // setItems(fullSearchUrl.data)
+      setIsLoading(false)
     }
-    setLoading(true);
-    axios.get(Variables.apiURL + 'api/get_all_posts', { headers: headers })
-      .then(response => {
-        setLoading(false);
-        console.log(response.data.success);
+    fetchItems()
+  },[query] )
+  //get all posts
+  // const getPosts = () => {
+  //   let gotten = JSON.parse(localStorage.getItem("adanianuser"));
+  //   let token = gotten.data.success.token;
 
-        if (response.status == 200) {
-          setPosts(response.data.success);
-          console.log(posts);
-        } else {
-          $('#SubmitError').show();
-        }
-      })
-      .catch(error => {
-        console.log('error');
-        console.log(error);
-        // $('#EmailAbsentError').show();
-        // setLoading(false);
-      })
-  }
+
+  //   const headers = {
+  //     'Content-Type': 'multipart/form-data',
+  //     'Authorization': "Bearer " + token
+  //   }
+  //   setLoading(true);
+  //   axios.get(Variables.apiURL + 'api/get_all_posts', { headers: headers })
+  //     .then(response => {
+  //       setLoading(false);
+  //       console.log(response.data.success);
+
+  //       if (response.status == 200) {
+  //         setPosts(response.data.success);
+  //         console.log(posts);
+  //       } else {
+  //         $('#SubmitError').show();
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('error');
+  //       console.log(error);
+  //       // $('#EmailAbsentError').show();
+  //       // setLoading(false);
+  //     })
+  // }
 
   Moment.locale('en');
   return (
+    
     <div className={styles.Home} data-testid="Home">
 
       <Header title="Overview"></Header>
@@ -64,6 +81,11 @@ const Home = () => {
               <li class="breadcrumb-item active"><a href="javascript:void(0)">Blank</a></li>
             </ol>
           </div>
+          {/* <section className='cards'>
+        {items.map((item) => (
+            <Case1 key={item._id} item={item}></Case1>
+        ))}
+        </section> */}
           <div class="row">
             <div class="col-lg-6 col-xl-6">
               <div class="card">
@@ -71,7 +93,7 @@ const Home = () => {
                   <div class="row m-b-30">
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
-                        <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
+                        <h4><a href="ecom-product-detail.html">{items._id}</a></h4>
                         <div class="comment-review star-rating">
                           <ul>
                             <li><i class="fa fa-star"></i></li>
