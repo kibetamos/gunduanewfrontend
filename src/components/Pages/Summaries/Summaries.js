@@ -64,7 +64,7 @@ Moment.locale('en');
 
                                         <div class="input-group mb-3">      
 								<div class="input-group">
-									<textarea rows="5" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
+									<textarea rows="6" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
 									<div class="input-group-append">
 										<button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
 									</div>
@@ -73,7 +73,7 @@ Moment.locale('en');
 							</div>
               <div class="input-group mb-3">
               <div class="input-group">
-									<textarea rows="14" cols="7"class="form-control" placeholder="View Text"></textarea>
+									<textarea rows="14" cols="7"class="form-control" placeholder="View Summarized Text $ Edit "></textarea>
 									<div class="input-group-append">
 										{/* <button type="button"></button> */}
 									</div>
