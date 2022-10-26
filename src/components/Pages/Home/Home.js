@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
 
-const Home = () => {
+const Home = ({ item }) => {
   const [posts, setPosts] = useState([]);
   const[items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -77,45 +77,52 @@ const Home = () => {
         <div class="container-fluid">
           <div class=" ">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
-              <li class="breadcrumb-item active"><a href="javascript:void(0)">Blank</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Gundua</a></li>
+              <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
             </ol>
           </div>
-          {/* <section className='cards'>
-        {items.map((item) => (
-            <Case1 key={item._id} item={item}></Case1>
-        ))}
-        </section> */}
           <div class="row">
+          {items.map((item) => (
+            // <Case1 key={item._id} item={item}></Case1>
+            // <p> {item.meta_info['Date Delivered']}</p>
             <div class="col-lg-6 col-xl-6">
               <div class="card">
                 <div class="card-body">
                   <div class="row m-b-30">
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
-                        <h4><a href="ecom-product-detail.html">{items._id}</a></h4>
+                      <h4><a href={"/Case?id="+item._id}>
+                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${item.meta_info['Parties'].substring(0,70)}...`} */}
+                {/* {item.judgement.substring(0,70)} */}
+                {item.meta_info['Parties']}
+                </a></h4> 
                         <div class="comment-review star-rating">
                           <ul>
-                            <li><i class="fa fa-star"></i></li>
+                            {/* <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star-half-empty"></i></li>
-                            <li><i class="fa fa-star-half-empty"></i></li>
+                            <li><i class="fa fa-star-half-empty"></i></li> */}
                           </ul>
-                          <span class="review-text">(34 reviews) / </span><a class="product-review" href="" data-toggle="modal" data-target="#reviewModal">Write a review?</a>
-                          <p class="price">$320.00</p>
+                          {/* <span class="review-text">(34 reviews) / </span><a class="product-review" href="" data-toggle="modal" data-target="#reviewModal">Write a review?</a>
+                          <p class="price">$320.00</p> */}
                         </div>
-                        <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                        <p>Product code: <span class="item">0405689</span> </p>
-                        <p>Brand: <span class="item">Lee</span></p>
-                        <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
+                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
+                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
+                        <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                        {/* <p class="text-content"></p> */}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-xl-6">
+
+        ))}
+            
+            {/* <div class="col-lg-6 col-xl-6">
               <div class="card">
                 <div class="card-body">
                   <div class="row m-b-30">
@@ -142,7 +149,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div class="modal fade" id="reviewModal">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">

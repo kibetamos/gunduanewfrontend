@@ -10,6 +10,7 @@ import Register from './components/Register/Register';
 // import Summarizer from './components/Summarizer/Summarizer';
 import Summaries from './components/Pages/Summaries/Summaries';
 import Search  from './components/Pages/Search/Search';
+import Case1 from './components/Pages/Cases/case1';
 
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route exact path="/" element={<Home />} />
       <Route exact path="/Summaries" element={<Summaries />} />
       <Route exact path="/Search" element={<Search />} />
+      <Route exact path="/Case" element={<Case1 />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')
