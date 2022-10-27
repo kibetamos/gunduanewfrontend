@@ -32,6 +32,10 @@ const Case1 = ({ item }) => {
       setIsLoading(false)
     }
     fetchItems()
+//     for (const [key, value] of Object.entries(meta_info)) {
+//       console.log(key + ": " + value)
+// }
+      
   },[query] )
   return (
     <div>
@@ -100,6 +104,25 @@ const Case1 = ({ item }) => {
           </ul>
           <span class="review-text">(34 reviews) / </span><a class="product-review" href=""  data-toggle="modal" data-target="#reviewModal">Write a review?</a>
         </div>
+        <div>
+        <div>
+        {/* {
+          Object.keys(this.state.dict).map(name => (
+            <Services categories={this.state.dict[name]}></Services>
+          ))
+        } */}
+        {/* {
+          this.state.items.map((data)=>
+          <div>{items.name}</div>
+           <ul>
+            {items.details(sub)}
+          </ul>
+
+        } */}
+    </div>
+        {/* for (const [key, value] of Object.entries(meta_info)) {
+    console.log(key, value);} */}
+</div>
         <div class="d-table mb-2">
           <p class="price float-left d-block">$325.00</p>
 

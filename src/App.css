@@ -33,3 +33,8 @@
     background-color: #162036;
     border-color: #162036;
 }
+
+.col-xxl-5 {
+    /* flex: 0 0 41.6666666667%; */
+    /* max-width: 41.6666666667%; */
+}
