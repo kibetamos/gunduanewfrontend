@@ -11,6 +11,7 @@ import Register from './components/Register/Register';
 import Summaries from './components/Pages/Summaries/Summaries';
 import Search  from './components/Pages/Search/Search';
 import Case1 from './components/Pages/Cases/case1';
+import Home2 from  './components/Pages/Home/Home2';
 
 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
     <Routes>
       <Route exact path="/register" element={<Register />} />
       <Route exact path="/" element={<Home />} />
+      <Route exact path="/home2" element={<Home2 />} />
       <Route exact path="/Summaries" element={<Summaries />} />
       <Route exact path="/Search" element={<Search />} />
       <Route exact path="/Case" element={<Case1 />} />

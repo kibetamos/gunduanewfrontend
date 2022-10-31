@@ -246,7 +246,7 @@ const Home = ({ item }) => {
 					</div>
 					<div class="col-xl-9 col-xxl-8">
 						<div class="row">
-							<div class="col-xl-4 col-xxl-6 col-lg-4 col-sm-6">
+							{/* <div class="col-xl-4 col-xxl-6 col-lg-4 col-sm-6">
 								<div class="card">
 									<div class="card-body">
 										<div class="d-flex align-items-end">
@@ -265,8 +265,8 @@ const Home = ({ item }) => {
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-xl-4 col-xxl-6 col-lg-4 col-sm-6">
+							</div> */}
+							{/* <div class="col-xl-4 col-xxl-6 col-lg-4 col-sm-6">
 								<div class="card">
 									<div class="card-body">
 										<div class="d-flex justify-content-between align-items-center">
@@ -289,7 +289,84 @@ const Home = ({ item }) => {
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> */}
+							 <div class="col-xl-4 col-xxl-12 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                            </div>
+                            <div class="card-body">
+                                {/* <!-- Nav tabs --> */}
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+									<li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#home1"><i class="la la-home mr-2"></i> All Content</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#home2"><i class="la la-home mr-2"></i> Cases</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Constitution</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#contact1"><i class="la la-phone mr-2"></i> Categories</a>
+											
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#tool1"><i class="la la-envelope mr-2"></i> Tools</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="home1" role="tabpanel">
+                                            <div class="pt-4">
+                                                <h4>All Content</h4>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+                                                </p>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+                                                </p>
+                                            </div>
+                                        </div>
+										<div class="tab-pane fade" id="home2">
+                                            <div class="pt-4">
+                                                <h4>Cases</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                </p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="profile1">
+                                            <div class="pt-4">
+                                                <h4>Constitution</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                </p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="contact1">
+                                            <div class="pt-4">
+                                                <h4>Categories</h4>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+                                                </p>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tool1">
+                                            <div class="pt-4">
+                                                <h4>Tools</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                </p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 							<div class="col-xl-4 col-xxl-12 col-lg-4">
 								<div class="card">
 									<div class="card-header align-items-start pb-0 border-0">

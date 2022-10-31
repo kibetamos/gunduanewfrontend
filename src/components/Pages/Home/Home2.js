@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
 
-const Home = ({ item }) => {
+const Home2 = ({ item }) => {
   const [posts, setPosts] = useState([]);
   const[items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -202,8 +202,8 @@ const Home = ({ item }) => {
   )
 };
 
-Home.propTypes = {};
+Home2.propTypes = {};
 
-Home.defaultProps = {};
+Home2.defaultProps = {};
 
-export default Home;
+export default Home2;
