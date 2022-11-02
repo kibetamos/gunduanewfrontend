@@ -1,25 +1,60 @@
-import React, { useState, forwardRef, useRef, useImperativeHandle, useEffect } from "react";
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
 import styles from '../../Pages/Home/Home.module.css';
 import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
-import Footer from '../../_layouts/Footers/Footers';
-import $ from 'jquery';
-import axios from 'axios';
-import { Variables } from '../../_utils/GlobalVariables';
-import Moment from 'moment';
 
-const Search = () => {
+const Docs = (event) => {
+  const [file, setFile] = useState();
+  const [remark, setRemark] = useState("");
 
+
+  const newDoc =() => {
+    const uploadData = new FormData();
+    uploadData.append('remark',remark);
+    uploadData.append('file',file, file.name);
+    // console.log(remark);
+    fetch('http://127.0.0.1:8000/files/',{
+      method:'POST',
+      body:uploadData
+    })
+    .then(res => console.log(res))
+    .catch(error => console.log(error))
+  }
+
+  // const changeHandler = (event) => {
+	// 	setSelectedFile(event.target.files[0]);
+		// setIsSelected(true);
+	// };
+  // const handleSubmission = () => {
+	// 	const formData = new FormData();
+
+	// 	// formData.append('File', selectedFile);
+
+	// 	fetch(
+	// 		'http://127.0.0.1:8000/files/',
+	// 		{
+	// 			method: 'POST',
+	// 			body: formData,
+	// 		}
+	// 	)
+	// 		.then((response) => response.json())
+	// 		.then((result) => {
+	// 			console.log('Success:', result);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error('Error:', error);
+	// 		});
+	// };
+	
   return (
-    <div className={styles.Summaries} data-testid="Summaries">
+    <div className={styles.Summaries} data-testid="Docs">
 
       <Header title="Overview"></Header>
       <Sidebar  ></Sidebar>
         <div class="container-fluid">
       <div class="content-body">
      
-          
+      
           <div class=" ">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
@@ -36,7 +71,7 @@ const Search = () => {
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Summarize Text</h5>
+                                                    <h5 class="modal-title">Upload Text</h5>
                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                     </button>
                                                 </div>
@@ -47,41 +82,40 @@ const Search = () => {
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Name</span>
                                             </div>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" class="form-control" value={remark} onChange={(evt) =>setRemark(evt.target.value)}/>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Upload</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input"/>
+                                                <input type="file" class="custom-file-input" onChange={(evt) =>setFile(evt.target.files[0])}/>
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
                                         </div>
-
                                         <div class="input-group mb-3">      
-								<div class="input-group">
+								{/* <div class="input-group">
 									<textarea rows="6" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
 									<div class="input-group-append">
 										<button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
 									</div>
-                  </div>
+                  </div> */}
 
 							</div>
-              <div class="input-group mb-3">
+              {/* <div class="input-group mb-3">
               <div class="input-group">
 									<textarea rows="14" cols="7"class="form-control" placeholder="View Summarized Text $ Edit "></textarea>
 									<div class="input-group-append">
-										{/* <button type="button"></button> */}
+										
 									</div>
                   </div>
-							</div>
+							</div> */}
                                     </form>
                                 </div>
                                                   </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    <button onClick={() => newDoc()} type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -173,5 +207,5 @@ const Search = () => {
     
   )
 }
-export default Search;
+export default Docs;
 

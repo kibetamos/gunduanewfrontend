@@ -244,100 +244,39 @@ const Home = ({ item }) => {
 							</div>
 						</div>
 					</div>
+					
 					<div class="col-xl-9 col-xxl-8">
 						<div class="row">
-							{/* <div class="col-xl-4 col-xxl-6 col-lg-4 col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<div class="d-flex align-items-end">
-											<div>
-												<p class="fs-14 mb-1">New Sales</p>
-												<span class="fs-35 text-black font-w600">93
-													<svg class="ml-1" width="19" height="12" viewBox="0 0 19 12"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M2.00401 11.1924C0.222201 11.1924 -0.670134 9.0381 0.589795 7.77817L7.78218 0.585786C8.56323 -0.195262 9.82956 -0.195262 10.6106 0.585786L17.803 7.77817C19.0629 9.0381 18.1706 11.1924 16.3888 11.1924H2.00401Z"
-															fill="#33C25B" />
-													</svg>
-												</span>
-											</div>
-											<canvas class="lineChart" id="chart_widget_2" height="85"></canvas>
-										</div>
-									</div>
-								</div>
-							</div> */}
-							{/* <div class="col-xl-4 col-xxl-6 col-lg-4 col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<div class="d-flex justify-content-between align-items-center">
-											<div>
-												<p class="fs-14 mb-1">Event Held</p>
-												<span class="fs-35 text-black font-w600">856
-													<svg class="ml-1" width="19" height="12" viewBox="0 0 19 12"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M2.00401 11.1924C0.222201 11.1924 -0.670134 9.0381 0.589795 7.77817L7.78218 0.585786C8.56323 -0.195262 9.82956 -0.195262 10.6106 0.585786L17.803 7.77817C19.0629 9.0381 18.1706 11.1924 16.3888 11.1924H2.00401Z"
-															fill="#33C25B" />
-													</svg>
-												</span>
-											</div>
-											<div class="d-inline-block ml-auto position-relative donut-chart-sale">
-												<span class="donut"
-													data-peity='{ "fill": ["rgb(254, 99, 78)", "rgba(244, 244, 244, 1)"],   "innerRadius": 31, "radius": 10}'>6/8</span>
-												<small class="text-secondary">90%</small>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> */}
-							 <div class="col-xl-4 col-xxl-12 col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title"></h4>
-                            </div>
-                            <div class="card-body">
-                                {/* <!-- Nav tabs --> */}
+							<div class="card-body">
+                                
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
-									<li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home1"><i class="la la-home mr-2"></i> All Content</a>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#home1"><i class="la la-home mr-2"></i> Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home2"><i class="la la-home mr-2"></i> Cases</a>
+                                            <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Constitution</a>
+                                            <a class="nav-link" data-toggle="tab" href="#contact1"><i class="la la-phone mr-2"></i>  Contact</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#contact1"><i class="la la-phone mr-2"></i> Categories</a>
-											
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#tool1"><i class="la la-envelope mr-2"></i> Tools</a>
+                                            <a class="nav-link" data-toggle="tab" href="#message1"><i class="la la-envelope mr-2"></i> Message</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="home1" role="tabpanel">
                                             <div class="pt-4">
-                                                <h4>All Content</h4>
+                                                <h4>This is home title</h4>
                                                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
                                                 </p>
                                                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-                                                </p>
-                                            </div>
-                                        </div>
-										<div class="tab-pane fade" id="home2">
-                                            <div class="pt-4">
-                                                <h4>Cases</h4>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-                                                </p>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="profile1">
                                             <div class="pt-4">
-                                                <h4>Constitution</h4>
+                                                <h4>This is profile title</h4>
                                                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
                                                 </p>
                                                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
@@ -346,16 +285,16 @@ const Home = ({ item }) => {
                                         </div>
                                         <div class="tab-pane fade" id="contact1">
                                             <div class="pt-4">
-                                                <h4>Categories</h4>
+                                                <h4>This is contact title</h4>
                                                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
                                                 </p>
                                                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="tool1">
+                                        <div class="tab-pane fade" id="message1">
                                             <div class="pt-4">
-                                                <h4>Tools</h4>
+                                                <h4>This is message title</h4>
                                                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
                                                 </p>
                                                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
@@ -365,8 +304,6 @@ const Home = ({ item }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 							<div class="col-xl-4 col-xxl-12 col-lg-4">
 								<div class="card">
 									<div class="card-header align-items-start pb-0 border-0">
