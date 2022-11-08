@@ -11,7 +11,31 @@ import Moment from 'moment';
 
 
 const Summaries = () => {
-  
+   //Do a .summary of each document
+// const url = `http://127.0.0.1:8000/files/.summary/${query}`;
+
+// async function getCases(){
+//   var result = await axios.get(url);
+//   // setCases(result.data.hits)
+//   console.log(result.data);
+// }
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+//     getCases();
+//   }
+const [id, setid]= useState("") 
+const [summary, setSummary] = useState("")
+const url = `http://127.0.0.1:8000/files/summary/${id}`;
+
+async function getSummary(){
+  var result = await axios.get(url);
+  setSummary(result.data.summary)
+  console.log(summary);
+}
+  const onSubmit = (e) => {
+    e.preventDefault();
+    getSummary();
+  }
 
 Moment.locale('en');
   return (
@@ -45,14 +69,19 @@ Moment.locale('en');
                                                 </div>
                                                 <div class="modal-body">
                                                 <div class="basic-form">
-                                    <form>
-                                    <div class="input-group mb-3">
+                                    <form onSubmit={onSubmit}>
+                                    <div class="input-group mb-3" >
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Name</span>
                                             </div>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text"
+                                            placeholder="Enter ID" 
+                                            autoComplete="Off" value={id}
+                                            onChange={(e) => setid(e.target.value)} 
+                                            class="form-control"/>
+                                            <input className="app__submit" type="submit" value="Summary" />
                                         </div>
-                                        <div class="input-group mb-3">
+                                        {/* <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Upload</span>
                                             </div>
@@ -60,9 +89,9 @@ Moment.locale('en');
                                                 <input type="file" class="custom-file-input"/>
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
-                                        </div>
+                                        </div> */}
 
-                                        <div class="input-group mb-3">      
+                                        {/* <div class="input-group mb-3">      
 								<div class="input-group">
 									<textarea rows="6" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
 									<div class="input-group-append">
@@ -70,12 +99,13 @@ Moment.locale('en');
 									</div>
                   </div>
 
-							</div>
+							</div> */}
               <div class="input-group mb-3">
               <div class="input-group">
-									<textarea rows="14" cols="7"class="form-control" placeholder="View Summarized Text $ Edit "></textarea>
+									<textarea>{summary}</textarea>
+                  
 									<div class="input-group-append">
-										{/* <button type="button"></button> */}
+										<button type="button"></button>
 									</div>
                   </div>
 							</div>
@@ -125,44 +155,8 @@ Moment.locale('en');
 													</div>
 												</td>
                                             </tr>
-											<tr>
-                                                <td><strong>02</strong></td>
-                                                <td>Mr. Bobby</td>
-                                                <td>Dr. Jackson</td>
-                                                <td>01 August 2020</td>
-                                                <td><span class="badge light badge-danger">Canceled</span></td>
-                                                {/* <td>$21.56</td> */}
-                                                <td>
-													<div class="dropdown">
-														<button type="button" class="btn btn-danger light sharp" data-toggle="dropdown">
-															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-														</button>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-                                            </tr>
-											<tr>
-                                                <td><strong>03</strong></td>
-                                                <td>Mr. Bobby</td>
-                                                <td>Dr. Jackson</td>
-                                                <td>01 August 2020</td>
-                                                <td><span class="badge light badge-warning">Pending</span></td>
-                                                {/* <td>$21.56</td> */}
-                                                <td>
-													<div class="dropdown">
-														<button type="button" class="btn btn-warning light sharp" data-toggle="dropdown">
-															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-														</button>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-                                            </tr>
+										
+											
                                         </tbody>
                                     </table>
                                     </div>

@@ -1,13 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styles from '../../Pages/Home/Home.module.css';
 import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
+import axios from 'axios';
 
 const Docs = (event) => {
   const [file, setFile] = useState();
   const [remark, setRemark] = useState("");
+  const [posts, setPosts] = useState([]);
+  const[items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const[isLoading, setIsLoading] = useState(true);
+  // const[query, setQuery] = useState('');
+  const [query, setquery] = useState("") 
+  const [currentPage, setCurrentPage] = useState(1);
+  const[itemsPerPage] = useState(6);
 
-
+//This is to post a new doc to the databse
   const newDoc =() => {
     const uploadData = new FormData();
     uploadData.append('remark',remark);
@@ -20,32 +29,32 @@ const Docs = (event) => {
     .then(res => console.log(res))
     .catch(error => console.log(error))
   }
+//Retrieve cases from the database
+  useEffect(() => {
+    const fetchItems = async () => {
+      setIsLoading(true)
+      // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
+      const result = await axios(`http://127.0.0.1:8000/files/`)
+      console.log(result.data)
+      setItems(result.data.results)
+      // setItems(fullSearchUrl.data)
+      setIsLoading(false)
+    }
+    fetchItems()
+  },[query] )
 
-  // const changeHandler = (event) => {
-	// 	setSelectedFile(event.target.files[0]);
-		// setIsSelected(true);
-	// };
-  // const handleSubmission = () => {
-	// 	const formData = new FormData();
+   //Do a summary of each document
+// const url = `http://127.0.0.1:8000/files/summary/${query}`;
 
-	// 	// formData.append('File', selectedFile);
-
-	// 	fetch(
-	// 		'http://127.0.0.1:8000/files/',
-	// 		{
-	// 			method: 'POST',
-	// 			body: formData,
-	// 		}
-	// 	)
-	// 		.then((response) => response.json())
-	// 		.then((result) => {
-	// 			console.log('Success:', result);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error('Error:', error);
-	// 		});
-	// };
-	
+// async function getCases(){
+//   var result = await axios.get(url);
+//   // setCases(result.data.hits)
+//   console.log(result.data);
+// }
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+//     getCases();
+//   }
   return (
     <div className={styles.Summaries} data-testid="Docs">
 
@@ -63,6 +72,8 @@ const Docs = (event) => {
             </ol>
             
           </div>
+          
+          
                                     {/* <!-- Large modal --> */}
                                     <div class="raise_button">
                                     <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Upload</button>
@@ -123,80 +134,56 @@ const Docs = (event) => {
         {/* <div class="raise_button">
             <button type="button"class="btn btn-primary">Summarize Text</button>
             </div> */}
+            
             <div class="card">
             <table class="table table-responsive-md">
                                         <thead>
                                             <tr>
-                                                <th class="width80">#</th>
-                                                <th>CASES</th>
-                                                <th>No.Of Cases</th>
-                                                <th>DATE</th>
+                                                <th class="width80">ID</th>
+                                                {/* <th>CASES</th> */}
+                                                {/* <th>No.Of Cases</th> */}
+                                                <th>Remark</th>
                                                 {/* <th>STATUS</th> */}
-                                                {/* <th>PRICE</th> */}
+                                                <th>Name</th>
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        
+           {items.map((item) => 
+           (
                                             <tr>
-                                                <td><strong>01</strong></td>
-                                                <td>Case 1</td>
-                                                <td>5</td>
-                                                <td>01 August 2020</td>
+                                                <td><strong>{item.id}</strong></td>
+                                                <td>{item.remark}</td>
+                                                {/* <td>5</td> */}
+                                                <td>{item.file.substr(40)}</td>
                                                 {/* <td><span class="badge light badge-success">Successful</span></td> */}
                                                 {/* <td>$21.56</td> */}
                                                 <td>
+                                                  {/* <div class="raise_button">
+            <button type="button"class="btn btn-primary">Summarize Text</button>
+            </div> */}
 													<div class="dropdown">
 														<button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
 															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
 														</button>
 														<div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Summarize</a>
 															<a class="dropdown-item" href="#">Edit</a>
 															<a class="dropdown-item" href="#">Delete</a>
 														</div>
 													</div>
 												</td>
                                             </tr>
-											<tr>
-                                                <td><strong>02</strong></td>
-                                                <td>Case 2 </td>
-                                                <td>6</td>
-                                                <td>01 August 2020</td>
-                                                {/* <td><span class="badge light badge-danger">Canceled</span></td> */}
-                                                {/* <td>$21.56</td> */}
-                                                <td>
-													<div class="dropdown">
-														<button type="button" class="btn btn-danger light sharp" data-toggle="dropdown">
-															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-														</button>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-                                            </tr>
-											<tr>
-                                                <td><strong>03</strong></td>
-                                                <td>Case3</td>
-                                                <td>10</td>
-                                                <td>01 August 2020</td>
-                                                {/* <td><span class="badge light badge-warning">Pending</span></td> */}
-                                                {/* <td>$21.56</td> */}
-                                                <td>
-													<div class="dropdown">
-														<button type="button" class="btn btn-warning light sharp" data-toggle="dropdown">
-															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-														</button>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-                                            </tr>
+											
+ ))}  
+           
+
+											
                                         </tbody>
                                     </table>
                                     </div>
+
                                     
       </div>
       

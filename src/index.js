@@ -13,6 +13,7 @@ import Docs  from './components/Pages/Docs/Docs';
 import Case1 from './components/Pages/Cases/case1';
 import Home2 from  './components/Pages/Home/Home2';
 import Editor from './components/Pages/Editor/Editor';
+import Search from './components/Pages/Search/Search';
 
 
 ReactDOM.render(
@@ -25,7 +26,8 @@ ReactDOM.render(
       <Route exact path="/Docs" element={<Docs />} />
       <Route exact path="/Case" element={<Case1 />} />
       <Route exact path="/Editor" element={<Editor />} />
-      <Route exact path="/categories"  />
+      <Route exact path="/Search" element={<Search />} />
+      {/* <Route exact path="/categories"  /> */}
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

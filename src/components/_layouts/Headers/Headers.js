@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Search from '../../Pages/Search/Search';
+import axios from 'axios';
+
 import {
   Link, useNavigate
 } from "react-router-dom";
 import styles from './Headers.module.css';
 
 function Headers() {
+  const[query, setQuery] = useState("");
+  const [result, setResult] = useState([])
+  
 
+  async function getResult(){
+    
+    let query = document.getElementById('search').value;
+    // console.log(query)
+    const url = `http://127.0.0.1:8000/cases/text_search/`+query;
+    var result = await axios.get(url);
+
+    setResult(result.data.hits)
+    console.log(result);
+  }
+    const onSubmit = (e) => {
+      e.preventDefault();
+      getResult();
+    }
   const navigate = useNavigate();
   let [loggedIn, setLoggedIn] = useState(false);
 
@@ -60,12 +80,20 @@ function Headers() {
               </div>
               <ul class="navbar-nav header-right">
                 <li class="nav-item">
-                  <div class="input-group top-search-bar search-area d-xl-inline-flex">
-                    <input type="text" class="form-control" placeholder="Search..." />
+                <form onSubmit={onSubmit}>
+                  <div class="input-group top-search-bar search-area d-xl-inline-flex" >
+                    <input type="text" class="form-control"
+                    id='search'
+                    onChange={(e) => setQuery(e.target.value)} placeholder="Search..." />
                     <div class="input-group-append">
-                      <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+                      <span class="input-group-text">
+                      {/* <i type="text"
+                        class="flaticon-381-search-2"/> */}
+                          <input className="app__submit" type="submit" value="Search" />
+                          </span>
                     </div>
                   </div>
+                  </form>
                 </li>
                 <li class="nav-item dropdown header-profile">
                   <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
