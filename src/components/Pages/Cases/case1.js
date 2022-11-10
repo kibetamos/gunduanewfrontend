@@ -50,46 +50,10 @@ const Case1 = ({ item }) => {
             <div class="card-body">
                 <div class="row">
                     <div class="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
-                        {/* <!-- Tab panes --> */}
-                        {/* <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade show active" id="first">
-                                <img class="img-fluid" src="images/product/1.jpg" alt=""/>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="second">
-                                <img class="img-fluid" src="images/product/2.jpg" alt=""/>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="third">
-                                <img class="img-fluid" src="images/product/3.jpg" alt=""/>
-                            </div>
-      <div role="tabpanel" class="tab-pane fade" id="for">
-                                <img class="img-fluid" src="images/product/4.jpg" alt=""/>
-                            </div>
-                        </div> */}
-                        {/* <div class="tab-slide-content new-arrival-product mb-4 mb-xl-0">
-                            
-                            <ul class="nav slide-item-list mt-3" role="tablist">
-                                <li role="presentation" class="show">
-                                    <a href="#first" role="tab" data-toggle="tab">
-                                        <img class="img-fluid" src="images/tab/1.jpg" alt="" width="50"/>
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#second" role="tab" data-toggle="tab">
-                                      <img class="img-fluid" src="images/tab/2.jpg" alt="" width="50"/></a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#third" role="tab" data-toggle="tab">
-                                      <img class="img-fluid" src="images/tab/3.jpg" alt="" width="50"/></a>
-                                </li>
-        <li role="presentation">
-                                    <a href="#for" role="tab" data-toggle="tab">
-                                      <img class="img-fluid" src="images/tab/4.jpg" alt="" width="50"/></a>
-                                </li>
-                            </ul>
-                        </div> */}
+                        
                     </div>
                     
-                    <div class="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
+                    <div class="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-6">
                         <div class="product-detail-content">
                             
                             <div class="new-arrival-content pr">
@@ -143,7 +107,9 @@ const Case1 = ({ item }) => {
                                 <p>Product code: <span class="item">0405689</span> </p>
                                 <p>Brand: <span class="item">Lee</span></p>
                                 <p>Tags:&nbsp;&nbsp;
-                                    <span class="badge badge-success light">{items.resolved_charges}</span>
+                                    {/* <span class="badge badge-success light">{items.resolved_charges}</span> */}
+                                    <span class="badge badge-success light">{items.resolved_charges} &nbsp;&nbsp; {items.resolved_acts}</span>
+                                    {/* <span class="badge badge-success light">{items.resolved_acts}</span> */}
                                     {/* <span class="badge badge-success light">clothes</span>
                                     <span class="badge badge-success light">shoes</span>
                                     <span class="badge badge-success light">dresses</span> */}
@@ -157,7 +123,7 @@ const Case1 = ({ item }) => {
         </div>
     </div>
 
-<div class="modal fade" id="reviewModal">
+{/* <div class="modal fade" id="reviewModal">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-header">
@@ -170,7 +136,7 @@ const Case1 = ({ item }) => {
 </div>
 </div>
 </div>
-</div>
+</div> */}
 </div>
 </div>
   )

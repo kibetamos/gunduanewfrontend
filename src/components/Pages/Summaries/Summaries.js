@@ -11,21 +11,32 @@ import Moment from 'moment';
 
 
 const Summaries = () => {
-   //Do a .summary of each document
-// const url = `http://127.0.0.1:8000/files/.summary/${query}`;
+  const[query, setQuery] = useState("");
+  // const [results, setResults] = useState([])
+  const[items, setItems] = useState([]);
+  const[files, setFiles] = useState([]);
+  
 
-// async function getCases(){
-//   var result = await axios.get(url);
-//   // setCases(result.data.hits)
-//   console.log(result.data);
-// }
-//   const onSubmit = (e) => {
-//     e.preventDefault();
-//     getCases();
-//   }
+  async function getResult(){
+    
+    let query = document.getElementById('search').value;
+    console.log(query)
+    // const url = `http://127.0.0.1:8000/cases/similar/${summary}`;
+    const url = `http://127.0.0.1:8000/cases/similar/`+summary;
+
+    var response = await axios.get(url);
+    // setItems(result.data.results)
+    // console.log(response.data);
+    setItems(response.data)
+    console.log(response.data);
+  }
+    const onButton = (e) => {
+      e.preventDefault();
+      getResult();
+    }
 const [id, setid]= useState("") 
 const [summary, setSummary] = useState("")
-const url = `http://127.0.0.1:8000/files/summary/${id}`;
+const url = `http://127.0.0.1:8000/summary/${id}`;
 
 async function getSummary(){
   var result = await axios.get(url);
@@ -36,6 +47,21 @@ async function getSummary(){
     e.preventDefault();
     getSummary();
   }
+
+
+//Retrieve cases from the database
+useEffect(() => {
+  const fetchFiles = async () => {
+    // setIsLoading(true)
+    // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
+    const files = await axios(`http://127.0.0.1:8000/files/`)
+    console.log(files.data.results)
+    setFiles(files.data.results)
+    // setItems(fullSearchUrl.data)
+    // setIsLoading(false)
+  }
+  fetchFiles()
+},[query] )
 
 Moment.locale('en');
   return (
@@ -81,37 +107,116 @@ Moment.locale('en');
                                             class="form-control"/>
                                             <input className="app__submit" type="submit" value="Summary" />
                                         </div>
-                                        {/* <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Upload</span>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input"/>
-                                                <label class="custom-file-label">Choose file</label>
-                                            </div>
-                                        </div> */}
-
-                                        {/* <div class="input-group mb-3">      
-								<div class="input-group">
-									<textarea rows="6" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
-									<div class="input-group-append">
-										<button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
-									</div>
-                  </div>
-
-							</div> */}
-              <div class="input-group mb-3">
-              <div class="input-group">
-									<textarea>{summary}</textarea>
+                                        
+                {summary}
+									{/* <textarea rows="14" cols="7"class="form-control" ></textarea> */}
                   
 									<div class="input-group-append">
-										<button type="button"></button>
-									</div>
-                  </div>
+                  <div class="modal-footer">
+                                                    {/* <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button> */}
+                                                    <button type="button" class="btn btn-primary" onClick={getResult}>Similar cases</button>
+                                                </div>
+                                 
 							</div>
+
                                     </form>
                                 </div>
                                                   </div>
+                                                
+
+<div class="row">
+          {items.map((item) => (
+            // <Case1 key={item._id} item={item}></Case1>
+            // <p> {item.meta_info['Date Delivered']}</p>
+            <div class="col-lg-6 col-xl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row m-b-30">
+                    <div class="col-md-12 col-xx l-12">
+                      <div class="new-arrival-content position-relative">
+                      <h4><a href={"/Case?id="+item._id}>
+                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${item.meta_info['Parties'].substring(0,70)}...`} */}
+                {/* {item.judgement.substring(0,70)} */}
+                {item.meta_info['Parties']}
+                </a></h4> 
+                        <div class="comment-review star-rating">
+                          <ul>
+                            {/* <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star-half-empty"></i></li>
+                            <li><i class="fa fa-star-half-empty"></i></li> */}
+                          </ul>
+                          {/* <span class="review-text">(34 reviews) / </span><a class="product-review" href="" data-toggle="modal" data-target="#reviewModal">Write a review?</a>
+                          <p class="price">$320.00</p> */}
+                        </div>
+                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
+                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
+                        <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                        {/* <p class="text-content"></p> */}
+                        <p>Tags:&nbsp;&nbsp;
+                                    <span class="badge badge-success light">{item.related_cases}</span>&nbsp;&nbsp;
+                                    <span class="badge badge-success light">{item.resolved_acts}</span>
+                                </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        ))}
+            
+        
+            <div class="modal fade" id="reviewModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Review</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    {/* <form>
+                      <div class="text-center mb-4">
+                        <img class="img-fluid rounded" width="78" src="./images/avatar/1.jpg" alt="DexignZone" />
+                      </div>
+                      <div class="form-group">
+                        <div class="rating-widget mb-4 text-center">
+                          <div class="rating-stars">
+                            <ul id="stars">
+                              <li class="star" title="Poor" data-value="1">
+                                <i class="fa fa-star fa-fw"></i>
+                              </li>
+                              <li class="star" title="Fair" data-value="2">
+                                <i class="fa fa-star fa-fw"></i>
+                              </li>
+                              <li class="star" title="Good" data-value="3">
+                                <i class="fa fa-star fa-fw"></i>
+                              </li>
+                              <li class="star" title="Excellent" data-value="4">
+                                <i class="fa fa-star fa-fw"></i>
+                              </li>
+                              <li class="star" title="WOW!!!" data-value="5">
+                                <i class="fa fa-star fa-fw"></i>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <textarea class="form-control" placeholder="Comment" rows="5"></textarea>
+                      </div>
+                      <button class="btn btn-success btn-block">RATE</button>
+                    </form> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                                                  
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Save changes</button>
@@ -119,28 +224,33 @@ Moment.locale('en');
                                             </div>
                                         </div>
                                     </div>
-        {/* <div class="raise_button">
-            <button type="button"class="btn btn-primary">Summarize Text</button>
-            </div> */}
             <div class="card">
             <table class="table table-responsive-md">
                                         <thead>
                                             <tr>
-                                                <th class="width80">#</th>
-                                                <th>TITLE</th>
-                                                <th>SOURCE</th>
-                                                <th>DATE</th>
+                                                <th class="width80">ID</th>
+                                                <th>NAME</th>
+                                                <th>FILE</th>
+                                                <th>SUMMARY</th>
                                                 <th>STATUS</th>
                                                 {/* <th>PRICE</th> */}
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                      
+                                        {files.map((file) => 
+                                        // if {
+                                        //   {file.summary} != null  }
+
+                                        // else {
+                                        // }
+           (
                                             <tr>
-                                                <td><strong>01</strong></td>
-                                                <td>Mr. Bobby</td>
-                                                <td>Dr. Jackson</td>
-                                                <td>01 August 2020</td>
+                                                <td><strong>{file.id}</strong></td>
+                                                <td>{file.remark}</td>
+                                                <td>{file.file.substring(40)}</td>
+                                                <td>{file.summary.substring(0, 150)}...</td>
                                                 <td><span class="badge light badge-success">Successful</span></td>
                                                 {/* <td>$21.56</td> */}
                                                 <td>
@@ -155,17 +265,13 @@ Moment.locale('en');
 													</div>
 												</td>
                                             </tr>
-										
-											
+                                            ))} 
                                         </tbody>
                                     </table>
                                     </div>
                                     
       </div>
-      
     </div>
-    
-    
     </div>
     
   )

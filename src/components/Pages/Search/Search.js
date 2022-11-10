@@ -77,10 +77,12 @@ const Search = ({ item }) => {
                                         <div class="tab-pane fade" id="profile1">
                                             <div class="pt-4">
                                                 <h4>This is profile title</h4>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                <p>www.africanlii.org
                                                 </p>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+                                                <p>www.bailii.org/form/search_cases.html
                                                 </p>
+                                                <p>www.worldlii.org</p>
+                                                <p><b><a href="http://www.worldlii.org/" target="www.worldlii.org">www.worldlii.org</a></b></p>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="contact1">
