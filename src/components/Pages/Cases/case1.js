@@ -70,38 +70,19 @@ const Case1 = ({ item }) => {
         </div>
         <div>
         <div>
-        {/* {
-          Object.keys(this.state.dict).map(name => (
-            <Services categories={this.state.dict[name]}></Services>
-          ))
-        } */}
-        {/* {
-          this.state.items.map((data)=>
-          <div>{items.name}</div>
-           <ul>
-            {items.details(sub)}
-          </ul>
-
-        } */}
+             
     </div>
-        {/* for (const [key, value] of Object.entries(meta_info)) {
-    console.log(key, value);} */}
+
 </div>
         <div class="d-table mb-2">
+        {
+                Object.keys(items).forEach(key => 
+                    <h2>key: meta_info[key]</h2>
+                )
+            }
           <p class="price float-left d-block">$325.00</p>
-
-          {/* <div>
-      {
-        Object.keys(sampleJSON.object).map((key, i) => (
-          <p key={i}>
-            <span>Key Name: {key}</span>,
-            <span>Value: {sampleJSON.object[key]}</span>
-          </p>
-        )
-      }
-    </div> */}
                                 </div>
-                                <p>Availability: <span class="item"> In stock <i
+                                <p>Availability: <span class="item"> {items.resolved_charges} &nbsp;&nbsp; {items.resolved_acts} <i
                                             class="fa fa-shopping-basket"></i></span>
                                 </p>
                                 <p>Product code: <span class="item">0405689</span> </p>

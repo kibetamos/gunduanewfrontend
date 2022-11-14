@@ -13,19 +13,19 @@ function Headers() {
   const [result, setResult] = useState([])
   
 
-  async function getResult(){
+  // async function getResult(){
     
-    let query = document.getElementById('search').value;
-    // console.log(query)
-    const url = `http://127.0.0.1:8000/cases/text_search/`+query;
-    var result = await axios.get(url);
+  //   let query = document.getElementById('search').value;
+  //   // console.log(query)
+  //   const url = `http://127.0.0.1:8000/cases/text_search/`+query;
+  //   var result = await axios.get(url);
 
-    setResult(result.data.hits)
-    console.log(result);
-  }
+  //   setResult(result.data.hits)
+  //   console.log(result);
+  // }
     const onSubmit = (e) => {
       e.preventDefault();
-      getResult();
+      setResult();
     }
   const navigate = useNavigate();
   let [loggedIn, setLoggedIn] = useState(false);
@@ -82,15 +82,25 @@ function Headers() {
                 <li class="nav-item">
                 <form onSubmit={onSubmit}>
                   <div class="input-group top-search-bar search-area d-xl-inline-flex" >
-                    <input type="text" class="form-control"
+                    <input type="text" 
+                    class="form-control"
                     id='search'
-                    onChange={(e) => setQuery(e.target.value)} placeholder="Search..." />
+                    
+                    onChange={(e) => setQuery(e.target.value)} placeholder="Search..." 
+                    />
                     <div class="input-group-append">
-                      <span class="input-group-text">
+                      <span class="input-group-text"><a href="javascript:void(0)"><i
+                      type="text"
+													class="flaticon-381-search-2">
+                            </i>
+                            </a>
+                            </span>
+                      {/* <span class="input-group-text">
                       {/* <i type="text"
-                        class="flaticon-381-search-2"/> */}
+                        class="flaticon-381-search-2"/> 
                           <input className="app__submit" type="submit" value="Search" />
-                          </span>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                          </span> */}
                     </div>
                   </div>
                   </form>

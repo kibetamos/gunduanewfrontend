@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useRef, useImperativeHandle, useEffect } from "react";
 import PropTypes from 'prop-types';
 import styles from '../../Pages/Home/Home.module.css';
-
+import Home2 from "../Home/Home2";
 import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import Footer from '../../_layouts/Footers/Footers';
@@ -9,28 +9,32 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
-
-const Search = ({ item }) => {
-    const[query, setQuery] = useState("");
+import Spinner from "../Summaries/Spinner";
+const Search = () => {
+  const[query, setQuery] = useState("");
   const [result, setResult] = useState([])
+  const[items, setItems] = useState([])
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const[isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const[itemsPerPage] = useState(6);
   
 
-  async function getResult(){
-    
-    let query = document.getElementById('search').value;
-    // console.log(query)
-    const url = `http://127.0.0.1:8000/cases/text_search/`+query;
-    var result = await axios.get(url);
-
-    setResult(result.data.hits)
-    console.log(result);
-  }
-    const onSubmit = (e) => {
-      e.preventDefault();
-      getResult();
+  useEffect(() => {
+    const fetchItems = async () => {
+      setIsLoading(true)
+      // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
+      const result = await axios('http://127.0.0.1:8000/cases/')
+      console.log(result.data)
+      setItems(result.data)
+      // setItems(fullSearchUrl.data)
+      setIsLoading(false)
     }
+    fetchItems()
+  },[query] )
   Moment.locale('en');
-  return (
+  return isLoading ? (<Spinner />) : (
     
     <div className={styles.Home} data-testid="Home">
 
@@ -68,21 +72,74 @@ const Search = ({ item }) => {
                                         <div class="tab-pane fade show active" id="home1" role="tabpanel">
                                             <div class="pt-4">
                                                 <h4>This is home title</h4>
-                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-                                                </p>
-                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-                                                </p>
+                                                <div class="row">
+          {items.map((item) => (
+            // <Case1 key={item._id} item={item}></Case1>
+            // <p> {item.meta_info['Date Delivered']}</p>
+            <div class="col-lg-6 col-xl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row m-b-30">
+                    <div class="col-md-12 col-xxl-12">
+                      <div class="new-arrival-content position-relative">
+                      <h4><a href={"/Case?id="+item._id}>
+                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${item.meta_info['Parties'].substring(0,70)}...`} */}
+                {/* {item.judgement.substring(0,70)} */}
+                {item.meta_info['Parties'].substring(0,70)}...
+                </a></h4> 
+                        <div class="comment-review star-rating">
+                          <ul>
+                            {/* <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star-half-empty"></i></li>
+                            <li><i class="fa fa-star-half-empty"></i></li> */}
+                          </ul>
+                          {/* <span class="review-text">(34 reviews) / </span><a class="product-review" href="" data-toggle="modal" data-target="#reviewModal">Write a review?</a>
+                          <p class="price">$320.00</p> */}
+                        </div>
+                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
+                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
+                        <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                        {/* <p class="text-content"></p> */}
+                        <p>Tags:&nbsp;&nbsp;
+                                    <span class="badge badge-success light">{item.resolved_acts}</span>
+                                </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        ))}
+          </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="profile1">
                                             <div class="pt-4">
-                                                <h4>This is profile title</h4>
-                                                <p>www.africanlii.org
-                                                </p>
-                                                <p>www.bailii.org/form/search_cases.html
-                                                </p>
-                                                <p>www.worldlii.org</p>
-                                                <p><b><a href="http://www.worldlii.org/" target="www.worldlii.org">www.worldlii.org</a></b></p>
+                                                <h4>Categories</h4>
+                                                {items.map((item) => (
+            <div class="col-lg-6 col-xl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row m-b-30">
+                    <div class="col-md-12 col-xxl-12">
+                      <div class="new-arrival-content position-relative">
+                      <h4><a href={"/Case?id="+item._id}>
+                <p>Tags:&nbsp;&nbsp;
+                <span class="badge badge-success light">{item.resolved_acts}</span>
+                </p>
+                </a></h4> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+        ))}
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="contact1">

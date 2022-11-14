@@ -30,12 +30,18 @@ const Sidebar = () => (
               <span class="nav-text"> Summaries</span>
             </a>
           </li>
-           <li >
+          {/* <li >
+            <a href="/library" class="ai-icon active" aria-expanded="false">
+              <i class='flaticon-381-square'></i>
+              <span class="nav-text"> Library</span>
+            </a>
+          </li> */}
+           {/* <li >
             <a href="/categories" class="ai-icon active" aria-expanded="false">
-              <i class=""></i>
+              <i class="fa-solid fa-table-cells-large"></i>
               <span class="nav-text"> Categories</span>
             </a>
-          </li>
+          </li> */}
           <li >
             <a href="/search" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-search-1"></i>
@@ -52,6 +58,12 @@ const Sidebar = () => (
             <a href="/editor" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-edit-1"></i>
               <span class="nav-text"> Editor</span>
+            </a>
+          </li>
+          <li >
+            <a href="/library" class="ai-icon active" aria-expanded="false">
+              <i class="fa fa-institution"></i>
+              <span class="nav-text"> Library</span>
             </a>
           </li>
           <li >

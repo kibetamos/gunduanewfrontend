@@ -7,10 +7,12 @@ import Footer from '../../_layouts/Footers/Footers';
 import $ from 'jquery';
 import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
+import Spinner from "./Spinner";
+
 import Moment from 'moment';
 
 
-const Summaries = () => {
+const Summaries = ( {isLoading} ) => {
   const[query, setQuery] = useState("");
   // const [results, setResults] = useState([])
   const[items, setItems] = useState([]);
@@ -48,7 +50,22 @@ async function getSummary(){
     getSummary();
   }
 
+  const removeData = (id) => {
+    if (window.confirm("Are you sure?")) {
 
+        fetch('http://127.0.0.1:8000/files/' + id,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json'
+                }
+            })
+
+            .then(console.log("Deleted"))
+            .catch(err => console.log(err));
+    }
+};
 //Retrieve cases from the database
 useEffect(() => {
   const fetchFiles = async () => {
@@ -64,7 +81,7 @@ useEffect(() => {
 },[query] )
 
 Moment.locale('en');
-  return (
+  return isLoading ? (<Spinner />) :(
     <div className={styles.Summaries} data-testid="Summaries">
 
       <Header title="Overview"></Header>
@@ -159,6 +176,7 @@ Moment.locale('en');
                         <p>Tags:&nbsp;&nbsp;
                                     <span class="badge badge-success light">{item.related_cases}</span>&nbsp;&nbsp;
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
+                                    <span class="badge badge-success light">{item.resolved_charges}</span>
                                 </p>
                       </div>
                     </div>
@@ -226,6 +244,7 @@ Moment.locale('en');
                                     </div>
             <div class="card">
             <table class="table table-responsive-md">
+            
                                         <thead>
                                             <tr>
                                                 <th class="width80">ID</th>
@@ -247,10 +266,24 @@ Moment.locale('en');
                                         // }
            (
                                             <tr>
-                                                <td><strong>{file.id}</strong></td>
+                                              {/* <h4><a href={"/file?id="+file._id}> */}
+                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${item.meta_info['Parties'].substring(0,70)}...`} */}
+                {/* {item.judgement.substring(0,70)} */}
+                {/* {file.file.id}...
+                </a></h4>  */}
+                                                <td><a href={"/Case?id="+file._id}></a>
+                                                  <strong>{file.id}</strong></td>
                                                 <td>{file.remark}</td>
                                                 <td>{file.file.substring(40)}</td>
-                                                <td>{file.summary.substring(0, 150)}...</td>
+                                                    {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${item.meta_info['Parties'].substring(0,70)}...`} */}
+                {/* {item.judgement.substring(0,70)} */}
+                                                <td>
+                                                  {file.summary == null ? `${file.summary}`:
+                                                `${file.summary.substring(0,200)}...`} 
+                                                
+                                                </td>
                                                 <td><span class="badge light badge-success">Successful</span></td>
                                                 {/* <td>$21.56</td> */}
                                                 <td>
@@ -260,7 +293,7 @@ Moment.locale('en');
 														</button>
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
+															<a class="dropdown-item" href="#" onClick={() => removeData(file.id)}>Delete</a>
 														</div>
 													</div>
 												</td>

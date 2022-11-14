@@ -43,18 +43,18 @@ const Docs = (event) => {
     fetchItems()
   },[query] )
 
-   //Do a summary of each document
-// const url = `http://127.0.0.1:8000/files/summary/${query}`;
+  //  Do a summary of each document
+const url = `http://127.0.0.1:8000/files/summary/${query}`;
 
-// async function getCases(){
-//   var result = await axios.get(url);
-//   // setCases(result.data.hits)
-//   console.log(result.data);
-// }
-//   const onSubmit = (e) => {
-//     e.preventDefault();
-//     getCases();
-//   }
+async function getCases(){
+  var result = await axios.get(url);
+  // setCases(result.data.hits)
+  console.log(result.data);
+}
+  const onSubmit = (e) => {
+    e.preventDefault();
+    getCases();
+  }
   return (
     <div className={styles.Summaries} data-testid="Docs">
 
