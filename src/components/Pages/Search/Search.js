@@ -9,7 +9,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
-import Spinner from "../Summaries/Spinner";
+// import Spinner from "../Summaries/Spinner";
 const Search = () => {
   const[query, setQuery] = useState("");
   const [result, setResult] = useState([])
@@ -24,7 +24,7 @@ const Search = () => {
   useEffect(() => {
     const fetchItems = async () => {
       setIsLoading(true)
-      // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
+      // const result = await axios(`http://192.168.30.102:5000/fulltext/cases/${query}`)
       const result = await axios('http://127.0.0.1:8000/cases/')
       console.log(result.data)
       setItems(result.data)
@@ -34,7 +34,7 @@ const Search = () => {
     fetchItems()
   },[query] )
   Moment.locale('en');
-  return isLoading ? (<Spinner />) : (
+  return (
     
     <div className={styles.Home} data-testid="Home">
 
@@ -83,10 +83,10 @@ const Search = () => {
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+item._id}>
-                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
-                `${item.meta_info['Parties'].substring(0,70)}...`} */}
+                      { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${ item.meta_info['Parties'].substring(0,70)}...` } 
                 {/* {item.judgement.substring(0,70)} */}
-                {item.meta_info['Parties'].substring(0,70)}...
+                {/* {item.meta_info['Parties'].substring(0,70)}... */}
                 </a></h4> 
                         <div class="comment-review star-rating">
                           <ul>

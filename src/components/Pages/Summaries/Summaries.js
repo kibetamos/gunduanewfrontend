@@ -53,7 +53,7 @@ async function getSummary(){
   const removeData = (id) => {
     if (window.confirm("Are you sure?")) {
 
-        fetch('http://127.0.0.1:8000/files/' + id,
+        fetch('http://127.0.0.1:8000/files/'+ id,
             {
                 method: 'DELETE',
                 headers: {
@@ -122,7 +122,9 @@ Moment.locale('en');
                                             autoComplete="Off" value={id}
                                             onChange={(e) => setid(e.target.value)} 
                                             class="form-control"/>
-                                            <input className="app__submit" type="submit" value="Summary" />
+                                            <button type="submit" class="btn btn-primary">Summary
+                                            {/* <input className="app__submit"  value="Summary" /> */}
+                                            </button>
                                         </div>
                                         
                 {summary}
@@ -152,10 +154,10 @@ Moment.locale('en');
                     <div class="col-md-12 col-xx l-12">
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+item._id}>
-                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
-                `${item.meta_info['Parties'].substring(0,70)}...`} */}
-                {/* {item.judgement.substring(0,70)} */}
-                {item.meta_info['Parties']}
+                { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
+                `${item.meta_info['Parties'].substring(0,70)}...`} 
+                {/* {item.judgement.substring(0,70)}
+                {/* {item.meta_info['Parties']} */}
                 </a></h4> 
                         <div class="comment-review star-rating">
                           <ul>
@@ -174,7 +176,7 @@ Moment.locale('en');
                         <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
                         {/* <p class="text-content"></p> */}
                         <p>Tags:&nbsp;&nbsp;
-                                    <span class="badge badge-success light">{item.related_cases}</span>&nbsp;&nbsp;
+                                    <span class="badge badge-success light">{item.related_cases}</span>
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
                                     <span class="badge badge-success light">{item.resolved_charges}</span>
                                 </p>
@@ -251,7 +253,7 @@ Moment.locale('en');
                                                 <th>NAME</th>
                                                 <th>FILE</th>
                                                 <th>SUMMARY</th>
-                                                <th>STATUS</th>
+                                                {/* <th>STATUS</th> */}
                                                 {/* <th>PRICE</th> */}
                                                 <th>ACTIONS</th>
                                             </tr>
@@ -284,7 +286,7 @@ Moment.locale('en');
                                                 `${file.summary.substring(0,200)}...`} 
                                                 
                                                 </td>
-                                                <td><span class="badge light badge-success">Successful</span></td>
+                                                {/* <td><span class="badge light badge-success">Successful</span></td> */}
                                                 {/* <td>$21.56</td> */}
                                                 <td>
 													<div class="dropdown">

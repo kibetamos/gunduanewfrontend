@@ -32,13 +32,13 @@ const Docs = (event) => {
 //Retrieve cases from the database
   useEffect(() => {
     const fetchItems = async () => {
-      setIsLoading(true)
+      // setIsLoading(true)
       // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
       const result = await axios(`http://127.0.0.1:8000/files/`)
       console.log(result.data)
       setItems(result.data.results)
       // setItems(fullSearchUrl.data)
-      setIsLoading(false)
+      // setIsLoading(false)
     }
     fetchItems()
   },[query] )
@@ -55,6 +55,22 @@ async function getCases(){
     e.preventDefault();
     getCases();
   }
+  const removeData = (id) => {
+    if (window.confirm("Are you sure?")) {
+
+        fetch('http://127.0.0.1:8000/files/'+ id,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json'
+                }
+            })
+
+            .then(console.log("Deleted"))
+            .catch(err => console.log(err));
+    }
+};
   return (
     <div className={styles.Summaries} data-testid="Docs">
 
@@ -168,10 +184,10 @@ async function getCases(){
 															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
 														</button>
 														<div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Summarize</a>
+                            {/* <a class="dropdown-item" href="#">Summarize</a> */}
 															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
+                              <a class="dropdown-item" onClick={() => removeData(file.id)}>Delete</a>														
+                              </div>
 													</div>
 												</td>
                                             </tr>

@@ -28,13 +28,13 @@ const Case1 = () => {
 
     let params = new URLSearchParams(window.location.search);
     let id = params.get('id');
-    const result = await axios('http://127.0.0.1:8000/cases/'+id)
+    const result = await axios('http://127.0.0.1:8000/files/'+id)
     //  console.log(result.data)
     //  console.log(result.data.meta_info)
            setItems(result.data)
-           setMetas(result.data.meta_info)
-           setKeys(Object.keys(metas))
-           setValues(Object.values(metas))
+        //    setMetas(result.data.meta_info)
+        //    setKeys(Object.keys(metas))
+        //    setValues(Object.values(metas))
           //  items 
           // let entries= Object.entries(metas);
           // console.log(keys.length);

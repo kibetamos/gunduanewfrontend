@@ -2,6 +2,8 @@ import React, {useState  } from "react";
 import styles from '../../Pages/Home/Home.module.css';
 import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
+import axios from "axios";
+
 // or import 'quill/dist/quill.bubble.css'; // Add css for bubble theme
 
 const Editor = () => {
@@ -29,12 +31,14 @@ const Editor = () => {
             <div class="col-xl-12 col-xxl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Editor</h4>
+                        <h4 class="card-title">Write your text here</h4>
                     </div>
                     <div class="card-body">
-                        <div class="summernote"></div>
+                        <div class="summernote">
+                         
+                        </div>
                     </div>
-                    erfergseth
+                   
                 </div>
             </div>
         </div>
