@@ -24,7 +24,7 @@ const Summaries = ( {isLoading} ) => {
     let query = document.getElementById('search').value;
     console.log(query)
     // const url = `http://127.0.0.1:8000/cases/similar/${summary}`;
-    const url = `http://127.0.0.1:8000/cases/similar/`+summary;
+    const url = `http://192.168.30.102:5000/cases/similar/`+summary;
 
     var response = await axios.get(url);
     // setItems(result.data.results)
@@ -38,7 +38,8 @@ const Summaries = ( {isLoading} ) => {
     }
 const [id, setid]= useState("") 
 const [summary, setSummary] = useState("")
-const url = `http://127.0.0.1:8000/summary/${id}`;
+const url = `http://192.168.30.102:5000/summary/${id}`;
+
 
 async function getSummary(){
   var result = await axios.get(url);
@@ -53,7 +54,7 @@ async function getSummary(){
   const removeData = (id) => {
     if (window.confirm("Are you sure?")) {
 
-        fetch('http://127.0.0.1:8000/files/'+ id,
+        fetch('http://192.168.30.102:5000/files/'+ id,
             {
                 method: 'DELETE',
                 headers: {
@@ -71,7 +72,7 @@ useEffect(() => {
   const fetchFiles = async () => {
     // setIsLoading(true)
     // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-    const files = await axios(`http://127.0.0.1:8000/files/`)
+    const files = await axios(`http://192.168.30.102:5000/files/`)
     console.log(files.data.results)
     setFiles(files.data.results)
     // setItems(fullSearchUrl.data)
@@ -126,9 +127,11 @@ Moment.locale('en');
                                             {/* <input className="app__submit"  value="Summary" /> */}
                                             </button>
                                         </div>
-                                        
-                {summary}
-									{/* <textarea rows="14" cols="7"class="form-control" ></textarea> */}
+                                        {/* <textarea> </textarea>        */}
+                
+									<textarea rows="14" cols="7"class="form-control" >
+                  {summary}
+                  </textarea> {summary}
                   
 									<div class="input-group-append">
                   <div class="modal-footer">

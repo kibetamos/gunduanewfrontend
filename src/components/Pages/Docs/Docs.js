@@ -22,7 +22,7 @@ const Docs = (event) => {
     uploadData.append('remark',remark);
     uploadData.append('file',file, file.name);
     // console.log(remark);
-    fetch('http://127.0.0.1:8000/files/',{
+    fetch('http://192.168.30.102:5000/files/',{
       method:'POST',
       body:uploadData
     })
@@ -34,7 +34,7 @@ const Docs = (event) => {
     const fetchItems = async () => {
       // setIsLoading(true)
       // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-      const result = await axios(`http://127.0.0.1:8000/files/`)
+      const result = await axios(`http://192.168.30.102:5000/files/`)
       console.log(result.data)
       setItems(result.data.results)
       // setItems(fullSearchUrl.data)
@@ -44,7 +44,7 @@ const Docs = (event) => {
   },[query] )
 
   //  Do a summary of each document
-const url = `http://127.0.0.1:8000/files/summary/${query}`;
+const url = `http://192.168.30.102:5000/files/summary/${query}`;
 
 async function getCases(){
   var result = await axios.get(url);
@@ -58,7 +58,7 @@ async function getCases(){
   const removeData = (id) => {
     if (window.confirm("Are you sure?")) {
 
-        fetch('http://127.0.0.1:8000/files/'+ id,
+        fetch('http://192.168.30.102:5000/files/'+ id,
             {
                 method: 'DELETE',
                 headers: {

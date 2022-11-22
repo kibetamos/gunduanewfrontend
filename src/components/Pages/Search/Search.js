@@ -25,7 +25,7 @@ const Search = () => {
     const fetchItems = async () => {
       setIsLoading(true)
       // const result = await axios(`http://192.168.30.102:5000/fulltext/cases/${query}`)
-      const result = await axios('http://127.0.0.1:8000/cases/')
+      const result = await axios('http://192.168.30.102:5000/cases/')
       console.log(result.data)
       setItems(result.data)
       // setItems(fullSearchUrl.data)
