@@ -88,8 +88,6 @@ async function getCases(){
             </ol>
             
           </div>
-          
-          
                                     {/* <!-- Large modal --> */}
                                     <div class="raise_button">
                                     <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Upload</button>

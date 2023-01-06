@@ -8,7 +8,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Spinner from "./Spinner";
-
+import * as ReactBoostrap from 'react-bootstrap';
 import Moment from 'moment';
 
 
@@ -150,40 +150,37 @@ Moment.locale('en');
           {items.map((item) => (
             // <Case1 key={item._id} item={item}></Case1>
             // <p> {item.meta_info['Date Delivered']}</p>
-            <div class="col-lg-6 col-xl-6">
+            <div class="col-xl-6">
               <div class="card">
                 <div class="card-body">
                   <div class="row m-b-30">
                     <div class="col-md-12 col-xx l-12">
                       <div class="new-arrival-content position-relative">
+                      <div class="card-header">
                       <h4><a href={"/Case?id="+item._id}>
                 { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
                 `${item.meta_info['Parties'].substring(0,70)}...`} 
                 {/* {item.judgement.substring(0,70)}
                 {/* {item.meta_info['Parties']} */}
-                </a></h4> 
-                        <div class="comment-review star-rating">
-                          <ul>
-                            {/* <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star-half-empty"></i></li>
-                            <li><i class="fa fa-star-half-empty"></i></li> */}
-                          </ul>
-                          {/* <span class="review-text">(34 reviews) / </span><a class="product-review" href="" data-toggle="modal" data-target="#reviewModal">Write a review?</a>
-                          <p class="price">$320.00</p> */}
-                        </div>
-                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
-                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
-                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
-                        <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                </a></h4> </div>
+                <div class="card-body">
+                        <p class="card-title">Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p class="card-title">Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
+                        <p class="card-title">County: <span class="item">{item.meta_info['County']}</span></p>
+                        <p class="card-title">Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
                         {/* <p class="text-content"></p> */}
-                        <p>Tags:&nbsp;&nbsp;
+                        <p class="card-text">Tags:&nbsp;&nbsp;
                                     <span class="badge badge-success light">{item.related_cases}</span>
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
                                     <span class="badge badge-success light">{item.resolved_charges}</span>
                                 </p>
+                                </div>
+                                <div class="card-footer border-0 pt-0">
+                                <p class="card-text d-inline">Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                                <a class="card-link float-right">Judge(s): {item.meta_info['Judge(s)']}</a>
+                            </div>
                       </div>
+                      
                     </div>
                   </div>
                 </div>
