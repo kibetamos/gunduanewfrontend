@@ -23,8 +23,8 @@ const Home = () => {
       setIsLoading(true)
       // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
       const result = await axios(`http://192.168.30.102:5000/files/`)
-    //   console.log(result.data)
-      setItems(result.data.results)
+      console.log(result)
+	   setItems(result.data.results)
       // setItems(fullSearchUrl.data)
       setIsLoading(false)
     }
