@@ -52,7 +52,7 @@ const Login = () => {
       return;
     }
     let submitPayload = {
-      "email": email,
+      "username": email,
       "password": password
     };
     // console.log(submitPayload);
@@ -60,7 +60,7 @@ const Login = () => {
       'Content-Type': 'application/json',
     }
     setLoading(true);
-    axios.post(Variables.apiURL + 'api/login', submitPayload, { headers: headers })
+    axios.post('http://192.168.30.102:5000/rest_auth/login/', submitPayload, { headers: headers })
       .then(response => {
         // $('#EmailExistsError').hide();
 
@@ -71,9 +71,9 @@ const Login = () => {
           $('#EmailAbsentError').hide();
           $('.alert-success').show();
 
-          localStorage.removeItem("adanianuser");
+          localStorage.removeItem("gunduauser");
           let user = JSON.stringify(response);
-          localStorage.setItem("adanianuser", user);
+          localStorage.setItem("gunduauser", user);
           setTimeout(function () {
             // navigate('/home');
 
@@ -94,7 +94,7 @@ const Login = () => {
 
   const handleChange = (event) => {
     // this.setState({ [event.target.name]: event.target.value });
-    if (event.target.name == "email") {
+    if (event.target.name == "username") {
       validateEmail(event.target.value);
     } else if (event.target.name == "password") {
       validatePassword(event.target.value);

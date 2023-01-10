@@ -35,7 +35,7 @@ const Editor = () => {
                     </div>
                     <div class="card-body">
                         <div class="summernote">
-                         
+                         {/* {this} */}
                         </div>
                     </div>
                    

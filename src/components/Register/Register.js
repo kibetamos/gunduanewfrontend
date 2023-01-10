@@ -16,6 +16,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [first_name, setFirst_name] = useState('');
+  const [last_name, setLast_name] = useState('');
   const [loading, setLoading] = useState(false);
   const [emailvalid, setEmailvalid] = useState(false);
 
@@ -29,6 +30,10 @@ const Register = () => {
     // If fields are blank
     if (first_name == '') {
       $('#FirstNameInvalidError').show();
+      return;
+    }
+    if (last_name == '') {
+      $('#LastNameInvalidError').show();
       return;
     }
     if (email == '') {
@@ -58,34 +63,37 @@ const Register = () => {
 
     let submitPayload = {
       "password": password,
-      "c_password": password2,
+      "password2": password2,
       "email": email,
-      "name": first_name
+      "first_name": first_name,
+      "last_name": last_name
     };
     const headers = {
       'Content-Type': 'application/json',
     }
     // console.log('submitting');
     setLoading(true);
-    axios.post(Variables.apiURL + 'api/register', submitPayload, { headers: headers })
+    console.log(submitPayload)
+    axios.post('http://192.168.30.102:5000/registration/', submitPayload, { headers: headers })
       .then(response => {
         $('#EmailExistsError').hide();
 
         setLoading(false);
-        // console.log(response);
+        console.log(response);
 
-        if (response.status == 200) {
+        if (response.status == 201) {
           $('#SubmitError').hide();
           $('.alert-success').show();
 
-          // localStorage.removeItem("adanianuser");
-          // let user = JSON.stringify(response);
-          // localStorage.setItem("adanianuser", user);
+          localStorage.removeItem("gunduauser");
+          let user = JSON.stringify(response);
+          localStorage.setItem("gunduauser", user);
+           
           setTimeout(function () {
             // navigate('/home');
             // $("#register-form").fadeOut();
             // $("#emailsent").removeClass("d-none");
-            window.location.href = "/login";
+            window.location.href = "/profile";
           }, 2000);
         } else {
           $('.alert-success').hide();
@@ -116,12 +124,22 @@ const Register = () => {
       validatePassword2(event.target.value);
     } else if (event.target.name == "first_name") {
       validateFirstName(event.target.value);
+    } else if (event.target.name == "last_name") {
+      validateLastName(event.target.value);
     }
   }
 
   const validateFirstName = (value) => {
     $('#FirstNameInvalidError').hide();
     setFirst_name(value);
+    // if (value.length < 2) {
+    //   $('#FirstNameInvalidError').show();
+    // }
+  }
+
+  const validateLastName = (value) => {
+    $('#LastNameInvalidError').hide();
+    setLast_name(value);
     // if (value.length < 2) {
     //   $('#FirstNameInvalidError').show();
     // }
@@ -203,18 +221,26 @@ const Register = () => {
                             </div> */}
                           <div className="form-group">
                             <label className="mb-1 text-primary"><strong>Full Name</strong></label>
-                            <input type="text" className="form-control" onChange={handleChange} id='first_name' name="first_name" placeholder="..." />
+                            <input type="text" className="form-control" onChange={handleChange} id='first_name' name="first_name" placeholder="FirstName" />
                             <div className="alert alert-danger mt-2" id='FirstNameInvalidError' style={displayNone} role="alert">
-                              Please Input a name
+                              Please Input First Name
                             </div>
                           </div>
+
                           {/* <div className="form-group">
-                            <label className="mb-1 text-primary"><strong>Last Name</strong></label>
+                            <label className="mb-1 text-primary"><strong>Full Name</strong></label>
                             <input type="text" className="form-control" onChange={handleChange} id='last_name' name="last_name" placeholder="..." />
+                            <div className="alert alert-danger mt-2" id='FirstNameInvalidError' style={displayNone} role="alert">
+                              Please Input Last Name
+                            </div>
+                          </div> */}
+                          <div className="form-group">
+                            <label className="mb-1 text-primary"><strong>Last Name</strong></label>
+                            <input type="text" className="form-control" onChange={handleChange} id='last_name' name="last_name" placeholder="LastName" />
                             <div className="alert alert-danger mt-2" id='LastNameInvalidError' style={displayNone} role="alert">
                               Please Input a Name
                             </div>
-                          </div> */}
+                          </div>
                           <div className="form-group">
                             <label className="mb-1 text-primary"><strong>Email</strong></label>
                             <input type="email" className="form-control" onChange={handleChange} id='registeremail' name="email" placeholder="hello@example.com" />

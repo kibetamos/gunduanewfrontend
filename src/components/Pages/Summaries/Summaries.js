@@ -129,11 +129,11 @@ Moment.locale('en');
                                         </div>
                                         {/* <textarea> </textarea>        */}
                 
-									<textarea rows="14" cols="7"class="form-control" >
+									{/* <textarea rows="14" cols="7"class="form-control" > */}
                   {/* {summary} */}
-                  </textarea> 
+                  {/* </textarea>  */}
                   {summary}
-                  { isLoading ? summary :<Spinner animation="border" />}
+                  {/* { isLoading ? summary :<Spinner animation="border" />} */}
                   
 									<div class="input-group-append">
                   <div class="modal-footer">

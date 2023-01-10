@@ -72,7 +72,9 @@ const Search = () => {
                                         <div class="tab-pane fade show active" id="home1" role="tabpanel">
                                             <div class="pt-4">
                                                 <h4>This is home title</h4>
-                                                <div class="row">
+                                                
+                                            </div>
+                                            <div class="row">
           {items.map((item) => (
             // <Case1 key={item._id} item={item}></Case1>
             // <p> {item.meta_info['Date Delivered']}</p>
@@ -116,7 +118,6 @@ const Search = () => {
 
         ))}
           </div>
-                                            </div>
                                         </div>
                                         <div class="tab-pane fade" id="profile1">
                                             <div class="pt-4">
