@@ -45,12 +45,13 @@ const Search = () => {
 		
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xl-9 col-xxl-8">
+					<div class="col-xl-12 col-xxl-12">
 						<div class="row">
 	
 							<div class="col-xl-12">
 								<div class="card">
 									<div class="card-header border-0 pb-sm-0 pb-5">
+									</div>
 										<div class="card-body">
                                 
                                 <div class="custom-tab-1">
@@ -70,10 +71,8 @@ const Search = () => {
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="home1" role="tabpanel">
-                                            <div class="pt-4">
-                                                <h4>This is home title</h4>
-                                                
-                                            </div>
+                                          
+                                             
                                             <div class="row">
           {items.map((item) => (
             // <Case1 key={item._id} item={item}></Case1>
@@ -85,29 +84,14 @@ const Search = () => {
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+item._id}>
-                      { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
-                `${ item.meta_info['Parties'].substring(0,70)}...` } 
-                {/* {item.judgement.substring(0,70)} */}
-                {/* {item.meta_info['Parties'].substring(0,70)}... */}
+                      { `${ item.meta_info['Parties'].substring(0,70)}...` } 
                 </a></h4> 
-                        <div class="comment-review star-rating">
-                          <ul>
-                            {/* <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star-half-empty"></i></li>
-                            <li><i class="fa fa-star-half-empty"></i></li> */}
-                          </ul>
-                          {/* <span class="review-text">(34 reviews) / </span><a class="product-review" href="" data-toggle="modal" data-target="#reviewModal">Write a review?</a>
-                          <p class="price">$320.00</p> */}
-                        </div>
                         <p>Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
                         <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
                         <p>County: <span class="item">{item.meta_info['County']}</span></p>
                         <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
-                        {/* <p class="text-content"></p> */}
-                        <p>Tags:&nbsp;&nbsp;
-                                    <span class="badge badge-success light">{item.resolved_acts}</span>
+                        <p>Tags:&nbsp;&nbsp;   
+                                    <span class="badge badge-success light">{item.resolved_acts.slice(0,4)}</span>
                                 </p>
                       </div>
                     </div>
@@ -119,8 +103,15 @@ const Search = () => {
         ))}
           </div>
                                         </div>
+
                                         <div class="tab-pane fade" id="profile1">
+                                        {/* {isLoading ? <p> Loading ... </p> : (
+
+)} */}
+
+        {isLoading ? <p>Loading...</p> : (
                                             <div class="pt-4">
+
                                                 <h4>Categories</h4>
                                                 {items.map((item) => (
             <div class="col-lg-6 col-xl-6">
@@ -142,6 +133,7 @@ const Search = () => {
              </div>
         ))}
                                             </div>
+                                            )}
                                         </div>
                                         <div class="tab-pane fade" id="contact1">
                                             <div class="pt-4">
@@ -164,7 +156,6 @@ const Search = () => {
                                     </div>
                                 </div>
                             </div>
-									</div>
 									
 								</div>
 							</div>

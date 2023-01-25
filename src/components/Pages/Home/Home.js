@@ -9,6 +9,11 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
+let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+
+let UserDetails = gotten.data
+console.log (UserDetails.key)
+
 
 const Home = () => {
  
@@ -19,17 +24,30 @@ const Home = () => {
 
   //Retrieve cases from the database
   useEffect(() => {
+		var axios = require("axios").default;
+
     const fetchItems = async () => {
+			var axios = require("axios").default;
       setIsLoading(true)
       // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-      const result = await axios(`http://192.168.30.102:5000/files/`)
-      console.log(result)
-	   setItems(result.data.results)
+      // const result = await axios(`http://192.168.30.102:5000/files/`)
+			var result = {
+        method: 'GET',
+        url: `http://192.168.30.102:5000/files/`,
+        headers: {Authorization: 'Token ' +(UserDetails.key)}
+      };
+			axios.request(result).then(function (result) {
+
+      console.log(result.data);
+			setItems(result.data.results)
       // setItems(fullSearchUrl.data)
+		}).catch(function (error) {
+			console.error(error);
+		});
       setIsLoading(false)
     }
     fetchItems()
-  })
+  },[])
   return (
     
     <div className={styles.Home} data-testid="Home">
@@ -252,8 +270,11 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
+			
 		</div>
+		 <Footer></Footer>
     </div>
+	
   )
 };
 

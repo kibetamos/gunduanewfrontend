@@ -8,10 +8,17 @@ import {
 } from "react-router-dom";
 import styles from './Headers.module.css';
 
-function Headers() {
+function Headers(props) {
+  const [loading, setLoading] = useState(false);
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+
+  // const navigate = useNavigate();
+  const { title } = props;
   const[query, setQuery] = useState("");
   const [result, setResult] = useState([])
-  
+  const navigate = useNavigate();
+  let [loggedIn, setLoggedIn] = useState(false);
+
 
   // async function getResult(){
     
@@ -27,27 +34,37 @@ function Headers() {
       e.preventDefault();
       setResult();
     }
-  const navigate = useNavigate();
-  let [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    let gotten = JSON.parse(localStorage.getItem("adanianuser"));
+    let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+    // const navigate = useNavigate();
     //if not logged in
     if (gotten == null || !gotten) {
-      if (window.location.pathname != "/register") {
+      if (window.location.pathname != "/login") {
         //redirect to login 
-        if (window.location.pathname != "/login") {
-          // window.location.href = "/login";
-          setLoggedIn(false);
-        }
+        // if (window.location.pathname != "/login") {
+        //   // window.location.href = "/login";
+        //   setLoggedIn(false);
+        // }
       }
     } else {
-      setLoggedIn(true);
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+      let token = gotten.data.refresh;
+      let payload = {
+        "refresh": token
+      };
+  
+
+      // setLoggedIn(true);
       // window.location.href = "/home";
     }
   }, []);
   const logOut = () => {
-    localStorage.removeItem("adanianuser");
+    // localStorage.removeItem("gunduauser");
+    localStorage.removeItem('gunduauser');
     navigate('/login');
   }
 

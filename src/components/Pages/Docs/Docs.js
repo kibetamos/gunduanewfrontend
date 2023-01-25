@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const Docs = (event) => {
   const [file, setFile] = useState();
+  const[files, setFiles] = useState([]);
   const [remark, setRemark] = useState("");
   const [posts, setPosts] = useState([]);
   const[items, setItems] = useState([]);
@@ -15,30 +16,80 @@ const Docs = (event) => {
   const [query, setquery] = useState("") 
   const [currentPage, setCurrentPage] = useState(1);
   const[itemsPerPage] = useState(6);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentFile, setCurrentFile] = useState({});
+  console.log("-------------------------------")
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+
+  let UserDetails = gotten.data
+  console.log (UserDetails.key)
+
+
 
 //This is to post a new doc to the databse
   const newDoc =() => {
+    var axios = require("axios").default;
+
     const uploadData = new FormData();
     uploadData.append('remark',remark);
     uploadData.append('file',file, file.name);
     // console.log(remark);
-    fetch('http://192.168.30.102:5000/files/',{
-      method:'POST',
-      body:uploadData
+    axios.post('http://192.168.30.102:5000/files/', uploadData, {
+      // method:'POST',
+      // body:uploadData,
+      // headers: {
+      //   Authorization: 'Token' +(UserDetails.key)
+      // }
+      headers: {
+        'Authorization': `Token ${UserDetails.key}`,
+        'Content-Type': 'multipart/form-data'
+      }
     })
     .then(res => console.log(res))
     .catch(error => console.log(error))
   }
+  ////////////////////////////////////////////////////////////////
+//   var axios = require("axios").default;
+
+//   var options = {
+//     method: 'GET',
+//     url: "http://192.168.30.102:5000/cases/similar/"+summary+"/",
+//     headers: {Authorization: 'Token ' +(UserDetails.key)}
+//   };
+
+//   axios.request(options).then(function (response) {
+//     console.log(response.data);
+//     setItems(response.data)
+//   }).catch(function (error) {
+//     console.error(error);
+//   });
+// }
 //Retrieve cases from the database
   useEffect(() => {
+
+    var axios = require("axios").default;
+
     const fetchItems = async () => {
-      // setIsLoading(true)
-      // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-      const result = await axios(`http://192.168.30.102:5000/files/`)
-      console.log(result.data)
-      setItems(result.data.results)
+      var axios = require("axios").default;
+      var result = {
+        method: 'GET',
+        url: `http://192.168.30.102:5000/files/`,
+        headers: {Authorization: 'Token ' +(UserDetails.key)}
+      };
+
+      axios.request(result).then(function (result) {
+        console.log(result.data);
+        setItems(result.data.results)
+
+      }).catch(function (error) {
+        console.error(error);
+      });
+      // const result = await axios(`http://192.168.30.102:5000/files/`)
+      // console.log(result.data)
+      // setItems(result.data.results)
       // setItems(fullSearchUrl.data)
       // setIsLoading(false)
+      
     }
     fetchItems()
   },[query] )
@@ -55,10 +106,37 @@ async function getCases(){
     e.preventDefault();
     getCases();
   }
-  const removeData = (id) => {
-    if (window.confirm("Are you sure?")) {
+//   const handleUpdate = (id) => {
+//     const file = document.getElementById("file").file[0];
+//     const remark = document.getElementById("remark").value;
 
-        fetch('http://192.168.30.102:5000/files/'+ id,
+//     let formData = new FormData();
+//     formData.append("file", file);
+//     formData.append("remark", remark);
+
+//     fetch(`http://192.168.30.102:5000/files/${id}`, {
+//         method: 'PUT',
+//         body: formData
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error(response.statusText);
+//         }
+//         return response.json();
+//     })
+//     .then(responseData => {
+//         setFiles(files.map(f => f.id === id ? {...f, file: responseData.file, remark: responseData.remark} : f));
+//         alert("Data updated successfully");
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         alert("Error updating data: " + err);
+//     });
+// }
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure?")) {
+        fetch('http://192.168.30.102:5000/files/'+ id +"/",
             {
                 method: 'DELETE',
                 headers: {
@@ -66,9 +144,25 @@ async function getCases(){
                     'content-Type': 'application/json'
                 }
             })
-
-            .then(console.log("Deleted"))
-            .catch(err => console.log(err));
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(response.statusText);
+            } else if (response.status === 204) {
+                setFiles(files.filter(f => f.id !== id));
+                alert("Deleted successfully");
+                // return response.json();
+            } else {
+              return response.json();
+          }
+          // )
+          //   .then(responseData => {
+          //     setFiles(files.filter(f => f.id !== id));
+          //     alert("Deleted successfully");
+          })
+          .catch(err => {
+            console.log(err);
+            alert("Error deleting data: " + err);
+        });
     }
 };
   return (
@@ -154,11 +248,8 @@ async function getCases(){
                                         <thead>
                                             <tr>
                                                 <th class="width80">ID</th>
-                                                {/* <th>CASES</th> */}
-                                                {/* <th>No.Of Cases</th> */}
-                                                <th>Remark</th>
-                                                {/* <th>STATUS</th> */}
-                                                <th>Name</th>
+                                                <th>NAME</th>
+                                                <th>File</th>
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -183,8 +274,8 @@ async function getCases(){
 														</button>
 														<div class="dropdown-menu">
                             {/* <a class="dropdown-item" href="#">Summarize</a> */}
-															<a class="dropdown-item" href="#">Edit</a>
-                              <a class="dropdown-item" onClick={() => removeData(file.id)}>Delete</a>														
+															{/* <a class="dropdown-item" onClick={() => handleUpdate(item.id)}>Edit</a> */}
+                              <a class="dropdown-item" onClick={() => handleDelete(item.id)}>Delete</a>														
                               </div>
 													</div>
 												</td>

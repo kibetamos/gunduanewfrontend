@@ -1,53 +1,76 @@
-import React, {useState  } from "react";
+import React, { useState, useEffect } from "react";
 import styles from '../../Pages/Home/Home.module.css';
 import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import axios from "axios";
-
-// or import 'quill/dist/quill.bubble.css'; // Add css for bubble theme
+import "quill/dist/quill.snow.css"; // import the styles
+import ReactQuill from "react-quill"; // import the library
 
 const Editor = () => {
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://192.168.30.102:5000/files/")
+      .then((response) => {
+        setContent(response.data.content);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .put("http://192.168.30.102:5000/files/", { content })
+      .then((response) => {
+        console.log(response);
+        alert("Content saved successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error saving content: " + error);
+      });
+  };
+
   return (
     <div className={styles.Summaries} data-testid="Docs">
-
       <Header title="Overview"></Header>
       <Sidebar  ></Sidebar>
-{/* <div class="header">
-    
-</div> */}
-
-<div class="content-body">
-    <div class="container-fluid">
-
-
-        <div class="page-titles">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
-    <li class="breadcrumb-item active"><a href="javascript:void(0)">Editor</a></li>
-  </ol>
-        </div>
-        
-        <div class="row">
-            <div class="col-xl-12 col-xxl-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Write your text here</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="summernote">
-                         {/* {this} */}
-                        </div>
-                    </div>
-                   
+      <div className="content-body">
+        <div className="container-fluid">
+          <div className="page-titles">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <a href="javascript:void(0)">Form</a>
+              </li>
+              <li className="breadcrumb-item active">
+                <a href="javascript:void(0)">Editor</a>
+              </li>
+            </ol>
+          </div>
+          <div className="row">
+            <div className="col-xl-12 col-xxl-12">
+              <div className="card">
+                <div className="card-header">
+                  <h4 className="card-title">Write your text here</h4>
                 </div>
+                <div className="card-body">
+                  <ReactQuill value={content} onChange={setContent} />
+                </div>
+                <div className="card-footer">
+                  <button className="btn btn-primary" onClick={handleSubmit}>
+                    Save
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  );
+};
 
-</div>
-
-  )
-}
 export default Editor;
-

@@ -27,10 +27,11 @@ const Profile = () => {
   }
   const getUserDetails = () => {
     let thisName = document.getElementById("name")
-    let thisEmail = document.getElementById("mail")
+    let thisEmail = document.getElementById("email")
     let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+    // console.log(gotten);
     let UserDetails = gotten.data
-    console.log (gotten)
+    // console.log (UserDetails)
     thisName.innerHTML = UserDetails.first_name + ' ' + UserDetails.last_name;
     thisEmail.innerHTML = UserDetails.email;
 
@@ -38,13 +39,16 @@ const Profile = () => {
       'Content-Type': 'application/json',
       // 'Authorization': "Bearer " + token
     }
-    axios.get('http://192.168.30.102:5000/profile/' + gotten.data.id + "/", { headers: headers })
+    axios.put('http://192.168.30.102:5000/profile/' + gotten.data.id + "/", { headers: headers })
     
       .then(response => {
         // $('#EmailExistsError').hide();
 
         setLoading(false);
-        console.log(response);
+
+        const $select = document.querySelector('#user_type');
+        $select.value = response.data.user_type +"";
+        console.log($select.value)
         // if (response.status == 200) {
         //   $('#changepasswordSuccess').show();
         //   document.getElementById("change-password-form").reset();
@@ -111,8 +115,8 @@ const Profile = () => {
     setLoading(true);
     // console.log(payload)
       const headers = {
-      // 'Content-Type': 'application/json',
-      // 'Authorization': "Bearer " + token
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer " + token
     }
     axios.put('http://192.168.30.102:5000/profile/' + userid + "/", payload, { headers: headers })
     
@@ -235,7 +239,7 @@ const Profile = () => {
                           <div class="col-md-12">
                             <div class="form-group">
                                   <label>User Type</label>
-                                        <select class="form-control default-select" id="user_type" name='user_type'>
+                                        <select class="form-control  " id="user_type" name='user_type'>
                                   <option value='Public' >Public</option>
                                   <option value='Bar'>Bar</option>
                                   

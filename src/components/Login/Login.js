@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// import { refreshTokenSetup } from '../_utils/refreshToken';
 import styles from './Login.module.css';
 import Headers from '../_layouts/Headers/Headers';
 import Footers from '../_layouts/Footers/Footers';
@@ -12,6 +13,7 @@ import { Variables } from '../_utils/GlobalVariables';
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  // const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [emailvalid, setEmailvalid] = useState(false);
@@ -20,10 +22,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSuccess = (res) => {
-    // console.log('Login Success: currentUser:', res);
-    // alert(
-    //   `Logged in successfully welcome ${res.profileObj.name} . \n See console for full profile object.`
-    // );
+    console.log('Login Success: currentUser:', res);
+    alert(
+      `Logged in successfully welcome ${res.profileObj.name} . \n See console for full profile object.`
+    );
     // refreshTokenSetup(res);
   };
 
@@ -63,7 +65,9 @@ const Login = () => {
     axios.post('http://192.168.30.102:5000/rest_auth/login/', submitPayload, { headers: headers })
       .then(response => {
         // $('#EmailExistsError').hide();
-
+        localStorage.setItem('key', response.data.token);
+        // setIsLoggedIn(true);
+        // console.log(localStorage.getItem('key'));
         setLoading(false);
         console.log(response);
 
@@ -77,7 +81,7 @@ const Login = () => {
           setTimeout(function () {
             // navigate('/home');
 
-            // window.location.href = "/home";
+            window.location.href = "/";
           }, 1000);
         } else {
           $('.alert-success').hide();
@@ -94,7 +98,7 @@ const Login = () => {
 
   const handleChange = (event) => {
     // this.setState({ [event.target.name]: event.target.value });
-    if (event.target.name == "username") {
+    if (event.target.name == "email") {
       validateEmail(event.target.value);
     } else if (event.target.name == "password") {
       validatePassword(event.target.value);
@@ -136,16 +140,16 @@ const Login = () => {
                     <div class="auth-form">
                       <h3 class="text-center mb-4 text-primary"><strong>Login</strong><p className='text-black mb-0 p-0 fs-16'>(Existing User)</p></h3>
                       <form onSubmit={logIn}>
-                        <div class="form-group">
-                          <label class="mb-1 text-primary"><strong>Email</strong></label>
-                          <input onChange={handleChange} type="email" name="email" class="form-control" placeholder="hello@example.com" />
-                        </div>
+                      <div class="form-group">
+                            <label class="mb-1 text-primary"><strong>Email</strong></label>
+                            <input onChange={handleChange} type="email" name="email" class="form-control" placeholder="hello@example.com" />
+                          </div>
                         <div className="alert alert-danger mt-2" id='EmailInvalidError' style={displayNone} role="alert">
                           This Email is Invalid.
                         </div>
                         <div class="form-group">
                           <label class="mb-1 text-primary"><strong>Password</strong></label>
-                          <input type="password" onChange={handleChange} name='password' class="form-control" placeholder="Password" />
+                          <input value={password} type="password" onChange={handleChange} name='password' class="form-control" placeholder="Password" />
                         </div>
                         <div className="alert alert-danger" id='EmailAbsentError' style={displayNone} role="alert">
                           Invalid Credentials. Check and try again
@@ -195,3 +199,72 @@ Login.propTypes = {};
 Login.defaultProps = {};
 
 export default Login;
+// import React, { useState } from 'react';
+// import { Navigate } from 'react-router-dom';
+// import axios from 'axios';
+
+// function LoginPage() {
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [error, setError] = useState('');
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     const data = {
+//         'username': username,
+//         'password': password
+//     };
+
+//     axios.post('http://192.168.30.102:5000/rest_auth/login/', data)
+//       .then(response => {
+//         // if status code is 200, user is authenticated
+//         if (response.status === 200) {
+//             // Extract the token from the headers 
+//             // const token = response.headers.authorization;
+//             // // Store the token in local storage
+//             // localStorage.setItem('key', response.data.token);
+//             // console.log(localStorage.getItem('key'));
+//             //         setLoading(false);
+//           Storage.removeItem("gunduauser");
+//           let user = JSON.stringify(response);
+//           localStorage.setItem("gunduauser", user);
+//           console.log(response);
+//           setTimeout(function () {
+//             // navigate('/home');
+
+//             window.location.href = "/";
+//           }, 1000);
+//             // redirect user to dashboard
+//             // window.location.href = '/';
+//         }
+//       })
+//       .catch(error => {
+//         // if status code is not 200, display error message
+//         setError('Incorrect username or password');
+//       });
+//   };
+
+//   return (
+//     <div>
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           type='username'
+//           placeholder='username'
+//           value={username}
+//           onChange={e => setUsername(e.target.value)}
+//         />
+//         <input
+//           type='password'
+//           placeholder='Password'
+//           value={password}
+//           onChange={e => setPassword(e.target.value)}
+//         />
+//         <button type='submit'>Login</button>
+//       </form>
+//       {error && <div>{error}</div>}
+//     </div>
+//   );
+// }
+
+// export default LoginPage;

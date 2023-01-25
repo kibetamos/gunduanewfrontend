@@ -41,7 +41,7 @@ const Library = ({ item }) => {
 		
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xl-9 col-xxl-8">
+					<div class="col-xl-12 col-xxl-12">
 						<div class="row">
 	
 							<div class="col-xl-12">

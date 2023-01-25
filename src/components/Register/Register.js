@@ -71,7 +71,7 @@ const Register = () => {
     const headers = {
       'Content-Type': 'application/json',
     }
-    // console.log('submitting');
+    console.log('submitting');
     setLoading(true);
     console.log(submitPayload)
     axios.post('http://192.168.30.102:5000/registration/', submitPayload, { headers: headers })
@@ -88,12 +88,12 @@ const Register = () => {
           localStorage.removeItem("gunduauser");
           let user = JSON.stringify(response);
           localStorage.setItem("gunduauser", user);
-           
+           console.log(JSON.stringify(response));
           setTimeout(function () {
             // navigate('/home');
             // $("#register-form").fadeOut();
             // $("#emailsent").removeClass("d-none");
-            window.location.href = "/profile";
+            window.location.href = "/login";
           }, 2000);
         } else {
           $('.alert-success').hide();

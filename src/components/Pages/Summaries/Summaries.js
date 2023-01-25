@@ -5,7 +5,7 @@ import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import Footer from '../../_layouts/Footers/Footers';
 import $ from 'jquery';
-import axios from 'axios';
+import axios from "axios";
 import { Variables } from '../../_utils/GlobalVariables';
 import Spinner from "./Spinner";
 import * as ReactBoostrap from 'react-bootstrap';
@@ -17,20 +17,31 @@ const Summaries = ( {isLoading} ) => {
   // const [results, setResults] = useState([])
   const[items, setItems] = useState([]);
   const[files, setFiles] = useState([]);
-  
+  const [data, setData] = useState([]);
+  console.log("-------------------------------")
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  // console.log(gotten);
+  let UserDetails = gotten.data
+  console.log (UserDetails.key)
+
+
 
   async function getResult(){
-    
-    let query = document.getElementById('search').value;
-    console.log(query)
-    // const url = `http://127.0.0.1:8000/cases/similar/${summary}`;
-    const url = `http://192.168.30.102:5000/cases/similar/`+summary;
+ 
+    var axios = require("axios").default;
 
-    var response = await axios.get(url);
-    // setItems(result.data.results)
-    // console.log(response.data);
-    setItems(response.data)
-    console.log(response.data);
+      var options = {
+        method: 'GET',
+        url: `http://192.168.30.102:5000/cases/similar/`+summary,
+        headers: {Authorization: 'Token ' +(UserDetails.key)}
+      };
+      console.log(options);
+      axios.request(options).then(function (options) {
+        console.log(options);
+        setItems(options.data)
+      }).catch(function (error) {
+        console.error(error);
+      });
   }
     const onButton = (e) => {
       e.preventDefault();
@@ -38,23 +49,39 @@ const Summaries = ( {isLoading} ) => {
     }
 const [id, setid]= useState("") 
 const [summary, setSummary] = useState("")
-const url = `http://192.168.30.102:5000/summary/${id}`;
 
+// const url = `http://192.168.30.102:5000/summary/${id}`;
 
+var axios = require("axios").default;
 async function getSummary(){
-  var result = await axios.get(url);
-  setSummary(result.data.summary)
-  console.log(summary);
+  // console.log(url)
+  var axios = require("axios").default;
+
+  var result = 
+  {
+    method: 'GET',
+    url:`http://192.168.30.102:5000/summary/${id}`,
+    headers: {Authorization: 'Token ' +(UserDetails.key)}
+  };
+
+  axios.request(result).then(function (result) {
+        console.log(result.data);
+        setSummary(result.data.summary)
+      }).catch(function (error) {
+        console.error(error);
+      });
+    
+  // setSummary(result.data.summary)
+  // console.log(result);
 }
   const onSubmit = (e) => {
     e.preventDefault();
     getSummary();
   }
 
-  const removeData = (id) => {
+  const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
-
-        fetch('http://192.168.30.102:5000/files/'+ id,
+        fetch('http://192.168.30.102:5000/files/'+ id +"/",
             {
                 method: 'DELETE',
                 headers: {
@@ -62,26 +89,58 @@ async function getSummary(){
                     'content-Type': 'application/json'
                 }
             })
-
-            .then(console.log("Deleted"))
-            .catch(err => console.log(err));
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(response.statusText);
+            } else if (response.status === 204) {
+                setFiles(files.filter(f => f.id !== id));
+                alert("Deleted successfully");
+                // return response.json();
+            } else {
+              return response.json();
+          }
+          // )
+          //   .then(responseData => {
+          //     setFiles(files.filter(f => f.id !== id));
+          //     alert("Deleted successfully");
+          })
+          .catch(err => {
+            console.log(err);
+            alert("Error deleting data: " + err);
+        });
     }
 };
+
 //Retrieve cases from the database
 useEffect(() => {
+  
   const fetchFiles = async () => {
+    var axios = require("axios").default;
     // setIsLoading(true)
+    const files = {
+      method: 'GET',
+      url: `http://192.168.30.102:5000/files/`,
+      headers: {Authorization: 'Token ' +(UserDetails.key)}    
+    
+    };
+    console.log(files)
+    axios.request(files).then(function (files) {
     // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-    const files = await axios(`http://192.168.30.102:5000/files/`)
+    // const files = await axios(`http://192.168.30.102:5000/files/`)
     console.log(files.data.results)
     setFiles(files.data.results)
     // setItems(fullSearchUrl.data)
     // setIsLoading(false)
-  }
+  }).catch(function (error) {
+    console.error(error);
+  });
+}
   fetchFiles()
 },[query] )
 
+
 Moment.locale('en');
+
   return isLoading ? (<Spinner />) :(
     <div className={styles.Summaries} data-testid="Summaries">
 
@@ -261,35 +320,21 @@ Moment.locale('en');
                                             </tr>
                                         </thead>
                                         <tbody>
-                                      
-                                        {files.map((file) => 
-                                        // if {
-                                        //   {file.summary} != null  }
+                                        {files.map((f =>(
+                                          
+                                            <tr key={f.id} >
 
-                                        // else {
-                                        // }
-           (
-                                            <tr>
-                                              {/* <h4><a href={"/file?id="+file._id}> */}
-                {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
-                `${item.meta_info['Parties'].substring(0,70)}...`} */}
-                {/* {item.judgement.substring(0,70)} */}
-                {/* {file.file.id}...
-                </a></h4>  */}
-                                                <td><a href={"/Case?id="+file._id}></a>
-                                                  <strong>{file.id}</strong></td>
-                                                <td>{file.remark}</td>
-                                                <td>{file.file.substring(40)}</td>
-                                                    {/* { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
-                `${item.meta_info['Parties'].substring(0,70)}...`} */}
-                {/* {item.judgement.substring(0,70)} */}
+                                                <td><strong>{f.id}</strong></td>
+                                                <td>{f.remark}</td>
+                                                <td>{f.file.substring(40)}</td>
                                                 <td>
-                                                  {file.summary == null ? `${file.summary}`:
-                                                `${file.summary.substring(0,200)}...`} 
-                                                
+                                                {/* <tr key={f.id}>
+                            <td>{f.name}</td>
+                            <td><button onClick={() => handleDelete(f.id)}>Delete</button></td>
+                        </tr> */}
+                                                  {f.summary == null ? `${f.summary}`:
+                                                `${f.summary.substring(0,200)}...`} 
                                                 </td>
-                                                {/* <td><span class="badge light badge-success">Successful</span></td> */}
-                                                {/* <td>$21.56</td> */}
                                                 <td>
 													<div class="dropdown">
 														<button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
@@ -297,12 +342,14 @@ Moment.locale('en');
 														</button>
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#" onClick={() => removeData(file.id)}>Delete</a>
+															<a class="dropdown-item" onClick={() => handleDelete(f.id)}>Delete</a>
+                              {/* <td><button onClick={() => handleDelete(d.id)}>Delete</button></td> */}
+
 														</div>
 													</div>
 												</td>
                                             </tr>
-                                            ))} 
+                                            )))} 
                                         </tbody>
                                     </table>
                                     </div>
