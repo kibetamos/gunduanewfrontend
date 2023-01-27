@@ -86,7 +86,8 @@ async function getSummary(){
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
-                    'content-Type': 'application/json'
+                    'content-Type': 'application/json',
+                    Authorization: 'Token ' +(UserDetails.key)
                 }
             })
             .then(response => {
@@ -314,8 +315,7 @@ Moment.locale('en');
                                                 <th>NAME</th>
                                                 <th>FILE</th>
                                                 <th>SUMMARY</th>
-                                                {/* <th>STATUS</th> */}
-                                                {/* <th>PRICE</th> */}
+                                        
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>

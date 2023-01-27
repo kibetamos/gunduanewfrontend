@@ -55,6 +55,12 @@ const Sidebar = () => (
             </a>
           </li>
           <li >
+            <a href="/Transcribe" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-notepad-1"></i>
+              <span class="nav-text"> Transcribe</span>
+            </a>
+          </li>
+          <li >
             <a href="/editor" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-edit-1"></i>
               <span class="nav-text"> Editor</span>

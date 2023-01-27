@@ -35,11 +35,6 @@ const Docs = (event) => {
     uploadData.append('file',file, file.name);
     // console.log(remark);
     axios.post('http://192.168.30.102:5000/files/', uploadData, {
-      // method:'POST',
-      // body:uploadData,
-      // headers: {
-      //   Authorization: 'Token' +(UserDetails.key)
-      // }
       headers: {
         'Authorization': `Token ${UserDetails.key}`,
         'Content-Type': 'multipart/form-data'
@@ -136,12 +131,13 @@ async function getCases(){
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
-        fetch('http://192.168.30.102:5000/files/'+ id +"/",
+        fetch(`http://192.168.30.102:5000/files/${id}`,
             {
                 method: 'DELETE',
                 headers: {
-                    'Accept': 'application/json',
-                    'content-Type': 'application/json'
+                  Authorization: 'Token ' +(UserDetails.key),
+                  'Accept': 'application/json',
+                  'content-Type': 'application/json'
                 }
             })
             .then(response => {
@@ -154,10 +150,6 @@ async function getCases(){
             } else {
               return response.json();
           }
-          // )
-          //   .then(responseData => {
-          //     setFiles(files.filter(f => f.id !== id));
-          //     alert("Deleted successfully");
           })
           .catch(err => {
             console.log(err);
