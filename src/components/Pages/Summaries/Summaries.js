@@ -18,6 +18,8 @@ const Summaries = ( {isLoading} ) => {
   const[items, setItems] = useState([]);
   const[files, setFiles] = useState([]);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   console.log("-------------------------------")
   let gotten = JSON.parse(localStorage.getItem("gunduauser"));
   // console.log(gotten);
@@ -32,12 +34,14 @@ const Summaries = ( {isLoading} ) => {
 
       var options = {
         method: 'GET',
-        url: `http://192.168.30.102:5000/cases/similar/`+summary,
-        headers: {Authorization: 'Token ' +(UserDetails.key)}
+        url: `http://192.168.30.102:5000/cases/similar/`+summary +"/",
+        headers: {
+          Authorization: 'Token ' +(UserDetails.key)
+        }
       };
-      console.log(options);
+      // console.log(options);
       axios.request(options).then(function (options) {
-        console.log(options);
+        console.log(options.data);
         setItems(options.data)
       }).catch(function (error) {
         console.error(error);
@@ -53,6 +57,7 @@ const [summary, setSummary] = useState("")
 // const url = `http://192.168.30.102:5000/summary/${id}`;
 
 var axios = require("axios").default;
+
 async function getSummary(){
   // console.log(url)
   var axios = require("axios").default;
@@ -78,6 +83,30 @@ async function getSummary(){
     e.preventDefault();
     getSummary();
   }
+
+
+  async function getSummary1(id){
+    // console.log(url)
+    var axios = require("axios").default;
+  
+    var result = 
+    {
+      method: 'GET',
+      url:`http://192.168.30.102:5000/summary/${id}/`,
+      headers: {Authorization: 'Token ' +(UserDetails.key)}
+    };
+  
+    axios.request(result).then(function (result) {
+          console.log(result.data);
+          setSummary(result.data.summary)
+        }).catch(function (error) {
+          console.error(error);
+        });
+      
+    // setSummary(result.data.summary)
+    // console.log(result);
+  }
+
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -131,13 +160,13 @@ useEffect(() => {
     console.log(files.data.results)
     setFiles(files.data.results)
     // setItems(fullSearchUrl.data)
-    // setIsLoading(false)
+    setLoading(false);
   }).catch(function (error) {
     console.error(error);
   });
 }
   fetchFiles()
-},[query] )
+},[] )
 
 
 Moment.locale('en');
@@ -161,7 +190,10 @@ Moment.locale('en');
           </div>
                                     {/* <!-- Large modal --> */}
                                     <div class="raise_button">
-                                    <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Summarize Text</button>
+                                    <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Summarize Text</button>&ensp;&ensp;&ensp;&ensp; 
+                                    <a href="http://localhost:3000/Docs">
+                                      <button  type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg" >Check History</button></a>
+
                                     </div>
                                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
@@ -176,24 +208,20 @@ Moment.locale('en');
                                     <form onSubmit={onSubmit}>
                                     <div class="input-group mb-3" >
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">Name</span>
+                                                <span class="input-group-text">ID</span>
                                             </div>
                                             <input type="text"
                                             placeholder="Enter ID" 
                                             autoComplete="Off" value={id}
                                             onChange={(e) => setid(e.target.value)} 
                                             class="form-control"/>
-                                            <button type="submit" class="btn btn-primary">Summary
-                                            {/* <input className="app__submit"  value="Summary" /> */}
-                                            </button>
+                                            <button type="submit" class="btn btn-primary">Summary</button>
                                         </div>
-                                        {/* <textarea> </textarea>        */}
+                                    
                 
-									{/* <textarea rows="14" cols="7"class="form-control" > */}
-                  {/* {summary} */}
-                  {/* </textarea>  */}
+								
                   {summary}
-                  {/* { isLoading ? summary :<Spinner animation="border" />} */}
+                
                   
 									<div class="input-group-append">
                   <div class="modal-footer">
@@ -219,17 +247,19 @@ Moment.locale('en');
                     <div class="col-md-12 col-xx l-12">
                       <div class="new-arrival-content position-relative">
                       <div class="card-header">
-                      <h4><a href={"/Case?id="+item._id}>
-                { item.meta_info['Parties'].substring(0,70) ? `${item.meta_info['Parties']}` : 
-                `${item.meta_info['Parties'].substring(0,70)}...`} 
-                {/* {item.judgement.substring(0,70)}
-                {/* {item.meta_info['Parties']} */}
-                </a></h4> </div>
+                      <h4>
+                        <a href={"/Case?id="+item._id}>
+                          {/* {item.meta_info['Parties']} */}
+                { item.meta_info['Parties '].substring(0,70) ? `${item.meta_info['Parties ']}` : 
+                `${item.meta_info['Parties '].substring(0,70)}...`} 
+                </a>
+                </h4> 
+                </div>
                 <div class="card-body">
-                        <p class="card-title">Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p class="card-title">Judge(s): <span class="item">{item.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
                         <p class="card-title">Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
                         <p class="card-title">County: <span class="item">{item.meta_info['County']}</span></p>
-                        <p class="card-title">Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                        <p class="card-title">Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
                         {/* <p class="text-content"></p> */}
                         <p class="card-text">Tags:&nbsp;&nbsp;
                                     <span class="badge badge-success light">{item.related_cases}</span>
@@ -238,8 +268,8 @@ Moment.locale('en');
                                 </p>
                                 </div>
                                 <div class="card-footer border-0 pt-0">
-                                <p class="card-text d-inline">Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
-                                <a class="card-link float-right">Judge(s): {item.meta_info['Judge(s)']}</a>
+                                {/* <p class="card-text d-inline">Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p> */}
+                                <a class="card-link float-right">Judge(s): {item.meta_info['Judge(s) ']}</a>
                             </div>
                       </div>
                       
@@ -306,53 +336,52 @@ Moment.locale('en');
                                             </div>
                                         </div>
                                     </div>
-            <div class="card">
-            <table class="table table-responsive-md">
-            
-                                        <thead>
-                                            <tr>
-                                                <th class="width80">ID</th>
-                                                <th>NAME</th>
-                                                <th>FILE</th>
-                                                <th>SUMMARY</th>
-                                        
-                                                <th>ACTIONS</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {files.map((f =>(
-                                          
-                                            <tr key={f.id} >
+                                    {loading && 
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+}
+{!loading && 
+  <div class="card">
+    <table class="table table-responsive-md">
+      <thead>
+        <tr>
+          <th class="width80">ID</th>
+          <th>NAME</th>
+          <th>FILE</th>
+          <th>SUMMARY</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {files.map((f =>(
+          <tr key={f.id} >
+            <td><strong>{f.id}</strong></td>
+            <td>{f.remark}</td>
+            <td>{f.file.substring(40)}</td>
+            <td>
+              {f.summary == null ? `${f.summary}`:
+                `${f.summary.substring(0,200)}...`} 
+            </td>
+            <td>
+              <div class="dropdown">
+                <button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
+                  <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Edit</a>
+                  <a class="dropdown-item" onClick={() => handleDelete(f.id)}>Delete</a>
+                  <a class="dropdown-item" onClick={() => getSummary1(f.id)}>Summary</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        )))} 
+      </tbody>
+    </table>
+  </div>
+}
 
-                                                <td><strong>{f.id}</strong></td>
-                                                <td>{f.remark}</td>
-                                                <td>{f.file.substring(40)}</td>
-                                                <td>
-                                                {/* <tr key={f.id}>
-                            <td>{f.name}</td>
-                            <td><button onClick={() => handleDelete(f.id)}>Delete</button></td>
-                        </tr> */}
-                                                  {f.summary == null ? `${f.summary}`:
-                                                `${f.summary.substring(0,200)}...`} 
-                                                </td>
-                                                <td>
-													<div class="dropdown">
-														<button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
-															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-														</button>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" onClick={() => handleDelete(f.id)}>Delete</a>
-                              {/* <td><button onClick={() => handleDelete(d.id)}>Delete</button></td> */}
-
-														</div>
-													</div>
-												</td>
-                                            </tr>
-                                            )))} 
-                                        </tbody>
-                                    </table>
-                                    </div>
                                     
       </div>
     </div>

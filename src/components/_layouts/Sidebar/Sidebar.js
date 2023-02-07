@@ -25,6 +25,12 @@ const Sidebar = () => (
             </a>
           </li>
           <li >
+            <a href="/Docs" class="ai-icon active" aria-expanded="false">
+              <i class="flaticon-381-notepad-1"></i>
+              <span class="nav-text"> Docs</span>
+            </a>
+          </li>
+          <li >
             <a href="/summaries" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-clock-1"></i>
               <span class="nav-text"> Summaries</span>
@@ -48,12 +54,7 @@ const Sidebar = () => (
               <span class="nav-text"> Search</span>
             </a>
           </li>
-          <li >
-            <a href="/Docs" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-notepad-1"></i>
-              <span class="nav-text"> Docs</span>
-            </a>
-          </li>
+        
           <li >
             <a href="/Transcribe" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-notepad-1"></i>

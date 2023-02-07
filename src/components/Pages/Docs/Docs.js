@@ -18,6 +18,7 @@ const Docs = (event) => {
   const[itemsPerPage] = useState(6);
   const [isEditing, setIsEditing] = useState(false);
   const [currentFile, setCurrentFile] = useState({});
+  const [formData, setFormData] = useState({});
   console.log("-------------------------------")
   let gotten = JSON.parse(localStorage.getItem("gunduauser"));
 
@@ -27,7 +28,9 @@ const Docs = (event) => {
 
 
 //This is to post a new doc to the databse
-  const newDoc =() => {
+  const newDoc =(event) => {
+    // event.preventDefault();
+
     var axios = require("axios").default;
 
     const uploadData = new FormData();
@@ -35,13 +38,21 @@ const Docs = (event) => {
     uploadData.append('file',file, file.name);
     // console.log(remark);
     axios.post('http://192.168.30.102:5000/files/', uploadData, {
+      method: 'POST',
+      body: uploadData,
       headers: {
         'Authorization': `Token ${UserDetails.key}`,
         'Content-Type': 'multipart/form-data'
       }
     })
-    .then(res => console.log(res))
-    .catch(error => console.log(error))
+    .then(res => res)
+    .then(data => {
+      console.log(data);
+        // display the form with the same document
+        setFormData(data)
+      })
+      .catch(error => console.log(error))
+
   }
   ////////////////////////////////////////////////////////////////
 //   var axios = require("axios").default;
@@ -101,37 +112,55 @@ async function getCases(){
     e.preventDefault();
     getCases();
   }
-//   const handleUpdate = (id) => {
-//     const file = document.getElementById("file").file[0];
-//     const remark = document.getElementById("remark").value;
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   // API call to upload the file
+  //   fetch('/api/upload', {
+  //     method: 'POST',
+  //     body: formData
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       // display the form with the same document
+  //       setFormData(data);
+  //     })
+  //     .catch(error => console.error(error));
+  // };
+  
+  const handleUpdate = (id) => {
+    const file = document.getElementById("file").file[0];
+    const remark = document.getElementById("remark").value;
 
-//     let formData = new FormData();
-//     formData.append("file", file);
-//     formData.append("remark", remark);
+    let formData = new FormData();
+    formData.append("file", file);
+    formData.append("remark", remark);
 
-//     fetch(`http://192.168.30.102:5000/files/${id}`, {
-//         method: 'PUT',
-//         body: formData
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error(response.statusText);
-//         }
-//         return response.json();
-//     })
-//     .then(responseData => {
-//         setFiles(files.map(f => f.id === id ? {...f, file: responseData.file, remark: responseData.remark} : f));
-//         alert("Data updated successfully");
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         alert("Error updating data: " + err);
-//     });
-// }
+    fetch(`http://192.168.30.102:5000/files/${id}`, {
+        method: 'PUT',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+        return response.json();
+    })
+    .then(responseData => {
+        setFiles(files.map(f => f.id === id ? {...f, file: responseData.file, remark: responseData.remark} : f));
+        alert("Data updated successfully");
+    })
+    .catch(err => {
+        console.log(err);
+        alert("Error updating data: " + err);
+    });
+}
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
-        fetch(`http://192.168.30.102:5000/files/${id}`,
+      fetch('http://192.168.30.102:5000/files/'+ id +"/",
             {
                 method: 'DELETE',
                 headers: {
@@ -144,7 +173,7 @@ async function getCases(){
               if (!response.ok) {
                 throw new Error(response.statusText);
             } else if (response.status === 204) {
-                setFiles(files.filter(f => f.id !== id));
+              setFiles(files.filter(f => f.id !== id));
                 alert("Deleted successfully");
                 // return response.json();
             } else {
@@ -178,6 +207,8 @@ async function getCases(){
                                     <div class="raise_button">
                                     <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Upload</button>
                                     </div>
+                                    <a href="http://localhost:3000/Docs2">
+                                      <button  type="button" class="btn btn-primary mb-2 raise_button">Check History</button></a>
                                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -247,33 +278,26 @@ async function getCases(){
                                         </thead>
                                         <tbody>
                                         
-           {items.map((item) => 
-           (
+           {/* {items.map((item) =>(
                                             <tr>
                                                 <td><strong>{item.id}</strong></td>
                                                 <td>{item.remark}</td>
-                                                {/* <td>5</td> */}
                                                 <td>{item.file.substr(40)}</td>
-                                                {/* <td><span class="badge light badge-success">Successful</span></td> */}
-                                                {/* <td>$21.56</td> */}
                                                 <td>
-                                                  {/* <div class="raise_button">
-            <button type="button"class="btn btn-primary">Summarize Text</button>
-            </div> */}
 													<div class="dropdown">
 														<button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
 															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
 														</button>
 														<div class="dropdown-menu">
-                            {/* <a class="dropdown-item" href="#">Summarize</a> */}
-															{/* <a class="dropdown-item" onClick={() => handleUpdate(item.id)}>Edit</a> */}
-                              <a class="dropdown-item" onClick={() => handleDelete(item.id)}>Delete</a>														
+															<a class="dropdown-item" onClick={() => handleUpdate(item.id)}>Edit</a>
+                              <a class="dropdown-item" onClick={() => handleDelete(item.id)}>Delete</a>	
+                              <a class="dropdown-item" href='/summaries'>Summarize</a>														
                               </div>
 													</div>
 												</td>
                                             </tr>
 											
- ))}  
+ ))}   */}
            
 
 											

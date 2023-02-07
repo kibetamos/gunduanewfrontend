@@ -17,6 +17,8 @@ import Editor from './components/Pages/Editor/Editor';
 import Search from './components/Pages/Search/Search';
 import Library from './components/Pages/Libraries/Libraries';
 import Transcribe from './components/Pages/Transcribe/Transribe'; 
+import Docs2 from './components/Pages/Docs/Docs2';
+
 
 
 ReactDOM.render(
@@ -34,6 +36,7 @@ ReactDOM.render(
       <Route exact path="/Search" element={<Search />} />
       <Route exact path="/Library" element={<Library />} />
       <Route exact path="/Transcribe" element={<Transcribe />} />
+      <Route exact path="/Docs2" element={<Docs2 />} />
       {/* <Route exact path=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "/categories"  /> */}
     </Routes>
   </BrowserRouter>,

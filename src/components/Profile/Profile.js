@@ -21,23 +21,31 @@ const Profile = () => {
   const [loading, setLoading] = useState(false)
 
 
+  console.log("-------------------------------")
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  // console.log(gotten);
+  // let UserDetails = gotten.data
+  console.log (UserDetails)
+
+
+
   const submitForm = (e) => {
     e.preventDefault();
     validate();
   }
   const getUserDetails = () => {
     let thisName = document.getElementById("name")
-    let thisEmail = document.getElementById("email")
+    let thisEmail = document.getElementById("mail")
     let gotten = JSON.parse(localStorage.getItem("gunduauser"));
-    // console.log(gotten);
+    console.log(gotten);
     let UserDetails = gotten.data
-    // console.log (UserDetails)
+    console.log (UserDetails)
     thisName.innerHTML = UserDetails.first_name + ' ' + UserDetails.last_name;
     thisEmail.innerHTML = UserDetails.email;
 
     const headers = {
       'Content-Type': 'application/json',
-      // 'Authorization': "Bearer " + token
+      'Authorization': `Token ${UserDetails.key}`,
     }
     axios.put('http://192.168.30.102:5000/profile/' + gotten.data.id + "/", { headers: headers })
     
@@ -116,7 +124,7 @@ const Profile = () => {
     // console.log(payload)
       const headers = {
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + token
+      Authorization: 'Token ' +(UserDetails.key)
     }
     axios.put('http://192.168.30.102:5000/profile/' + userid + "/", payload, { headers: headers })
     

@@ -17,19 +17,25 @@ function Headers(props) {
   const[query, setQuery] = useState("");
   const [result, setResult] = useState([])
   const navigate = useNavigate();
+  const [results, setResults] = useState([]);
   let [loggedIn, setLoggedIn] = useState(false);
+  const[items, setItems] = useState([])
 
 
-  // async function getResult(){
+  async function getResult(){
     
-  //   let query = document.getElementById('search').value;
-  //   // console.log(query)
-  //   const url = `http://127.0.0.1:8000/cases/text_search/`+query;
-  //   var result = await axios.get(url);
+    let query = document.getElementById('search').value;
+    // console.log(query)
+    const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
+    var result = await axios.get(url);
+    
+    // const data = await result.json();
+    // setResults(data.results);
+    // setResult(result.data.hits)
+    console.log(result.data);
+    setItems(result.data);
 
-  //   setResult(result.data.hits)
-  //   console.log(result);
-  // }
+  }
     const onSubmit = (e) => {
       e.preventDefault();
       setResult();
@@ -46,6 +52,10 @@ function Headers(props) {
         //   // window.location.href = "/login";
         //   setLoggedIn(false);
         // }
+        if (query.length === 0) {
+          setResults([]);
+          return;
+        }
       }
     } else {
       const headers = {
@@ -97,31 +107,18 @@ function Headers(props) {
               </div>
               <ul class="navbar-nav header-right">
                 <li class="nav-item">
-                <form onSubmit={onSubmit}>
+                {/* <form onSubmit={onSubmit}>
                   <div class="input-group top-search-bar search-area d-xl-inline-flex" >
                     <input type="text" 
                     class="form-control"
                     id='search'
-                    
-                    onChange={(e) => setQuery(e.target.value)} placeholder="Search..." 
-                    />
-                    <div class="input-group-append">
-                      <span class="input-group-text"><a href="javascript:void(0)"><i
-                      type="text"
-													class="flaticon-381-search-2">
-                            </i>
-                            </a>
-                            </span>
-                      {/* <span class="input-group-text">
-                      {/* <i type="text"
-                        class="flaticon-381-search-2"/> 
-                          <input className="app__submit" type="submit" value="Search" />
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                          </span> */}
-                    </div>
+                    onClick={getResult}
+                    onChange={(e) => setQuery(e.target.value)} placeholder="Search..."/>
+                    <button type="submit">Search</button>
                   </div>
-                  </form>
+                  </form> */}
                 </li>
+                
                 <li class="nav-item dropdown header-profile">
                   <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
                     <img src="./images/profile/rename.png" width="20" />
@@ -137,6 +134,7 @@ function Headers(props) {
                     </a>
                   </div>
                 </li>
+                
               </ul>
             </div>
           </nav>

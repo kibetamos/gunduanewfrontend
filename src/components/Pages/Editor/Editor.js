@@ -3,15 +3,31 @@ import styles from '../../Pages/Home/Home.module.css';
 import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import axios from "axios";
+import FileSaver from 'file-saver';
 import "quill/dist/quill.snow.css"; // import the styles
 import ReactQuill from "react-quill"; // import the library
+import { Document, Packer, Paragraph } from 'docx';
+
+
+console.log("-------------------------------")
+let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+
+let UserDetails = gotten.data
+console.log (UserDetails.key)
+
+
 
 const Editor = () => {
   const [content, setContent] = useState("");
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
     axios
-      .get("http://192.168.30.102:5000/files/")
+      .get("http://192.168.30.102:5000/files/", {
+        headers: {
+          'Authorization': `Token ${UserDetails.key}`,
+        },
+      })
       .then((response) => {
         setContent(response.data.content);
       })
@@ -21,9 +37,15 @@ const Editor = () => {
   }, []);
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
-    axios
-      .put("http://192.168.30.102:5000/files/", { content })
+
+    axios.post("http://192.168.30.102:5000/files/", { content: content }, {
+        
+      headers: {
+        'Authorization': `Token ${UserDetails.key}`,
+        },
+      })
       .then((response) => {
         console.log(response);
         alert("Content saved successfully");
@@ -32,6 +54,18 @@ const Editor = () => {
         console.log(error);
         alert("Error saving content: " + error);
       });
+  };
+
+  const createWordDocument = (content) => {
+    const doc = new Document();
+    doc.add(new Paragraph(content));
+    return doc;
+  };
+
+  
+  const handleDownload = () => {
+    let blob = new Blob([content], { type: "application/msword" });
+    FileSaver.saveAs(blob, "document.dooh cx");
   };
 
   return (
@@ -62,12 +96,25 @@ const Editor = () => {
                 <div className="card-footer">
                   <button className="btn btn-primary" onClick={handleSubmit}>
                     Save
+                  </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button className="btn btn-primary" onClick={handleDownload}>
+                  Download as Word
                   </button>
+                </div>
+                <div className="card-footer">
+                 
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <style>
+        {`
+          .ql-container {
+            height: 250px; // increase the height of the container
+          }
+        `}
+      </style>
       </div>
     </div>
   );

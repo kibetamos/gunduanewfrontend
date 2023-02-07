@@ -2,7 +2,7 @@ import React, { useState, forwardRef, useRef, useImperativeHandle, useEffect } f
 import PropTypes from 'prop-types';
 import styles from '../../Pages/Home/Home.module.css';
 import Home2 from "../Home/Home2";
-import Header from '../../_layouts/Headers/Headers';
+
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import Footer from '../../_layouts/Footers/Footers';
 import $ from 'jquery';
@@ -20,26 +20,100 @@ const Search = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const[itemsPerPage] = useState(6);
   
+  async function getResult(){
+    
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      setIsLoading(true)
-      // const result = await axios(`http://192.168.30.102:5000/fulltext/cases/${query}`)
-      const result = await axios('http://192.168.30.102:5000/cases/')
-      console.log(result.data)
-      setItems(result.data)
-      // setItems(fullSearchUrl.data)
-      setIsLoading(false)
-    }
-    fetchItems()
-  },[query] )
+
+    let query = document.getElementById('search').value;
+    // console.log(query)
+    const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
+    var result = await axios.get(url);
+    
+    // const data = await result.json();
+    // setResults(data.results);
+    // setResult(result.data.hits)
+    setItems(result.data);
+
+    if (!result.data.length) {
+      console.log('No results found');
+    } else {
+    console.log(result.data);
+
+  }
+};
+    const onSubmit = (e) => {
+      
+      e.preventDefault();
+      
+      setResult();
+    };
+  
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     setIsLoading(true)
+  //     const result = await axios(`http://192.168.30.102:5000/fulltext/cases/${query}`)
+  //     // const result = await axios('http://192.168.30.102:5000/cases/')
+  //     console.log(result.data)
+  //     setItems(result.data)
+  //     // setItems(fullSearchUrl.data)
+  //     // setIsLoading(false)
+  //   }
+  //   fetchItems()
+  // },[query] )
   Moment.locale('en');
   return (
     
     <div className={styles.Home} data-testid="Home">
 
-      <Header title="Overview"></Header>
+      {/* <Header title="Overview"></Header> */}
+      {/* <Headers ></Headers> */}
       <Sidebar  ></Sidebar>
+      <div>
+      {/*  Nav header start */}
+      <div className="nav-header">
+        <a href="/" className="brand-logo">
+          <img className="logo-abbr" src="./images/gundualogo.png" alt="" />
+          <img className="logo-compact" src="./images/gunduatext.png" alt="" />
+          <img className="brand-title" src="./images/gunduatext4.png" alt="" />
+        </a>
+
+        <div className="nav-control">
+          <div className="hamburger">
+            <span className="line"></span><span className="line"></span><span className="line"></span>
+          </div>
+        </div>
+      </div>
+      {/*  Nav header end */}
+
+      {/* Header start */}
+      <div class="header">
+        <div class="header-content">
+          <nav class="navbar navbar-expand">
+            <div class="collapse navbar-collapse justify-content-between">
+              <div class="header-left">
+                <div class="dashboard_bar">
+                </div>
+              </div>
+              <ul class="navbar-nav header-right">
+                <li class="nav-item">
+                <form onSubmit={onSubmit}>
+                  <div class="input-group top-search-bar search-area d-xl-inline-flex" >
+                    <input type="text" 
+                    class="form-control"
+                    id='search'
+                   
+                    onChange={(e) => setQuery(e.target.value)} placeholder="Search..."/>
+                    <button type="submit" class="btn btn-primary mb-2 raise_button"  onClick={getResult}>Search</button>
+                  </div>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      {/* Header end */}
+    </div>
 
 <div class="content-body">
 		
@@ -51,7 +125,11 @@ const Search = () => {
 							<div class="col-xl-12">
 								<div class="card">
 									<div class="card-header border-0 pb-sm-0 pb-5">
+                    
 									</div>
+                  <div className="card-header">
+                  <h4 className="card-title">Search Cases Here</h4>
+                </div>
 										<div class="card-body">
                                 
                                 <div class="custom-tab-1">
@@ -60,7 +138,7 @@ const Search = () => {
                                             <a class="nav-link active" data-toggle="tab" href="#home1"><i class="la la-home mr-2"></i> Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Profile</a>
+                                            <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Tags</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#contact1"><i class="la la-phone mr-2"></i>  Contact</a>
@@ -75,7 +153,8 @@ const Search = () => {
                                              
                                             <div class="row">
           {items.map((item) => (
-            // <Case1 key={item._id} item={item}></Case1>
+            
+            
             // <p> {item.meta_info['Date Delivered']}</p>
             <div class="col-lg-6 col-xl-6">
               <div class="card">
@@ -83,13 +162,15 @@ const Search = () => {
                   <div class="row m-b-30">
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
+                      {/* <p key={item._id} item={item}></p> */}
                       <h4><a href={"/Case?id="+item._id}>
-                      { `${ item.meta_info['Parties'].substring(0,70)}...` } 
+                      { `${ item.meta_info['Parties '].substring(0,70)}...` } 
                 </a></h4> 
-                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s)']}<i class="fa fa-check-circle text-success"></i></span></p>
+               
+                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
                         <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
                         <p>County: <span class="item">{item.meta_info['County']}</span></p>
-                        <p>Date: <span class="item">{item.meta_info['Date Delivered']}</span></p>
+                        <p>Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
                         <p>Tags:&nbsp;&nbsp;   
                                     <span class="badge badge-success light">{item.resolved_acts.slice(0,4)}</span>
                                 </p>
@@ -122,7 +203,7 @@ const Search = () => {
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+item._id}>
                 <p>Tags:&nbsp;&nbsp;
-                <span class="badge badge-success light">{item.resolved_acts}</span>
+                <span class="badge badge-success light">{item.resolved_acts.slice(0,4)}</span>
                 </p>
                 </a></h4> 
                       </div>
