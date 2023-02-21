@@ -168,7 +168,7 @@ async function getCases(){
   return (
     <div className={styles.Summaries} data-testid="Docs">
 
-      <Header title="Overview"></Header>
+      <Header title="Documents"></Header>
       <Sidebar  ></Sidebar>
         <div class="container-fluid">
       <div class="content-body">

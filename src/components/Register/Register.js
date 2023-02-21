@@ -199,10 +199,6 @@ const Register = () => {
         <div class="divider"></div>
         <div class="divider"></div>
       </div>
-
-      <Headers></Headers>
-
-
       <body style={bodyStyle} className="h-100 mt-5 pt-5">
         <div className="authincation mt-5 mb-5 h-100">
           <div className="container login-container h-100">
@@ -313,7 +309,6 @@ const Register = () => {
           </div>
         </div>
       </body >
-      <Footers></Footers>
     </div>
   )
 };

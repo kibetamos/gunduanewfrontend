@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   const onFailure = (res) => {
-    // console.log('Login failed: res:', res);
+    console.log('Login failed: res:', res);
     console.log(
       `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
     );
@@ -65,10 +65,13 @@ const Login = () => {
     axios.post('http://192.168.30.102:5000/rest_auth/login/', submitPayload, { headers: headers })
       .then(response => {
         // $('#EmailExistsError').hide();
-        localStorage.setItem('key', response.data.token);
+        // localStorage.setItem('key', response.data.token);
         // setIsLoggedIn(true);
-        // console.log(localStorage.getItem('key'));
         setLoading(false);
+
+
+        // console.log(localStorage.getItem('key'));
+       
         console.log(response);
 
         if (response.status == 200) {
@@ -118,7 +121,6 @@ const Login = () => {
 
   return (
 
-
     <div className={styles.Login} data-testid="Login">
       {/* <!-- dividers --> */}
       <div class="dividers">
@@ -129,7 +131,7 @@ const Login = () => {
       </div>
 
 
-      <Headers></Headers>
+      {/* <Headers></Headers> */}
       <div class="authincation mt-5 mb-5 h-100">
         <div class="container pb-5 login-container h-100">
           <div class="row pt-5 justify-content-center h-100 align-items-center">
@@ -189,7 +191,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Footers></Footers>
+     
     </div>
   )
 };

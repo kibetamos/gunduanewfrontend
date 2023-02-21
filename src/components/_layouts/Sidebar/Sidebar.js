@@ -4,6 +4,27 @@ import {
   Link, useNavigate
 } from "react-router-dom";
 
+const isMobile = {
+  Android: function () {
+    return navigator.userAgent.match(/Android/i);
+  },
+  BlackBerry: function () {
+    return navigator.userAgent.match(/BlackBerry/i);
+  },
+  iOS: function () {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function () {
+    return navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function () {
+    return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+  },
+  any: function () {
+    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+  }
+};
+
 const Sidebar = () => (
   <div className='sidebar-main' id='sidebar-main'>
     <div class="deznav">
@@ -21,13 +42,13 @@ const Sidebar = () => (
           <li > 
             <a href="/" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-home-3"></i>
-              <span class="nav-text">Home</span>
+              <span class="nav-text">Dashboard</span>
             </a>
           </li>
           <li >
             <a href="/Docs" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-notepad-1"></i>
-              <span class="nav-text"> Docs</span>
+              <span class="nav-text"> Documents</span>
             </a>
           </li>
           <li >
@@ -36,18 +57,7 @@ const Sidebar = () => (
               <span class="nav-text"> Summaries</span>
             </a>
           </li>
-          {/* <li >
-            <a href="/library" class="ai-icon active" aria-expanded="false">
-              <i class='flaticon-381-square'></i>
-              <span class="nav-text"> Library</span>
-            </a>
-          </li> */}
-           {/* <li >
-            <a href="/categories" class="ai-icon active" aria-expanded="false">
-              <i class="fa-solid fa-table-cells-large"></i>
-              <span class="nav-text"> Categories</span>
-            </a>
-          </li> */}
+          
           <li >
             <a href="/search" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-search-1"></i>
@@ -57,20 +67,14 @@ const Sidebar = () => (
         
           <li >
             <a href="/Transcribe" class="ai-icon active" aria-expanded="false">
-              <i class="flaticon-381-notepad-1"></i>
-              <span class="nav-text"> Transcribe</span>
+              <i class="flaticon-381-microphone-1"></i>
+              <span class="nav-text">Transcription</span>
             </a>
           </li>
           <li >
             <a href="/editor" class="ai-icon active" aria-expanded="false">
               <i class="flaticon-381-edit-1"></i>
-              <span class="nav-text"> Editor</span>
-            </a>
-          </li>
-          <li >
-            <a href="/library" class="ai-icon active" aria-expanded="false">
-              <i class="fa fa-institution"></i>
-              <span class="nav-text"> Library</span>
+              <span class="nav-text">Text Editor</span>
             </a>
           </li>
           <li >

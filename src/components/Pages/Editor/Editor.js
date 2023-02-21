@@ -9,24 +9,21 @@ import ReactQuill from "react-quill"; // import the library
 import { Document, Packer, Paragraph } from 'docx';
 
 
-console.log("-------------------------------")
-let gotten = JSON.parse(localStorage.getItem("gunduauser"));
-
-let UserDetails = gotten.data
-console.log (UserDetails.key)
-
-
 
 const Editor = () => {
   const [content, setContent] = useState("");
   const [userDetails, setUserDetails] = useState({});
+// console.log("-------------------------------")
+let gotten = JSON.parse(localStorage.getItem("gunduauser"));
 
+let UserDetails = gotten.data
+// console.log (UserDetails.key)
   useEffect(() => {
     axios
       .get("http://192.168.30.102:5000/files/", {
-        headers: {
-          'Authorization': `Token ${UserDetails.key}`,
-        },
+        // headers: {
+        //   'Authorization': `Token ${UserDetails.key}`,
+        // },
       })
       .then((response) => {
         setContent(response.data.content);
@@ -70,7 +67,7 @@ const Editor = () => {
 
   return (
     <div className={styles.Summaries} data-testid="Docs">
-      <Header title="Overview"></Header>
+      <Header title="Text Editor"></Header>
       <Sidebar  ></Sidebar>
       <div className="content-body">
         <div className="container-fluid">

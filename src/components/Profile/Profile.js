@@ -17,17 +17,26 @@ const Profile = () => {
   const [phone_numberError, setPhone_numberError] = useState("")
   const [countyError, setCounty_numberError] = useState("")
   const [otherErrors, setOtherErrors] = useState("")
-  const [UserDetails, setUserDetails] = useState("")
+  // const [UserDetails, setUserDetails] = useState("")
+
+
   const [loading, setLoading] = useState(false)
-
-
-  console.log("-------------------------------")
   let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  let token = gotten.data.access;
+  let userid = gotten.data.id;
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer " + token
+  }
+  // console.log("-------------------------------")
+  // let gotten = JSON.parse(localStorage.getItem("gunduauser"));
   // console.log(gotten);
   // let UserDetails = gotten.data
-  console.log (UserDetails)
+  // console.log (UserDetails) 
 
-
+  // let token = UserDetails.access;
+ 
+// console.log(token);
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -37,17 +46,23 @@ const Profile = () => {
     let thisName = document.getElementById("name")
     let thisEmail = document.getElementById("mail")
     let gotten = JSON.parse(localStorage.getItem("gunduauser"));
-    console.log(gotten);
-    let UserDetails = gotten.data
-    console.log (UserDetails)
+      // let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  console.log(gotten);
+  let UserDetails = gotten.data
+  console.log (UserDetails) 
+  let userid = gotten.data.id;
+    // console.log(gotten);
+    // let UserDetails = gotten.data
+    // console.log (UserDetails)
+
     thisName.innerHTML = UserDetails.first_name + ' ' + UserDetails.last_name;
-    thisEmail.innerHTML = UserDetails.email;
+    thisEmail.innerHTML = UserDetails.username;
 
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Token ${UserDetails.key}`,
+      'Authorization': "Bearer " + token
     }
-    axios.put('http://192.168.30.102:5000/profile/' + gotten.data.id + "/", { headers: headers })
+    axios.put('http://192.168.30.102:5000/profile/' + userid + "/", { headers: headers })
     
       .then(response => {
         // $('#EmailExistsError').hide();
@@ -124,7 +139,8 @@ const Profile = () => {
     // console.log(payload)
       const headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Token ' +(UserDetails.key)
+      // Authorization: 'Token ' +(UserDetails.key)
+      'Authorization': "Bearer " + token
     }
     axios.put('http://192.168.30.102:5000/profile/' + userid + "/", payload, { headers: headers })
     

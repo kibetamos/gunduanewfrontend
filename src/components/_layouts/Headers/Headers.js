@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import Search from '../../Pages/Search/Search';
 import axios from 'axios';
 
-import {
-  Link, useNavigate
-} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styles from './Headers.module.css';
 
-function Headers(props) {
+function Header(props) {
   const [loading, setLoading] = useState(false);
-  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  // let gotten = JSON.parse(localStorage.getItem("gunduauser"));
 
   // const navigate = useNavigate();
   const { title } = props;
@@ -20,26 +18,27 @@ function Headers(props) {
   const [results, setResults] = useState([]);
   let [loggedIn, setLoggedIn] = useState(false);
   const[items, setItems] = useState([])
+  
 
 
-  async function getResult(){
+  // async function getResult(){
     
-    let query = document.getElementById('search').value;
-    // console.log(query)
-    const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
-    var result = await axios.get(url);
+  //   let query = document.getElementById('search').value;
+  //   // console.log(query)
+  //   const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
+  //   var result = await axios.get(url);
     
-    // const data = await result.json();
-    // setResults(data.results);
-    // setResult(result.data.hits)
-    console.log(result.data);
-    setItems(result.data);
+  //   // const data = await result.json();
+  //   // setResults(data.results);
+  //   // setResult(result.data.hits)
+  //   console.log(result.data);
+  //   setItems(result.data);
 
-  }
-    const onSubmit = (e) => {
-      e.preventDefault();
-      setResult();
-    }
+  // }
+  //   const onSubmit = (e) => {
+  //     e.preventDefault();
+  //     setResult();
+  //   }
 
   useEffect(() => {
     let gotten = JSON.parse(localStorage.getItem("gunduauser"));
@@ -66,11 +65,13 @@ function Headers(props) {
       let payload = {
         "refresh": token
       };
-  
-
+      //log out automatically
+      setTimeout(function () {
+        logOut();
+      }, 3600000)
       // setLoggedIn(true);
       // window.location.href = "/home";
-    }
+    } 
   }, []);
   const logOut = () => {
     // localStorage.removeItem("gunduauser");
@@ -103,6 +104,7 @@ function Headers(props) {
             <div class="collapse navbar-collapse justify-content-between">
               <div class="header-left">
                 <div class="dashboard_bar">
+                {title}
                 </div>
               </div>
               <ul class="navbar-nav header-right">
@@ -143,10 +145,14 @@ function Headers(props) {
       {/* Header end */}
     </div>
   )
+}
+
+Header.propTypes = {
+  title: PropTypes.string
 };
 
-Headers.propTypes = {};
+Header.defaultProps = {
+  title: 'Login'
+};
 
-Headers.defaultProps = {};
-
-export default Headers;
+export default Header;

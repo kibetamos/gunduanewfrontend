@@ -14,11 +14,16 @@ const Transcribe = (event) => {
   const [text, setText]= useState("")
   const [showFullText, setShowFullText] = useState(false);
 
-  console.log("-------------------------------")
-  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  // console.log("-------------------------------")
+  // let gotten = JSON.parse(localStorage.getItem("gunduauser"));
 
-  let UserDetails = gotten.data
-  console.log (UserDetails.key)
+  // let UserDetails = gotten.data
+  // console.log (UserDetails.key)
+
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  let token = gotten.data.access;
+  // let id = gotten.data.id;
+  //       console.log(id)
 
 
 
@@ -32,7 +37,7 @@ const Transcribe = (event) => {
     // console.log(remark);
     axios.post('http://192.168.30.102:5000/transcription/', uploadData, {
       headers: {
-        Authorization: `Token ${UserDetails.key}`,
+        'Authorization': "Bearer " + token,
         'Content-Type': 'multipart/form-data'
       }
     })
@@ -46,7 +51,7 @@ const Transcribe = (event) => {
     {
       method: 'GET',
       url:`http://192.168.30.102:5000/text/${id}/`,
-      headers: {Authorization: 'Token ' +(UserDetails.key)}
+      headers: {'Authorization': "Bearer " + token}
     };
   
     axios.request(result).then(function (result) {
@@ -56,29 +61,30 @@ const Transcribe = (event) => {
         });
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    var axios = require("axios").default;
+  //   var axios = require("axios").default;
 
     const fetchItems = async () => {
-      var axios = require("axios").default;
-      var result = {
+      try {
+        const result = await axios({
         method: 'GET',
         url: `http://192.168.30.102:5000/transcription/`,
-        headers: {Authorization: 'Token ' +(UserDetails.key)}
-      };
-
-      axios.request(result).then(function (result) {
+        headers: {
+          'Authorization': "Bearer " + token,
+        },
+      });
         console.log(result.data);
         setItems(result.data.results)
 
-      }).catch(function (error) {
+      }catch (error) {
         console.error(error);
-      });
-      
-    }
-    fetchItems()
-  },[query] )
+      }
+    };
+    useEffect(() => {
+      fetchItems();
+    }, []);     
+  
 
   //  Do a summary of each document
 // const url = `http://192.168.30.102:5000/files/summary/${query}`;
@@ -98,7 +104,7 @@ const Transcribe = (event) => {
             {
                 method: 'DELETE',
                 headers: {
-                  Authorization: 'Token ' +(UserDetails.key),
+                  'Authorization': "Bearer " + token,
                   'Accept': 'application/json',
                   'content-Type': 'application/json'
                 }
@@ -123,7 +129,7 @@ const Transcribe = (event) => {
   return (
     <div className={styles.Summaries} data-testid="Docs">
 
-      <Header title="Overview"></Header>
+      <Header title="Transcription"></Header>
       <Sidebar  ></Sidebar>
         <div class="container-fluid">
       <div class="content-body">
@@ -176,7 +182,7 @@ const Transcribe = (event) => {
                                                   </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                    <button onClick={() => newDoc()} type="button" class="btn btn-primary">Save changes</button>
+                                                    <button onClick={() => newDoc()} type="button" class="btn btn-primary">Transcribe</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -200,20 +206,31 @@ const Transcribe = (event) => {
                                                 <td>{item.file.substr(51)}</td>
                                                 <td>{item.text} </td>
                         <td>
-													<div class="dropdown">
+													{/* <div class="dropdown">
 														<button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
 															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
 														</button>
-														<div class="dropdown-menu">
-                            {/* <a class="dropdown-item" href="#">Summarize</a> */}
-															{/* <a class="dropdown-item" onClick={() => handleUpdate(item.id)}>Edit</a> */}
-                              <a class="dropdown-item" onClick={() => handleDelete(item.id)}>Delete</a>	
-                              <a class="dropdown-item"onClick={() => getText(item.id)} >Transcribe</a>
+														 <div class="dropdown-menu"> 
+                            <a class="dropdown-item" href="#">Summarize</a> 
+															 {/* <a class="dropdown-item" onClick={() => handleUpdate(item.id)}>Edit</a>  */}
+                               {/* <a class="dropdown-item" onClick={() => handleDelete(item.id)}>Delete</a>	 */}
+                              {/* <a class="dropdown-item"onClick={() => getText(item.id)} >Transcribe</a>
                           													
-                              </div>
-                              {/* &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info">Transcribe</button> */}
-													</div>
-                        
+                              </div> 
+                               &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info">Transcribe</button> 
+													</div> */} 
+                           
+                         <div class="d-flex ">
+                               <a  data-toggle="modal" data-target="#editDraftModal"
+                                  class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                              <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal">
+                                   <i class="fa fa-trash"></i></a>
+
+                              <a onClick={() => getText(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal">
+                                   <i class="fa fa-book"></i></a>
+
+                                   {/* <a class onClick={() => getText(item.id)} >Transcribe</a> */}
+                          </div>
                                 
                                 
                                

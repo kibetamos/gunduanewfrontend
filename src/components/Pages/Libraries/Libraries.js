@@ -34,7 +34,7 @@ const Library = ({ item }) => {
     
     <div className={styles.Home} data-testid="Home">
 
-      <Header title="Overview"></Header>
+      <Header title="Libraries"></Header>
       <Sidebar  ></Sidebar>
 
 <div class="content-body">

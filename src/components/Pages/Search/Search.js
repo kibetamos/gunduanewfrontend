@@ -2,7 +2,8 @@ import React, { useState, forwardRef, useRef, useImperativeHandle, useEffect } f
 import PropTypes from 'prop-types';
 import styles from '../../Pages/Home/Home.module.css';
 import Home2 from "../Home/Home2";
-
+import Header from '../../_layouts/Headers/Headers';
+// import Header from "../../_layouts/Headers/Headers";
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import Footer from '../../_layouts/Footers/Footers';
 import $ from 'jquery';
@@ -10,6 +11,9 @@ import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
 // import Spinner from "../Summaries/Spinner";
+
+// console.log("-------------------------------")
+
 const Search = () => {
   const[query, setQuery] = useState("");
   const [result, setResult] = useState([])
@@ -19,6 +23,14 @@ const Search = () => {
   const[isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const[itemsPerPage] = useState(6);
+
+  console.log("-------------------------------")
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+
+  let UserDetails = gotten.data
+  console.log (UserDetails.key)
+
+  
   
   async function getResult(){
     
@@ -30,14 +42,14 @@ const Search = () => {
     var result = await axios.get(url);
     
     // const data = await result.json();
-    // setResults(data.results);
-    // setResult(result.data.hits)
+    console.log(result.data);
+    // console.log(result.data.hits)
     setItems(result.data);
 
     if (!result.data.length) {
       console.log('No results found');
     } else {
-    console.log(result.data);
+    console.log(result.data.length);
 
   }
 };
@@ -63,11 +75,11 @@ const Search = () => {
   Moment.locale('en');
   return (
     
-    <div className={styles.Home} data-testid="Home">
+    <div className={styles.Summaries} data-testid="Docs">
 
-      {/* <Header title="Overview"></Header> */}
-      {/* <Headers ></Headers> */}
-      <Sidebar  ></Sidebar>
+        {/* <Header title="Search"></Header> */}
+      
+      
       <div>
       {/*  Nav header start */}
       <div className="nav-header">
@@ -114,10 +126,11 @@ const Search = () => {
       </div>
       {/* Header end */}
     </div>
+    <Sidebar  ></Sidebar>
 
-<div class="content-body">
 		
 			<div class="container-fluid">
+      <div class="content-body">
 				<div class="row">
 					<div class="col-xl-12 col-xxl-12">
 						<div class="row">
@@ -128,16 +141,17 @@ const Search = () => {
                     
 									</div>
                   <div className="card-header">
-                  <h4 className="card-title">Search Cases Here</h4>
+                  <h4 className="card-title"> Results</h4>
+                  {/* <p>About: {items.length} results</p> */}
                 </div>
 										<div class="card-body">
                                 
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home1"><i class="la la-home mr-2"></i> Home</a>
+                                            <a class="nav-link active" data-toggle="tab" href="#home1"><i class="l"></i> Results</a>
                                         </li>
-                                        <li class="nav-item">
+                                        {/* <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Tags</a>
                                         </li>
                                         <li class="nav-item">
@@ -145,10 +159,13 @@ const Search = () => {
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#message1"><i class="la la-envelope mr-2"></i> Message</a>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="home1" role="tabpanel">
+                                          <div>
+
+                                          <p>About: {items.length} results</p>
                                           
                                              
                                             <div class="row">
@@ -183,14 +200,15 @@ const Search = () => {
 
         ))}
           </div>
+          </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="profile1">
+                                        {/* <div class="tab-pane fade" id="profile1">
                                         {/* {isLoading ? <p> Loading ... </p> : (
 
 )} */}
 
-        {isLoading ? <p>Loading...</p> : (
+        {/* {isLoading ? <p>Loading...</p> : (
                                             <div class="pt-4">
 
                                                 <h4>Categories</h4>
@@ -214,9 +232,9 @@ const Search = () => {
              </div>
         ))}
                                             </div>
-                                            )}
-                                        </div>
-                                        <div class="tab-pane fade" id="contact1">
+                                            )} */}
+                                        {/* </div>  */}
+                                        {/* <div class="tab-pane fade" id="contact1">
                                             <div class="pt-4">
                                                 <h4>This is contact title</h4>
                                                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
@@ -233,7 +251,7 @@ const Search = () => {
                                                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
