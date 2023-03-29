@@ -453,7 +453,7 @@ rt of the asnwer //////// */}
                     class="form-control"
                     id='search1'
                    
-                    onChange={(e) => setQuery(e.target.value)} placeholder="Name ,Court Division,Case Class"/>
+                    onChange={(e) => setQuery(e.target.value)} placeholder="Name,Court Division,Case Class"/>
                     <button type="submit" class="btn btn-primary mb-2 raise_button"  onClick={getResultadhoc}>Search</button>
                   </div>
                   </form>
