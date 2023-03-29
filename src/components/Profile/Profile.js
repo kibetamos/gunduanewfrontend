@@ -51,12 +51,12 @@ const Profile = () => {
   let UserDetails = gotten.data
   console.log (UserDetails) 
   let userid = gotten.data.id;
-    // console.log(gotten);
+    console.log(userid);
     // let UserDetails = gotten.data
     // console.log (UserDetails)
 
     thisName.innerHTML = UserDetails.first_name + ' ' + UserDetails.last_name;
-    thisEmail.innerHTML = UserDetails.username;
+    thisEmail.innerHTML = UserDetails.id;
 
     const headers = {
       'Content-Type': 'application/json',
@@ -72,14 +72,7 @@ const Profile = () => {
         const $select = document.querySelector('#user_type');
         $select.value = response.data.user_type +"";
         console.log($select.value)
-        // if (response.status == 200) {
-        //   $('#changepasswordSuccess').show();
-        //   document.getElementById("change-password-form").reset();
-        // } else {
-        //   $('#changepasswordSuccess').hide();
-        //   setOtherErrors("Something Went wrong, Please try again");
-        //   $('#otherErrors').show();
-        // }
+    
 
       })
       .catch(error => {

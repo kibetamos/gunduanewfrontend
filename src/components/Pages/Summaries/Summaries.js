@@ -10,16 +10,14 @@ import { Variables } from '../../_utils/GlobalVariables';
 import Spinner from "./Spinner";
 import * as ReactBoostrap from 'react-bootstrap';
 import Moment from 'moment';
-// console.log("-------------------------------")
-// let gotten = JSON.parse(localStorage.getItem("gunduauser"));
-// // console.log(gotten);
-// let UserDetails = gotten.data
-// console.log (UserDetails.key)
+
 
 const Summaries = ( {isLoading} ) => {
   const[query, setQuery] = useState("");
   // const [results, setResults] = useState([])
   const[items, setItems] = useState([]);
+  const[categories, setCategories] = useState([]);
+  const[item, setItem] = useState([]);
   const[files, setFiles] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,34 +26,26 @@ const Summaries = ( {isLoading} ) => {
   const [showModal, setShowModal] = useState(false);
 
 
-  // console.log("-------------------------------")
-  // let gotten = JSON.parse(localStorage.getItem("gunduauser"));
 
-  // console.log(gotten);
-
-  // let UserDetails = gotten.data
-  // console.log (UserDetails.key)
   let gotten = JSON.parse(localStorage.getItem("gunduauser"));
   let token = gotten.data.access;
   // let id = gotten.data.id;
   //       console.log(id)
 
 
-  async function 
-  
-  
-  getResult(){
+async function getResult(){
  
     var axios = require("axios").default;
 
       var options = {
         method: 'GET',
         url: `http://192.168.30.102:5000/cases/similar/`+selectedFile.summary +"/",
+        
         headers: {
           'Authorization': "Bearer " + token,
         }
       };
-      // console.log(options);
+      console.log(options);
       axios.request(options).then(function (options) {
         console.log(options.data);
         setItems(options.data)
@@ -66,6 +56,27 @@ const Summaries = ( {isLoading} ) => {
     const onButton = (e) => {
       e.preventDefault();
       getResult();
+    }
+
+
+    async function search_by_category(itemname){
+ 
+      var axios = require("axios").default;
+  
+        var cats = {
+          method: 'GET',
+          url: `http://192.168.30.102:5000/cases/category/`+itemname +"/",
+          headers: {
+            'Authorization': "Bearer " + token,
+          }
+        };
+        // console.log(options);
+        axios.request(cats).then(function (cats) {
+          console.log(cats.data);
+          setCategories(cats.data)  
+        }).catch(function (error) {
+          console.error(error);
+        });
     }
 const [id, setid]= useState("") 
 const [summary, setSummary] = useState("")
@@ -155,27 +166,7 @@ if (!updatedSummary.message) {
 }
 document.getElementById("noMessageError").classList.add("d-none");
 
-// Make the API call to update the draft
-// axios.put(`/api/drafts/${id}`, updatedDraft)
-//   .then((res) => {
-//     console.log(res.data);
 
-//     document.getElementById("editDraftSuccess").classList.remove("d-none");
-//     setTimeout(() => {
-//       document.getElementById("editDraftSuccess").classList.add("d-none");
-//     }, 3000);
-    
-//     // Close the modal
-//     $('#editSummaryModal').modal('hide');
-
-//     // Refresh the list of drafts
-//     getDrafts();
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//     document.getElementById("editDraftError").innerHTML = error.response.data.message;
-//     document.getElementById("editDraftError").classList.remove("d-none");
-//   });
 
 });
 };
@@ -272,12 +263,12 @@ Moment.locale('en');
             
           </div>
                                     {/* <!-- Large modal --> */}
-                                    <div class="raise_button">
+                                    {/* <div class="raise_button">
                                     <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Summarize Text</button>&ensp;&ensp;&ensp;&ensp; 
                                     <a href="http://localhost:3000/Docs">
                                       <button  type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg" >See Documents</button></a>
 
-                                    </div>
+                                    </div> */}
                                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -322,7 +313,8 @@ Moment.locale('en');
                                 </div>
                                                   </div>
                                                 
-
+//////////////////START//////////////////////////////////////////
+//////////////////////////////////////////////////////////////////END////////////////////
 <div class="row">
           {items.map((item) => (
             // <Case1 key={item._id} item={item}></Case1>
@@ -348,8 +340,8 @@ Moment.locale('en');
                         <p class="card-title">County: <span class="item">{item.meta_info['County']}</span></p>
                         <p class="card-title">Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
                         {/* <p class="text-content"></p> */}
-                        <p class="card-text">Tags:&nbsp;&nbsp;
-                                    <span class="badge badge-success light">{item.related_cases}</span>
+                        <p class="card-text">Category(s):&nbsp;&nbsp;
+                                    <span class="badge badge-success light">{ }</span>
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
                                     <span class="badge badge-success light">{item.resolved_charges}</span>
                                 </p>
@@ -459,7 +451,7 @@ Moment.locale('en');
                         <p class="card-title">County: <span class="item">{item.meta_info['County']}</span></p>
                         <p class="card-title">Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
                         {/* <p class="text-content"></p> */}
-                        <p class="card-text">Tags:&nbsp;&nbsp;
+                        <p class="card-text">Category(s):&nbsp;&nbsp;
                                     <span class="badge badge-success light">{item.related_cases}</span>
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
                                     <span class="badge badge-success light">{item.resolved_charges}</span>
@@ -715,10 +707,11 @@ Moment.locale('en');
                         <p class="card-title">County: <span class="item">{item.meta_info['County']}</span></p>
                         <p class="card-title">Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
                         {/* <p class="text-content"></p> */}
-                        <p class="card-text">Tags:&nbsp;&nbsp;
-                                    <span class="badge badge-success light">{item.related_cases}</span>
-                                    <span class="badge badge-success light">{item.resolved_acts}</span>
-                                    <span class="badge badge-success light">{item.resolved_charges}</span>
+                        
+                        <p class="card-text">Category(s):
+                                  <button onClick={() => search_by_category(item.related_cases)}><span class="badge badge-success light">{item.related_cases}</span></button>
+                                  <button onClick={() => search_by_category(item.resolved_acts)}><span class="badge badge-success light">{item.resolved_acts}</span></button>
+                                  <button onClick={() => search_by_category(item.resolved_charges)}><span class="badge badge-success light">{item.resolved_charges}</span></button>
                                 </p>
                                 </div>
                                 <div class="card-footer border-0 pt-0">

@@ -222,11 +222,11 @@ const Transcribe = (event) => {
                            
                          <div class="d-flex ">
                                <a  data-toggle="modal" data-target="#editDraftModal"
-                                  class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                              <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal">
+                                  class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"title="EDIT"></i></a>
+                              <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"title="DELETE">
                                    <i class="fa fa-trash"></i></a>
 
-                              <a onClick={() => getText(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal">
+                              <a onClick={() => getText(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"title="Transribe">
                                    <i class="fa fa-book"></i></a>
 
                                    {/* <a class onClick={() => getText(item.id)} >Transcribe</a> */}

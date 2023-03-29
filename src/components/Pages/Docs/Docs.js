@@ -263,9 +263,11 @@ async function getCases(){
 
                                                 <div class="d-flex ">
                                <a onClick={() => handleUpdate(item.id)} data-toggle="modal" data-target="#editDraftModal"
-                                  class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                              <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal">
-                                   <i class="fa fa-trash"></i></a>
+                                  class="btn btn-primary shadow btn-xs sharp mr-1"title="EDIT"><i class="fa fa-pencil"></i></a>
+                              
+                                   <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"
+                    title="Delete">
+                    <i class="fa fa-trash"></i></a> 
                           </div>
                        </td>
 													{/* <div class="dropdown">

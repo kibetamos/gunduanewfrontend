@@ -56,7 +56,7 @@ const Search = () => {
     // const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
     const capitalizedQuery = query.charAt(0).toUpperCase() + query.slice(1);
 
-    const url = `http://192.168.30.102:5000/cases/fulltext/${capitalizedQuery}`;
+    const url = `http://192.168.30.102:5000/cases/category/${capitalizedQuery}`;
 
 
     var result = await axios.get(url);
@@ -74,30 +74,6 @@ const Search = () => {
   }
 };
 
-
-async function getResultadhoc(){
-  let query = document.getElementById('search1').value;
-  // console.log(query)
-  // const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
-  const capitalizedQuery = query.charAt(0).toUpperCase() + query.slice(1);
-
-  const urls = `http://192.168.30.102:5000/cases/adhoc/${capitalizedQuery}`;
-
-
-  var result = await axios.get(urls);
-  
-  // const data = await result.json();
-  console.log(result);
-  // console.log(result.data.hits)
-  setItems(result.data);
-
-  if (!result.data.length) {
-    console.log('No results found');
-  } else {
-  console.log(result.data.length);
-
-}
-};
 
 
 
@@ -211,7 +187,6 @@ async function search_by_category(category){
           </nav>
         </div>
       </div>
-      {/* Header end */}
     </div>
     <Sidebar  ></Sidebar>
 
@@ -240,10 +215,6 @@ async function search_by_category(category){
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#profile1"><i class="la la-user mr-2"></i> Category</a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile2"><i class="la la mr-2"></i> Advanced search</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -293,6 +264,7 @@ async function search_by_category(category){
   <div class="card-body">
     <div>
 
+
 <div className="dropdown">
       <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={getCategories} >
         Categories
@@ -303,10 +275,6 @@ async function search_by_category(category){
           {categories.map((category) => (
             <option key={category} value={category} onClick={() => search_by_category(category)} className="col-lg-12 col-xl-12" >
               {category}
-              {/* <span className="item">{category}<i className="fa fa-check-circle text-success"></i></span> */}
-              {/* <a href="#" onClick={() => search_by_category(category)}>
-                            <span className="item">{category}<i className="fa fa-check-circle text-success"></i></span>
-                          </a> */}
             </option>
             
           ))}
@@ -335,65 +303,6 @@ async function search_by_category(category){
         </div>
       </div>
     </div> 
-     {/* {categories.map((category) => (
-  <div class="col-lg-12 col-xl-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="row m-b-30">
-          <div class="col-md-12 col-xxl-12">
-            <div class="new-arrival-content position-relative">
-              <p>
-                <a href="#" onClick={() => search_by_category(category)}>
-                  <span class="item">{category}<i class="fa fa-check-circle text-success"></i></span>
-                </a>
-
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-))} */}
-{/* <div>
-    <button  onClick={getCategories} class="btn btn-primary dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Categories
-    </button>
-    <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-      <select className="dropdown-menu" onChange={handleCategoryChange} value={selectedCategory}>
-        <option value="">Select a category</option>
-        {categories.map((category) => (
-          <option key={category} value={category}>{category}</option>
-        ))}
-      </select>
-    </div>
-  </div> */}
-
-
-  
-
-{/* {categories.map((category) => (
-  <div class="col-lg-12 col-xl-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="row m-b-30">
-          <div class="col-md-12 col-xxl-12">
-            <div class="new-arrival-content position-relative">
-              <p>
-                <a href="#" onClick={() => search_by_category(category)}>
-                  <span class="item">{category}<i class="fa fa-check-circle text-success"></i></span>
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-))}  */}
-
-{/* ////////sta
-rt of the asnwer //////// */}
                 <div class="row">
           {cats.map((cat) => (
             <div class="col-lg-6 col-xl-6">
@@ -423,9 +332,8 @@ rt of the asnwer //////// */}
         ))}
           </div>
 
-{/* 
-          /////answer
-           of the search////// */}
+ 
+        
     </div>
   </div>
 </div>
@@ -434,107 +342,7 @@ rt of the asnwer //////// */}
                                             </div>
                                         </div>
 
-
-
-                                       
-                                        {/* this is for advanced search results */}
-                                        <div class="tab-pane fade" id="profile2">
-                                            <div class="pt-4">
-                                                
-                                                <div class="col-xl-12 col-lg-12">
-                                                <div class="card">
-  <div class="card-body">
-    <div>
-    <ul class="navbar-nav header-right">
-                <li class="nav-item">
-                <form onSubmit={onSubmit}>
-                  <div class="input-group top-search-bar search-area d-xl-inline-flex" >
-                    <input type="text" 
-                    class="form-control"
-                    id='search1'
-                   
-                    onChange={(e) => setQuery(e.target.value)} placeholder="Search By Name , Date, Court, Topic"/>
-                    <button type="submit" class="btn btn-primary mb-2 raise_button"  onClick={getResultadhoc}>Search</button>
-                  </div>
-                  </form>
-                </li>
-              </ul>
-    </div>
-
-    <div>
-
-                                          <h4><p>About: {items.length} results</p></h4>
-                                         
-                                          
-                                             
-                                            <div class="row">
-          {items.map((item) => (
-            <div class="col-lg-6 col-xl-6">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row m-b-30">
-                    <div class="col-md-12 col-xxl-12">
-                      <div class="new-arrival-content position-relative">
-                      <h4><a href={"/Case?id="+item._id}>
-                      { item.meta_info['Parties '].substring(0,70)} 
-                </a></h4> 
-                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
-                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
-                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
-                        <p>Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
-                        <p>Tags:&nbsp;&nbsp;   
-                                    {/* <span class="badge badge-success light">{item.resolved_acts.slice(0,4)}</span> */}
-                                    <span class="badge badge-success light">{item.resolved_acts}</span>
-                                    <span class="badge badge-success light">{item.resolved_charges}</span>
-                                </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        ))}
-          </div>
-          </div>
-  </div>
-</div>
-
-                    </div>
-                                            </div>
-                                        </div>
-
-
-
-{/* this is the end of the advanced search  */}
-                                        
-
-                                        {/* <div class="col-xl-4 col-lg-12">
-                        <div class="card">
-                            <div class="card-header d-block">
-                                <h4 class="card-title">Dropdown Divider</h4>
-                                <p class="m-0 subtitle">The
-                                    <code>.dropdown-divider</code> class is used to separate links inside the dropdown menu with a thin horizontal border
-                                </p>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="basic-dropdown">
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                            Dropdown button
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Link 1</a>
-                                            <a class="dropdown-item" href="#">Link 2</a>
-                                            <a class="dropdown-item" href="#">Link 3</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Another link</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
+                                
 
                                     </div>
                                 </div>

@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
+ 
+// let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+// let token = gotten.data.access;
+
+
 const Case1 = () => {
   const [metas, setMetas] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -8,18 +13,39 @@ const Case1 = () => {
   const [relatedCases, setRelatedCases] = useState([]);
   const [relatedCaseDetails, setRelatedCaseDetails] = useState(null);
   const[items, setItems] = useState([]);
-  
+  // var ans = {
+  //   method: 'GET',
+  //   url: `http://192.168.30.102:5000/cases/category/`+category +"/",
+  //   headers: {
+  //     'Authorization': "Bearer " + token,
+  //   }
+  // };
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
-    axios.get(`http://192.168.30.102:5000/cases/${id}`)
-      .then(response => {
-        console.log(response.data.related_cases)
-        setMetas(response.data.meta_info);
-        setJudgement(response.data.judgement);
-        setRelatedCases(response.data.related_cases);
-        setIsLoading(false);
-      })
+    var respo = {
+      method: 'GET',
+      url: `http://192.168.30.102:5000/cases/${id}`,
+      // headers: {
+      //   'Authorization': "Bearer " + token,
+      // }
+  };
+  console.log(respo);
+  axios.request(respo).then(function (respo) {
+    console.log(respo.data)
+    // console.log(response);
+          setMetas(respo.data.meta_info);
+        setJudgement(respo.data.judgement);
+        setRelatedCases(respo.data.related_cases);
+        setIsLoading(false); 
+  })
+  //     .then(response => {
+  //       console.log(response.data.related_cases)
+  //       setMetas(response.data.meta_info);
+  //       setJudgement(response.data.judgement);
+  //       setRelatedCases(response.data.related_cases);
+  //       setIsLoading(false);
+  //     })
       .catch(error => {
         console.error(error);
         setIsLoading(false);
