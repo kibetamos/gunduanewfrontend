@@ -33,24 +33,54 @@ const Docs2 = (event) => {
 
 
 // This is to post a new doc to the databse
-  const newDoc =() => {
+  // const newDoc =() => {
 
+  //   var axios = require("axios").default;
+
+  //   const uploadData = new FormData();
+  //   uploadData.append('remark',remark);
+  //   uploadData.append('file',file, file.name);
+  //   console.log(remark);
+  //   console.log(file);
+  //   axios.post('http://192.168.30.102:5000/files/', uploadData, {
+  //     headers: {
+  //       'Authorization': "Bearer " + token,
+  //       "Content-Type": "multipart/form-data"
+  //     }
+  //   })
+  //   .then(res => console.log(res))
+  //   .catch(error => console.log(error))
+  // }
+
+  const newDoc = () => {
     var axios = require("axios").default;
-
+  
+    // Check if the remark field has been changed
+    if (!remark) {
+      console.log("Remark field is empty");
+      return;
+    }
+  
+    const uniqueRemark = remark + "_" + Date.now();
+  
     const uploadData = new FormData();
-    uploadData.append('remark',remark);
-    uploadData.append('file',file, file.name);
-    console.log(remark);
+    uploadData.append("remark", uniqueRemark);
+    uploadData.append("file", file, file.name);
+    console.log(uniqueRemark);
     console.log(file);
-    axios.post('http://192.168.30.102:5000/files/', uploadData, {
-      headers: {
-        'Authorization': "Bearer " + token,
-        "Content-Type": "multipart/form-data"
-      }
-    })
-    .then(res => console.log(res))
-    .catch(error => console.log(error))
-  }
+    axios
+      .post("http://192.168.30.102:5000/files/", uploadData, {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+  };
+  
+  
+
   ////////////////////////////////////////////////////////////////
 
 

@@ -54,7 +54,8 @@ const Search = () => {
     let query = document.getElementById('search').value;
     // console.log(query)
     // const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
-    const capitalizedQuery = query.charAt(0).toUpperCase() + query.slice(1);
+    const capitalizedQuery = query.toLowerCase();
+    // query.charAt(0).toUpperCase() + query.slice(1);
 
     const url = `http://192.168.30.102:5000/cases/fulltext/${capitalizedQuery}`;
 
@@ -300,19 +301,16 @@ async function search_by_category(category){
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <select className="form-control" onChange={handleCategoryChange} value={selectedCategory}>
           <option value="" >Select a category</option>
+          </select>
           {categories.map((category) => (
             <option key={category} value={category} onClick={() => search_by_category(category)} className="col-lg-12 col-xl-12" >
               {category}
-              {/* <span className="item">{category}<i className="fa fa-check-circle text-success"></i></span> */}
-              {/* <a href="#" onClick={() => search_by_category(category)}>
-                            <span className="item">{category}<i className="fa fa-check-circle text-success"></i></span>
-                          </a> */}
             </option>
             
           ))}
-        </select>
         
-        <div className="row mt-2">
+        
+        {/* <div className="row mt-2">
           {categories.map((category) => (
             <div key={category} className="col-lg-12 col-xl-12">
               <div className="card">
@@ -332,7 +330,7 @@ async function search_by_category(category){
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div> 
      {/* {categories.map((category) => (
