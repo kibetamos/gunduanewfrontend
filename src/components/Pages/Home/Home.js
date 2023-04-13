@@ -68,8 +68,8 @@ const Home = () => {
 									<div class="card-body">
 										<div class="d-flex justify-content-between align-items-center">
 											<div>
-												<p class="fs-14 mb-1">Upload Cases </p>
-												<span class="fs-35 text-black font-w600">209
+												<p class="fs-14 mb-1">Total Cases </p>
+												<span class="fs-35 text-black font-w600">2359
 													<svg class="ml-1" width="19" height="12" viewBox="0 0 19 12"
 														fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path
@@ -102,7 +102,7 @@ const Home = () => {
 								
 									<div class="card-footer text-center border-0">
 										<a class="btn btn-primary btn-sm dz-load-more" id="latestSales"
-											href="javascript:void(0)" rel="ajax/latest-sales.html">View More</a>
+											href="http://127.0.0.1:3000/search" rel="ajax/latest-sales.html">View More</a>
 									</div>
 								</div>
 							</div>
@@ -115,8 +115,8 @@ const Home = () => {
 									<div class="card-body">
 										<div class="d-flex align-items-end">
 											<div>
-												<p class="fs-14 mb-1">New Cases</p>
-												<span class="fs-35 text-black font-w600">66
+												<p class="fs-14 mb-1">Your Uploads</p>
+												<span class="fs-35 text-black font-w600">6
 													<svg class="ml-1" width="19" height="12" viewBox="0 0 19 12"
 														fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path
@@ -135,8 +135,8 @@ const Home = () => {
 									<div class="card-body">
 										<div class="d-flex justify-content-between align-items-center">
 											<div>
-												<p class="fs-14 mb-1">Ongoing Cases</p>
-												<span class="fs-35 text-black font-w600">209
+												<p class="fs-14 mb-1">Transcripted  Text</p>
+												<span class="fs-35 text-black font-w600">29
 													<svg class="ml-1" width="19" height="12" viewBox="0 0 19 12"
 														fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path
@@ -147,8 +147,8 @@ const Home = () => {
 											</div>
 											<div class="d-inline-block ml-auto position-relative donut-chart-sale">
 												<span class="donut"
-													data-peity='{ "fill": ["rgb(254, 99, 78)", "rgba(244, 244, 244, 1)"],   "innerRadius": 31, "radius": 10}'>6/8</span>
-												<small class="text-secondary">90%</small>
+													data-peity='{ "fill": ["rgb(254, 99, 78)", "rgba(244, 244, 244, 1)"],   "innerRadius": 31, "radius": 10}'>3/8</span>
+												<small class="text-secondary">30%</small>
 											</div>
 										</div>
 									</div>

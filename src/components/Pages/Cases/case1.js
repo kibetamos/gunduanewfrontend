@@ -13,13 +13,52 @@ const Case1 = () => {
   const [relatedCases, setRelatedCases] = useState([]);
   const [relatedCaseDetails, setRelatedCaseDetails] = useState(null);
   const[items, setItems] = useState([]);
-  // var ans = {
-  //   method: 'GET',
-  //   url: `http://192.168.30.102:5000/cases/category/`+category +"/",
-  //   headers: {
-  //     'Authorization': "Bearer " + token,
-  //   }
+  const [summary, setSummary] = useState("");
+  const [id, setid]= useState("")
+  let gotten = JSON.parse(localStorage.getItem("gunduauser"));
+  let token = gotten.data.access;
+  const [judgment, setJudgment] = useState("");
+
+  // const getSummary = () => {
+    
+  //   fetch(`http://192.168.30.102:5000/cases/summary/${judgement}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setSummary(data.summary);
+
+  //       //console.log(data); // log the response data to the console
+  //     })
+  //     .catch((error) => console.log(error));
   // };
+
+  async function getSummary(){
+ 
+    var axios = require("axios").default;
+
+      var ca = {
+        method: 'GET',
+        url: `http://192.168.30.102:5000/cases/summary/${judgement}`,
+        headers: {
+          'Authorization': "Bearer " + token,
+        }
+      };
+      // console.log(options);
+      axios.request(ca).then(function (ca) {
+        console.log(ca);
+        setSummary(ca.data)  
+      }).catch(function (error) {
+        console.error(error);
+      });
+  
+  
+    // axios.request(result).then(function (result) {
+    //       console.log(result.data);
+    //       setSummary(result.data.summary)
+    //     }).catch(function (error) {
+    //       console.error(error);
+    //     });
+      }
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -30,6 +69,9 @@ const Case1 = () => {
       //   'Authorization': "Bearer " + token,
       // }
   };
+
+
+
   console.log(respo);
   axios.request(respo).then(function (respo) {
     console.log(respo.data)
@@ -39,13 +81,7 @@ const Case1 = () => {
         setRelatedCases(respo.data.related_cases);
         setIsLoading(false); 
   })
-  //     .then(response => {
-  //       console.log(response.data.related_cases)
-  //       setMetas(response.data.meta_info);
-  //       setJudgement(response.data.judgement);
-  //       setRelatedCases(response.data.related_cases);
-  //       setIsLoading(false);
-  //     })
+
       .catch(error => {
         console.error(error);
         setIsLoading(false);
@@ -131,13 +167,38 @@ const Case1 = () => {
                         </div>
                       </div>
                     </div>
+                    {/* <button type="button" class="btn btn-rounded btn-info"><span
+                                        class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
+                                    </span>Add</button> */}
+                                    <div class="input-group-append justify-content-end">
+  {/* <button type="button" class="btn btn-rounded btn-info" onclick={getSummary}>
+    <span class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i></span>
+    Get Summary
+  </button> */}
+  <button onClick={() => getSummary(judgment)}>Get Summary</button>
+  {/* <button onClick={() => getSummary(judgement)}><span class="badge badge-success light">Sum</span></button> */}
+  
+</div>
+<p className="mt-3">
+          <strong>Summary:</strong> 
+        </p>
+
                     <div class="card-header">
                       <h4 class="card-title">JUDGEMENT</h4>
                     </div>
                     <p class="text-content">{judgement}</p>
                   </div>
+                  {/* <button className="btn btn-primary" onClick={judgement}>
+  Get Summary
+</button> */}
 
+      {/* <button className="btn btn-primary" onClick={(e) => onSubmit(e)}>
+  Get Summary
+</button> */}
+
+      
                   <div >
+                  {summary}
               
               <div class="row">
           {items.map((item) => (
