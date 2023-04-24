@@ -192,11 +192,16 @@ async function getSummary(id){
                       </div>
                     </div>
                     <div class="input-group-append justify-content-end">
-  <button onClick={() => getSummary(id1)}>Summary</button>
+  <button type="button" class="btn btn-primary" onClick={() => getSummary(id1)}>Summary</button>
 </div>
-<p className="mt-3">
-          <strong>Summary:</strong> {summary}
-        </p> 
+<div class="card-header">
+                      <h4 class="card-title">Summary</h4>
+                    </div>
+                    <p class="text-content"> {summary}</p>
+{/* <p className="mt-3">
+          <strong>Summary:</strong> 
+          
+        </p>  */}
 
                     <div class="card-header">
                       <h4 class="card-title">JUDGEMENT</h4>
