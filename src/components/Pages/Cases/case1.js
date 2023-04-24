@@ -195,7 +195,7 @@ async function getSummary(id){
   <button type="button" class="btn btn-primary" onClick={() => getSummary(id1)}>Summary</button>
 </div>
 <div class="card-header">
-                      <h4 class="card-title">Summary</h4>
+                      <h4 class="card-title">Summary of the Judgement</h4>
                     </div>
                     <p class="text-content"> {summary}</p>
 {/* <p className="mt-3">
