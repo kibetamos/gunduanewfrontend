@@ -15,9 +15,11 @@ const Case1 = () => {
   const[items, setItems] = useState([]);
   const [summary, setSummary] = useState("");
   const [id, setid]= useState("")
+  const [id1, setid1] = useState("")
   let gotten = JSON.parse(localStorage.getItem("gunduauser"));
   let token = gotten.data.access;
   const [judgment, setJudgment] = useState("");
+  
 
   // const getSummary = () => {
     
@@ -30,34 +32,53 @@ const Case1 = () => {
   //     })
   //     .catch((error) => console.log(error));
   // };
+// const 
+// remove_slash = judgement.replace('/', '');
+// async function getSummary(){
 
-  async function getSummary(){
- 
-    var axios = require("axios").default;
+//   var axios = require("axios").default;
 
-      var ca = {
-        method: 'GET',
-        url: `http://192.168.30.102:5000/cases/summary/${judgement}`,
-        headers: {
-          'Authorization': "Bearer " + token,
-        }
-      };
-      // console.log(options);
-      axios.request(ca).then(function (ca) {
-        console.log(ca);
-        setSummary(ca.data)  
+//   // Remove forward slash from judgement variable
+//   var judgementWithoutSlash = judgement.replace("/", "");
+
+//   var ca = {
+//     method: 'GET',
+//     url: `http://192.168.30.102:5000/cases/summary/${judgementWithoutSlash}`,
+//     headers: {
+//       'Authorization': "Bearer " + token,
+//     }
+//   };
+//   console.log(ca);
+//   axios.request(ca).then(function (ca) {
+//     // console.log(ca);
+//     setSummary(ca.Object)  
+//   }).catch(function (error) {
+//     console.error(error);
+//   });
+// }
+
+async function getSummary(id){
+  // console.log(url)
+  var axios = require("axios").default;
+
+  var result1 = 
+  {
+    method: 'GET',
+    url:`http://192.168.30.102:5000/cases/summary/${id}`,
+    headers: {'Authorization': "Bearer " + token}
+  };
+
+  axios.request(result1).then(function (result1) {
+        console.log(result1);
+        setSummary(result1.data.summary)
       }).catch(function (error) {
         console.error(error);
       });
-  
-  
-    // axios.request(result).then(function (result) {
-    //       console.log(result.data);
-    //       setSummary(result.data.summary)
-    //     }).catch(function (error) {
-    //       console.error(error);
-    //     });
-      }
+    
+  // setSummary(result.data.summary)
+  // console.log(result);
+}
+
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -75,8 +96,11 @@ const Case1 = () => {
   console.log(respo);
   axios.request(respo).then(function (respo) {
     console.log(respo.data)
+    console.log(respo.data._id)
     // console.log(response);
-          setMetas(respo.data.meta_info);
+
+        setMetas(respo.data.meta_info);
+        setid1(respo.data._id);
         setJudgement(respo.data.judgement);
         setRelatedCases(respo.data.related_cases);
         setIsLoading(false); 
@@ -167,38 +191,22 @@ const Case1 = () => {
                         </div>
                       </div>
                     </div>
-                    {/* <button type="button" class="btn btn-rounded btn-info"><span
-                                        class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                    </span>Add</button> */}
-                                    <div class="input-group-append justify-content-end">
-  {/* <button type="button" class="btn btn-rounded btn-info" onclick={getSummary}>
-    <span class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i></span>
-    Get Summary
-  </button> */}
-  <button onClick={() => getSummary(judgment)}>Get Summary</button>
-  {/* <button onClick={() => getSummary(judgement)}><span class="badge badge-success light">Sum</span></button> */}
-  
+                    <div class="input-group-append justify-content-end">
+  <button onClick={() => getSummary(id1)}>Summary</button>
 </div>
 <p className="mt-3">
-          <strong>Summary:</strong> 
-        </p>
+          <strong>Summary:</strong> {summary}
+        </p> 
 
                     <div class="card-header">
                       <h4 class="card-title">JUDGEMENT</h4>
                     </div>
                     <p class="text-content">{judgement}</p>
                   </div>
-                  {/* <button className="btn btn-primary" onClick={judgement}>
-  Get Summary
-</button> */}
-
-      {/* <button className="btn btn-primary" onClick={(e) => onSubmit(e)}>
-  Get Summary
-</button> */}
-
+             
       
                   <div >
-                  {summary}
+                
               
               <div class="row">
           {items.map((item) => (
@@ -220,6 +228,8 @@ const Case1 = () => {
                 `${item.meta_info['Parties '].substring(0,70)}...`} 
                 </a>
                 </h4> 
+
+               
                 </div>
                 <div class="card-body">
                         <p class="card-title">Judge(s): <span class="item">{item.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
