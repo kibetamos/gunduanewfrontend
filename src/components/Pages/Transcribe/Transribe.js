@@ -13,6 +13,8 @@ const Transcribe = (event) => {
   const [id, setid]= useState("")
   const [text, setText]= useState("")
   const [showFullText, setShowFullText] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   // console.log("-------------------------------")
   // let gotten = JSON.parse(localStorage.getItem("gunduauser"));
@@ -25,7 +27,14 @@ const Transcribe = (event) => {
   // let id = gotten.data.id;
   //       console.log(id)
 
+  const handleViewSummary = (item) => {
+    setSelectedFile(item);
+    setShowModal(true);
+  };
 
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
 //This is to post a new doc to the databse
   const newDoc =() => {
@@ -98,33 +107,69 @@ const Transcribe = (event) => {
 //     e.preventDefault();
 //     getCases();
 //   }
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure?")) {
-        fetch('http://192.168.30.102:5000/transcription/'+ id,
-            {
-                method: 'DELETE',
-                headers: {
-                  'Authorization': "Bearer " + token,
+//   const handleDelete = (id) => {
+//     if (window.confirm("Are you sure?")) {
+//         fetch('http://192.168.30.102:5000/transcription/'+ id +"/",
+//         {
+//           method: 'DELETE',
+//           headers: {
+//               'Accept': 'application/json',
+//               'content-Type': 'application/json',
+//               'Authorization': "Bearer " + token,
+//           }
+//       })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error(response.statusText);
+//       } else if (response.status === 204) {
+//           setFiles(files.filter(f => f.id !== id));
+//           alert("Deleted successfully");
+//           // return response.json();
+//       } else {
+//         return response.json();
+//     }
+//     // )
+//     //   .then(responseData => {
+//     //     setFiles(files.filter(f => f.id !== id));
+//     //     alert("Deleted successfully");
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       alert("Error deleting data: " + err);
+//   });
+// }
+
+const handleDelete = (id) => {
+  if (window.confirm("Are you sure?")) {
+    fetch('http://192.168.30.102:5000/transcription/'+ id +"/",
+          {
+              method: 'DELETE',
+              headers: {
                   'Accept': 'application/json',
-                  'content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(response.statusText);
-            } else if (response.status === 204) {
-                setFiles(files.filter(f => f.id !== id));
-                alert("Deleted successfully");
-                // return response.json();
-            } else {
-              return response.json();
-          }
+                  'content-Type': 'application/json',
+                  'Authorization': "Bearer " + token,
+              }
           })
-          .catch(err => {
-            console.log(err);
-            alert("Error deleting data: " + err);
-        });
-    }
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.statusText);
+          } else if (response.status === 204) {
+              setFiles(files.filter(f => f.id !== id));
+              alert("Deleted successfully");
+              // return response.json();
+          } else {
+            return response.json();
+        }
+        // )
+        //   .then(responseData => {
+        //     setFiles(files.filter(f => f.id !== id));
+        //     alert("Deleted successfully");
+        })
+        .catch(err => {
+          console.log(err);
+          alert("Error deleting data: " + err);
+      });
+  }
 };
   return (
     <div className={styles.Summaries} data-testid="Docs">
@@ -137,8 +182,8 @@ const Transcribe = (event) => {
       
           <div class=" ">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
-              <li class="breadcrumb-item active"><a href="javascript:void(0)">Blank</a></li>
+              {/* <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li> */}
+              <li class="breadcrumb-item active"><a href="javascript:void(0)"><bold>Transcription</bold></a></li>
               
             </ol>
             
@@ -204,47 +249,105 @@ const Transcribe = (event) => {
                                                 {/* <td><strong>{item.id}</strong></td> */}
                                                 <td>{item.name}</td>
                                                 <td>{item.file.substr(51)}</td>
-                                                <td>{item.text} </td>
-                        <td>
-													{/* <div class="dropdown">
-														<button type="button" class="btn btn-success light sharp" data-toggle="dropdown">
-															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-														</button>
-														 <div class="dropdown-menu"> 
-                            <a class="dropdown-item" href="#">Summarize</a> 
-															 {/* <a class="dropdown-item" onClick={() => handleUpdate(item.id)}>Edit</a>  */}
-                               {/* <a class="dropdown-item" onClick={() => handleDelete(item.id)}>Delete</a>	 */}
-                              {/* <a class="dropdown-item"onClick={() => getText(item.id)} >Transcribe</a>
-                          													
-                              </div> 
-                               &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info">Transcribe</button> 
-													</div> */} 
-                           
+                                                {/* <td>{item.text} </td> */}
+                                                <td>
+                                                    {item.text ? (
+                                                      item.text.length > 200 ? (
+                                                        <>
+                                                          {item.text.charAt(0).toUpperCase() + item.text.substring(1, 100)}...
+                                                          <button
+                                                            className="btn btn-link p-0 m-0 ml-1"
+                                                            data-toggle="modal" 
+                                                            data-target="#viewSummaryModal" 
+                                                            onClick={() => handleViewSummary(item)}
+                                                          >
+                                                            View More
+                                                          </button>
+                                                        </>
+                                                      ) : (
+                                                        item.text.charAt(0).toUpperCase() + item.text.substring(1)
+                                                      )
+                                                    ) : (
+                                                      <div style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                        No Transcription available.
+                                                      </div>
+                                                    )}
+                                                  </td>
+
+                        
+
                          <div class="d-flex ">
-                               <a  data-toggle="modal" data-target="#editDraftModal"
-                                  class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"title="EDIT"></i></a>
-                              <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"title="DELETE">
-                                   <i class="fa fa-trash"></i></a>
+                      <a onClick={() => getText(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"title="Transcribe">
+                         <i class="fa fa-book"></i>
+                                   
+                                   </a>
 
-                              <a onClick={() => getText(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"title="Transribe">
-                                   <i class="fa fa-book"></i></a>
 
-                                   {/* <a class onClick={() => getText(item.id)} >Transcribe</a> */}
+               {/* <a data-toggle="modal"
+                data-target="#editSummaryModal"
+                title="Edit"            
+                  class="btn btn-primary shadow btn-xs sharp mr-1">
+                    <i class="fa fa-pencil"></i>
+                    
+                    </a> */}
+
+
+                    <a onClick={() => handleDelete(item.id)} class="btn btn-danger shadow btn-xs sharp" data-toggle="modal"
+                    title="Delete">
+                    <i class="fa fa-trash"></i></a>
                           </div>
-                                
-                                
-                               
-                          
-												</td>
+
+												
                                             </tr>
 											
  ))}  
-           
 
-											
                        </tbody>
                                     </table>
                                     </div>
+                                    {selectedFile && (
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="viewSummaryModal" onHide={handleClose}>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" onClick={handleClose}>
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="basic-form">
+            <form>
+              <div class="form-group">
+                <div class="card background-dark">
+                  <label className="p-3 mb-1 text-Black">
+                    This is the Transcription
+                    <strong class="input-text"></strong>
+                  </label>
+                  <textarea
+                    className="form-control"
+                    value={selectedFile.text}
+                    onChange={(event) => {
+                      const newText = event.target.value;
+                      setSelectedFile({ ...selectedFile, text: newText });
+                    }}
+                    rows={8} // set the number of rows to 8
+                    cols={60}
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger light" onClick={handleClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
                                     
       </div>

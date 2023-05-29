@@ -626,6 +626,21 @@ Moment.locale('en');
                         </label>
                         <p>{selectedFile.summary}</p>
                       </div>
+
+
+                      {/* <textarea
+                    className="form-control"
+                    value={selectedFile.text}
+                    onChange={(event) => {
+                      const newText = event.target.value;
+                      <p>{selectedFile.summary}</p>
+                    }}
+                    rows={8} // set the number of rows to 8
+                    cols={60}
+                  /> */}
+
+
+
                     </div>
                   </form>
                 </div>

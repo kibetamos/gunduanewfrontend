@@ -9,6 +9,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Variables } from '../../_utils/GlobalVariables';
 import Moment from 'moment';
+
 let gotten = JSON.parse(localStorage.getItem("gunduauser"));
 
 // let UserDetails = gotten.data

@@ -157,12 +157,12 @@ async function getSummary(id){
       <div class="content-body">
   <div class="container-fluid">
     <div class="row">
-      <div class="page-titles">
+      {/* <div class="page-titles">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/search">Case</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">CaseDetails</a></li>
         </ol>
-      </div>
+      </div> */}
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
@@ -212,7 +212,7 @@ async function getSummary(id){
       
                   <div >
                 
-              
+                  <h3>Related Cases:</h3><h6>About : {items.length} results</h6>
               <div class="row">
           {items.map((item) => (
             // <Case1 key={item._id} item={item}></Case1>
@@ -223,7 +223,7 @@ async function getSummary(id){
                   <div class="row m-b-30">
                     <div class="col-md-12 col-xx l-12">
                       <div class="new-arrival-content position-relative">
-                      <h3>Related Cases:</h3><h4>About : {items.length} results</h4>
+                      
                       <div class="card-header">
                         
                       <h4>
