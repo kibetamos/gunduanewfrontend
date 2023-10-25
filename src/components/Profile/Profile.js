@@ -62,7 +62,7 @@ const Profile = () => {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + token
     }
-    axios.put('http://192.168.30.102:5000/profile/' + userid + "/", { headers: headers })
+    axios.put('http://192.168.10.12:5000/profile/' + userid + "/", { headers: headers })
     
       .then(response => {
         // $('#EmailExistsError').hide();
@@ -135,7 +135,7 @@ const Profile = () => {
       // Authorization: 'Token ' +(UserDetails.key)
       'Authorization': "Bearer " + token
     }
-    axios.put('http://192.168.30.102:5000/profile/' + userid + "/", payload, { headers: headers })
+    axios.put('http://192.168.10.12:5000/profile/' + userid + "/", payload, { headers: headers })
     
       .then(response => {
         // $('#EmailExistsError').hide();

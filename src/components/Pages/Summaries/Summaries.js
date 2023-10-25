@@ -39,7 +39,7 @@ async function getResult(){
 
       var options = {
         method: 'GET',
-        url: `http://192.168.30.102:5000/cases/similar/`+selectedFile.summary +"/",
+        url: `http://192.168.10.12:5000/cases/similar/`+selectedFile.summary +"/",
         
         headers: {
           'Authorization': "Bearer " + token,
@@ -65,7 +65,7 @@ async function getResult(){
   
         var cats = {
           method: 'GET',
-          url: `http://192.168.30.102:5000/cases/category/`+itemname +"/",
+          url: `http://192.168.10.12:5000/cases/category/`+itemname +"/",
           headers: {
             'Authorization': "Bearer " + token,
           }
@@ -81,7 +81,7 @@ async function getResult(){
 const [id, setid]= useState("") 
 const [summary, setSummary] = useState("")
 
-// const url = `http://192.168.30.102:5000/summary/${id}`;
+// const url = `http://192.168.10.12:5000/summary/${id}`;
 
 var axios = require("axios").default;
 
@@ -92,7 +92,7 @@ async function getSummary(){
   var result = 
             {
               method: 'GET',
-              url:`http://192.168.30.102:5000/summary/${id}`,
+              url:`http://192.168.10.12:5000/summary/${id}`,
               headers: {'Authorization': "Bearer " + token}
             };
 
@@ -120,7 +120,7 @@ async function getSummary(){
     var result = 
     {
       method: 'GET',
-      url:`http://192.168.30.102:5000/summary/${id}/`,
+      url:`http://192.168.10.12:5000/summary/${id}/`,
       headers: {'Authorization': "Bearer " + token}
     };
   
@@ -173,7 +173,7 @@ document.getElementById("noMessageError").classList.add("d-none");
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
-        fetch('http://192.168.30.102:5000/files/'+ id +"/",
+        fetch('http://192.168.10.12:5000/files/'+ id +"/",
             {
                 method: 'DELETE',
                 headers: {
@@ -212,7 +212,7 @@ useEffect(() => {
     // setIsLoading(true)
     const files = {
       method: 'GET',
-      url: 'http://192.168.30.102:5000/files/',
+      url: 'http://192.168.10.12:5000/files/',
       headers: {
         'Authorization': "Bearer " + token}    
     
@@ -220,7 +220,7 @@ useEffect(() => {
     console.log(files)
     axios.request(files).then(function (files) {
     // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-    // const files = await axios(`http://192.168.30.102:5000/files/`)
+    // const files = await axios(`http://192.168.10.12:5000/files/`)
     console.log(files.data.results)
     setFiles(files.data.results)
     // setItems(fullSearchUrl.data)
@@ -378,6 +378,7 @@ Moment.locale('en');
           </div>
                                                   
                                                 <div class="modal-footer">
+                                                    {/* <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button> */}
                                                     <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
@@ -747,6 +748,7 @@ Moment.locale('en');
             <div class="modal fade" id="reviewModal">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                  
                   <div class="modal-header">
                     <h5 class="modal-title">Review</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>

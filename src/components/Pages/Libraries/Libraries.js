@@ -19,7 +19,7 @@ const Library = ({ item }) => {
     
     let query = document.getElementById('search').value;
     // console.log(query)
-    const url = `http://192.168.30.102:5000/cases/text_search/`+query;
+    const url = `http://192.168.10.12:5000/cases/text_search/`+query;
     var result = await axios.get(url);
 
     setResult(result.data.hits)

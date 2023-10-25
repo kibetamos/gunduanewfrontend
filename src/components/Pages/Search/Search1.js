@@ -35,7 +35,7 @@ const Search = () => {
 
   //     var cats = {
   //       method: 'GET',
-  //       url: `http://192.168.30.102:5000/cases/category/`+itemname +"/",
+  //       url: `http://192.168.10.12:5000/cases/category/`+itemname +"/",
   //       headers: {
   //         'Authorization': "Bearer " + token,
   //       }
@@ -53,10 +53,10 @@ const Search = () => {
   async function getResult(){
     let query = document.getElementById('search').value;
     // console.log(query)
-    // const url = `http://192.168.30.102:5000/cases/fulltext/`+query;
+    // const url = `http://192.168.10.12:5000/cases/fulltext/`+query;
     const capitalizedQuery = query.charAt(0).toUpperCase() + query.slice(1);
 
-    const url = `http://192.168.30.102:5000/cases/category/${capitalizedQuery}`;
+    const url = `http://192.168.10.12:5000/cases/category/${capitalizedQuery}`;
 
 
     var result = await axios.get(url);
@@ -78,7 +78,7 @@ const Search = () => {
 
 
 // function searchCategory(category) {
-//   const url = `http://192.168.30.102:5000/cases/category/${category}`;
+//   const url = `http://192.168.10.12:5000/cases/category/${category}`;
 //   // Perform search using API
 
 // }
@@ -87,7 +87,7 @@ const getCategories = async () => {
   try {
     const cat = await axios({
       method: 'GET',
-      url: 'http://192.168.30.102:5000/cases/all_cat',
+      url: 'http://192.168.10.12:5000/cases/all_cat',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -109,7 +109,7 @@ async function search_by_category(category){
 
     var ans = {
       method: 'GET',
-      url: `http://192.168.30.102:5000/cases/category/`+category +"/",
+      url: `http://192.168.10.12:5000/cases/category/`+category +"/",
       headers: {
         'Authorization': "Bearer " + token,
       }

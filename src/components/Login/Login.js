@@ -31,7 +31,7 @@ const Login = () => {
 
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
-    console.log(
+    console.log(``
       `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
     );
   };
@@ -62,10 +62,10 @@ const Login = () => {
       'Content-Type': 'application/json',
     }
     setLoading(true);
-    axios.post('http://192.168.30.102:5000/rest_auth/login/', submitPayload, { headers: headers })
+    axios.post('http://192.168.10.12:5000/rest_auth/login/', submitPayload, { headers: headers })
       .then(response => {
-        // $('#EmailExistsError').hide();
-        // localStorage.setItem('key', response.data.token);
+        $('#EmailExistsError').hide();
+        localStorage.setItem('key', response.data.token);
         // setIsLoggedIn(true);
         setLoading(false);
 
@@ -140,7 +140,9 @@ const Login = () => {
                 <div class="row no-gutters">
                   <div class="col-xl-12">
                     <div class="auth-form">
-                      <h3 class="text-center mb-4 text-primary"><strong>Login</strong><p className='text-black mb-0 p-0 fs-16'>(Existing User)</p></h3>
+                      <h3 class="text-center mb-4 text-primary"><strong>Login</strong>
+                      <p className='text-black mb-0 p-0 fs-16'>(Existing User)</p>
+                      </h3>
                       <form onSubmit={logIn}>
                       <div class="form-group">
                             <label class="mb-1 text-primary"><strong>Email</strong></label>

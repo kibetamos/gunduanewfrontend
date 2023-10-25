@@ -30,10 +30,10 @@ const Home = () => {
 	// 		var axios = require("axios").default;
   //     setIsLoading(true)
   //     // const result = await axios(`http://127.0.0.1:8000/fulltext/cases/${query}`)
-  //     // const result = await axios(`http://192.168.30.102:5000/files/`)
+  //     // const result = await axios(`http://192.168.10.12:5000/files/`)
 	// 		var result = {
   //       method: 'GET',
-  //       url: `http://192.168.30.102:5000/files/`,
+  //       url: `http://192.168.10.12:5000/files/`,
   //       headers: {Authorization: 'Token ' +(UserDetails.key)}
   //     };
 	// 		axios.request(result).then(function (result) {

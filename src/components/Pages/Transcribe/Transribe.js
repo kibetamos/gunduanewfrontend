@@ -44,7 +44,7 @@ const Transcribe = (event) => {
     uploadData.append('name',name);
     uploadData.append('file',file);
     // console.log(remark);
-    axios.post('http://192.168.30.102:5000/transcription/', uploadData, {
+    axios.post('http://192.168.10.12:5000/transcription/', uploadData, {
       headers: {
         'Authorization': "Bearer " + token,
         'Content-Type': 'multipart/form-data'
@@ -59,7 +59,7 @@ const Transcribe = (event) => {
     var result = 
     {
       method: 'GET',
-      url:`http://192.168.30.102:5000/text/${id}/`,
+      url:`http://192.168.10.12:5000/text/${id}/`,
       headers: {'Authorization': "Bearer " + token}
     };
   
@@ -78,7 +78,7 @@ const Transcribe = (event) => {
       try {
         const result = await axios({
         method: 'GET',
-        url: `http://192.168.30.102:5000/transcription/`,
+        url: `http://192.168.10.12:5000/transcription/`,
         headers: {
           'Authorization': "Bearer " + token,
         },
@@ -96,7 +96,7 @@ const Transcribe = (event) => {
   
 
   //  Do a summary of each document
-// const url = `http://192.168.30.102:5000/files/summary/${query}`;
+// const url = `http://192.168.10.12:5000/files/summary/${query}`;
 
 // async function getCases(){
 //   var result = await axios.get(url);
@@ -109,7 +109,7 @@ const Transcribe = (event) => {
 //   }
 //   const handleDelete = (id) => {
 //     if (window.confirm("Are you sure?")) {
-//         fetch('http://192.168.30.102:5000/transcription/'+ id +"/",
+//         fetch('http://192.168.10.12:5000/transcription/'+ id +"/",
 //         {
 //           method: 'DELETE',
 //           headers: {
@@ -141,7 +141,7 @@ const Transcribe = (event) => {
 
 const handleDelete = (id) => {
   if (window.confirm("Are you sure?")) {
-    fetch('http://192.168.30.102:5000/transcription/'+ id +"/",
+    fetch('http://192.168.10.12:5000/transcription/'+ id +"/",
           {
               method: 'DELETE',
               headers: {

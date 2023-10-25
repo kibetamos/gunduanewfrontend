@@ -11,7 +11,7 @@ async function search_by_category(itemname){
 
       var cats = {
         method: 'GET',
-        url: `http://192.168.30.102:5000/cases/category/`+itemname +"/",
+        url: `http://192.168.10.12:5000/cases/category/`+itemname +"/",
         headers: {
           'Authorization': "Bearer " + token,
         }

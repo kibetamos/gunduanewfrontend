@@ -74,7 +74,7 @@ const Register = () => {
     console.log('submitting');
     setLoading(true);
     console.log(submitPayload)
-    axios.post('http://192.168.30.102:5000/registration/', submitPayload, { headers: headers })
+    axios.post('http://192.168.10.12:5000/registration/', submitPayload, { headers: headers })
       .then(response => {
         $('#EmailExistsError').hide();
 

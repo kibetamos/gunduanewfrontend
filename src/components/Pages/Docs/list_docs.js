@@ -4,7 +4,7 @@ import Header from '../../_layouts/Headers/Headers';
 import Sidebar from '../../_layouts/Sidebar/Sidebar';
 import axios from 'axios';
 
-const Docs2 = (event) => {
+const List_docs = (event) => {
   const [file, setFile] = useState();
   const[files, setFiles] = useState([]);
   const [remark, setRemark] = useState("");
@@ -208,22 +208,22 @@ async function getCases(){
                              {/* <button type="button" ><p class="card-link float-right">Card footer</p></button>   */}
                             </div>
                                     {/* <!-- Large modal --> */}
-                                    <div class="raise_button">
+                                    {/* <div class="raise_button">
                                     <button type="button" class="btn btn-primary mb-2 raise_button" data-toggle="modal" data-target=".bd-example-modal-lg">Upload</button>
-                                    </div>
+                                    </div> */}
                                     {/* <a href="/summaries"><button  type="button" class="btn btn-primary mb-2 raise_button" >View Summaries</button></a> */}
                                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                                {/* <div class="modal-header">
                                                     <h5 class="modal-title">Upload Text</h5>
                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                                </div>
+                                                </div> */}
                                                 
                                                 
                                                 <div class="modal-body">
                                                 <div class="basic-form">
-                                    <form>
+                                    {/* <form>
                                     <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Name</span>
@@ -241,23 +241,23 @@ async function getCases(){
                                             
                                         </div>
                                         <div class="input-group mb-3">      
-								{/* <div class="input-group">
+								<div class="input-group">
 									<textarea rows="6" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
 									<div class="input-group-append">
 										<button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
 									</div>
-                  </div>  */}
+                  </div> 
 
 							</div>
-              {/* <div class="input-group mb-3">
+              <div class="input-group mb-3">
               <div class="input-group">
 									<textarea rows="14" cols="7"class="form-control" placeholder="View Summarized Text $ Edit "></textarea>
 									<div class="input-group-append">
 										
 									</div>
                   </div>
-							</div> */}
-                                    </form>
+							</div>
+                                    </form> */}
                                 </div>
                                                   </div>
                                                 <div class="modal-footer">
@@ -282,7 +282,7 @@ async function getCases(){
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
-                                        {/* <tbody>
+                                        <tbody>
                                         
            {items.map((item) =>(
                                             <tr>
@@ -311,7 +311,7 @@ async function getCases(){
            
 
 											
-                                        </tbody> */}
+                                        </tbody>
                                     </table>
                                     </div>
 
@@ -325,5 +325,5 @@ async function getCases(){
     
   )
 }
-export default Docs2;
+export default List_docs;
 

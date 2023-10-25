@@ -28,7 +28,7 @@ const Case1 = () => {
 
     let params = new URLSearchParams(window.location.search);
     let id = params.get('id');
-    const result = await axios('http://192.168.30.102:5000/files/'+id)
+    const result = await axios('http://192.168.10.12:5000/files/'+id)
     //  console.log(result.data)
     //  console.log(result.data.meta_info)
            setItems(result.data)

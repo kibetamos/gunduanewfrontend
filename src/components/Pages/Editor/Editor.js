@@ -20,7 +20,7 @@ let UserDetails = gotten.data
 // console.log (UserDetails.key)
   useEffect(() => {
     axios
-      .get("http://192.168.30.102:5000/files/", {
+      .get("http://192.168.10.12:5000/files/", {
         // headers: {
         //   'Authorization': `Token ${UserDetails.key}`,
         // },
@@ -37,7 +37,7 @@ let UserDetails = gotten.data
 
     event.preventDefault();
 
-    axios.post("http://192.168.30.102:5000/files/", { content: content }, {
+    axios.post("http://192.168.10.12:5000/files/", { content: content }, {
         
       headers: {
         'Authorization': `Token ${UserDetails.key}`,

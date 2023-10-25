@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Pages/Home/Home';
@@ -11,6 +11,8 @@ import Register from './components/Register/Register';
 // import Summarizer from './components/Summarizer/Summarizer';
 import Summaries from './components/Pages/Summaries/Summaries';
 import Docs  from './components/Pages/Docs/Docs';
+// import list_docs  from './components/Pages/Docs/';
+import list_docs from './components/Pages/Docs/list_docs';
 import Case1 from './components/Pages/Cases/case1';
 import Home2 from  './components/Pages/Home/Home2';
 import Editor from './components/Pages/Editor/Editor';
@@ -18,6 +20,7 @@ import Search from './components/Pages/Search/Search';
 import Library from './components/Pages/Libraries/Libraries';
 import Transcribe from './components/Pages/Transcribe/Transribe'; 
 import Docs2 from './components/Pages/Docs/Docs2';
+import List_docs from './components/Pages/Docs/list_docs';
 
 
 
@@ -31,6 +34,9 @@ ReactDOM.render(
       <Route exact path="/home2" element={<Home2 />} />
       <Route exact path="/Summaries" element={<Summaries />} />
       <Route exact path="/Docs" element={<Docs />} />
+      <Route exact path="/Docs2" element={<Docs2 />} />
+      <Route exact path="/List_docs" element={<List_docs />} />
+      <Route exact path="/list_docs" element={<Docs />} />
       <Route exact path="/Case" element={<Case1 />} />
       <Route exact path="/Editor" element={<Editor />} />
       <Route exact path="/Search" element={<Search />} />
