@@ -1,7 +1,5 @@
 # Gundua FrontEnd Using React
-
 This  is a react project 
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
