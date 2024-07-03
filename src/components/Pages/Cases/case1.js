@@ -64,7 +64,9 @@ async function getSummary(id){
   var result1 = 
   {
     method: 'GET',
-    url:`http://192.168.30.102:5000/cases/summary/${id}`,
+    // url:`http://192.168.30.102:5000/cases/summary/${id}`,
+    // http://127.0.0.1:8000/
+    url:`http://127.0.0.1:8000/cases/summary/${id}`,
     headers: {'Authorization': "Bearer " + token}
   };
 
@@ -115,7 +117,7 @@ async function getSummary(id){
   useEffect(() => {
     if (relatedCases.length > 0) {
       let relatedCaseRequests = relatedCases.map((relatedCase) => {
-        return axios.get(`http://192.168.30.102:5000/cases/${relatedCase}`);
+        return axios.get(`http://127.0.0.1:8000/cases/${relatedCase}`);
       });
       Promise.all(relatedCaseRequests)
         .then((results) => {

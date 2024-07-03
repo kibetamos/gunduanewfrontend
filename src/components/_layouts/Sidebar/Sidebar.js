@@ -84,9 +84,9 @@ const Sidebar = () => (
             </a>
           </li>
         </ul>
-        {/* <div class="copyright">
-        <p><strong>UjumbePap </strong> © 2022 All Rights Reserved</p> 
-      </div> */}
+        <div class="copyright">
+        <p><strong>Gundua </strong> © 2024 All Rights Reserved</p> 
+      </div>
       </div>
     </div>
   </div>
