@@ -89,6 +89,7 @@ const fetchItems = async () => {
     const result = await axios({
       method: 'GET',
       url: 'http://192.168.10.12:5000/files/',
+      url: 'http://127.0.0.1:8000/files/',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -112,7 +113,7 @@ useEffect(() => {
     var result = 
     {
       method: 'GET',
-      url:`http://192.168.10.12:5000/summary/${id}/`,
+      url:`http://127.0.0.1:8000/summary/${id}/`,
       'Authorization': "Bearer " + token
     };
   
@@ -128,7 +129,7 @@ useEffect(() => {
   }
 
   //  Do a summary of each document
-const url = `http://192.168.10.12:5000/files/summary/${query}`;
+const url = `http://127.0.0.1:8000/files/summary/${query}`;
 
 async function getCases(){
   var result = await axios.get(url);
@@ -147,7 +148,7 @@ async function getCases(){
     formData.append("file", file);
     formData.append("remark", remark);
 
-    fetch(`http://192.168.10.12:5000/files/${id}`, {
+    fetch(`http://127.0.0.1:8000/files/${id}`, {
         method: 'PUT',
         body: formData
     })
@@ -169,7 +170,7 @@ async function getCases(){
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
-      fetch('http://192.168.10.12:5000/files/'+ id +"/",
+      fetch('http://127.0.0.1:8000/files/'+ id +"/",
             {
                 method: 'DELETE',
                 headers: {

@@ -62,7 +62,8 @@ const Login = () => {
       'Content-Type': 'application/json',
     }
     setLoading(true);
-    axios.post('http://192.168.10.12:5000/rest_auth/login/', submitPayload, { headers: headers })
+    // axios.post('http://192.168.10.12:5000/rest_auth/login/', submitPayload, { headers: headers })
+    axios.post('http://127.0.0.1:8000/rest_auth/login/', submitPayload, { headers: headers })
       .then(response => {
         $('#EmailExistsError').hide();
         localStorage.setItem('key', response.data.token);
