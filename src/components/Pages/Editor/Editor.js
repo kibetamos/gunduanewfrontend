@@ -20,7 +20,8 @@ let UserDetails = gotten.data
 // console.log (UserDetails.key)
   useEffect(() => {
     axios
-      .get("http://192.168.30.102:5000/files/", {
+      // .get("http://192.168.30.102:5000/files/", {
+        .get("http://127.0.0.1:8000/files/", {
         // headers: {
         //   'Authorization': `Token ${UserDetails.key}`,
         // },
