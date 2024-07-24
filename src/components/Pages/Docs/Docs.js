@@ -242,22 +242,22 @@ async function getCases(){
                                             
                                         </div>
                                         <div class="input-group mb-3">      
-								{/* <div class="input-group">
+								<div class="input-group">
 									<textarea rows="6" cols="7"class="form-control" placeholder="Paste your message..."></textarea>
 									<div class="input-group-append">
 										<button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
 									</div>
-                  </div>  */}
+                  </div>
 
 							</div>
-              {/* <div class="input-group mb-3">
+              <div class="input-group mb-3">
               <div class="input-group">
 									<textarea rows="14" cols="7"class="form-control" placeholder="View Summarized Text $ Edit "></textarea>
 									<div class="input-group-append">
 										
 									</div>
                   </div>
-							</div> */}
+							</div>
                                     </form>
                                 </div>
                                                   </div>

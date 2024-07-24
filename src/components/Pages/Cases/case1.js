@@ -87,7 +87,8 @@ async function getSummary(id){
     const id = params.get('id');
     var respo = {
       method: 'GET',
-      url: `http://192.168.10.12:5000/cases/${id}`,
+      // url: `http://192.168.30.102:5000/cases/${id}`,
+      url: `http://127.0.0.1:8000/cases/${id}`,
       // headers: {
       //   'Authorization': "Bearer " + token,
       // }
