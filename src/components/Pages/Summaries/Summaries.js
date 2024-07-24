@@ -39,7 +39,8 @@ async function getResult(){
 
       var options = {
         method: 'GET',
-        url: `http://192.168.10.12:5000/cases/similar/`+selectedFile.summary +"/",
+        // url: `http://192.168.30.102:5000/cases/similar/`+selectedFile.summary +"/",
+        url: `http://127.0.0.1:8000/cases/similar/`+selectedFile.summary +"/",
         
         headers: {
           'Authorization': "Bearer " + token,
@@ -65,7 +66,8 @@ async function getResult(){
   
         var cats = {
           method: 'GET',
-          url: `http://192.168.10.12:5000/cases/category/`+itemname +"/",
+          // url: `http://192.168.30.102:5000/cases/category/`+itemname +"/",
+          url: `http://127.0.0.1:000/cases/category/`+itemname +"/",
           headers: {
             'Authorization': "Bearer " + token,
           }
@@ -92,7 +94,8 @@ async function getSummary(){
   var result = 
             {
               method: 'GET',
-              url:`http://192.168.10.12:5000/summary/${id}`,
+              // url:`http://192.168.30.102:5000/summary/${id}`,
+              url:`http://127.0.0.1:8000/summary/${id}`,
               headers: {'Authorization': "Bearer " + token}
             };
 
@@ -120,7 +123,8 @@ async function getSummary(){
     var result = 
     {
       method: 'GET',
-      url:`http://192.168.10.12:5000/summary/${id}/`,
+      // url:`http://192.168.30.102:5000/summary/${id}/`,
+      url:`http://127.0.0.1:8000/summary/${id}/`,
       headers: {'Authorization': "Bearer " + token}
     };
   
@@ -173,7 +177,8 @@ document.getElementById("noMessageError").classList.add("d-none");
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
-        fetch('http://192.168.10.12:5000/files/'+ id +"/",
+        // fetch('http://192.168.30.102:5000/files/'+ id +"/",
+        fetch('http://127.0.0.1:8000/files/'+ id +"/",
             {
                 method: 'DELETE',
                 headers: {
@@ -212,7 +217,8 @@ useEffect(() => {
     // setIsLoading(true)
     const files = {
       method: 'GET',
-      url: 'http://192.168.10.12:5000/files/',
+      // url: 'http://192.168.30.102:5000/files/',
+      url: 'http://127.0.0.1:8000/files/',
       headers: {
         'Authorization': "Bearer " + token}    
     
