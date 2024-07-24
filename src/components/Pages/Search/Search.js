@@ -265,12 +265,12 @@ async function search_by_category(category){
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+item._id}>
-                      { item.meta_info['Parties '].substring(0,70)} 
+                      { item.meta_info['Parties: '].substring(0,70)} 
                 </a></h4> 
-                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
-                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
-                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
-                        <p>Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
+                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s): ']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p>Citation: <span class="item">{item.meta_info['Citation:']}</span> </p>
+                        <p>County: <span class="item">{item.meta_info['County:']}</span></p>
+                        <p>Date: <span class="item">{item.meta_info['Date Delivered: ']}</span></p>
                         <p>Tags:&nbsp;&nbsp;   
                                     {/* <span class="badge badge-success light">{item.resolved_acts.slice(0,4)}</span> */}
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
@@ -402,12 +402,12 @@ rt of the asnwer //////// */}
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+cat._id}>
-                      { cat.meta_info['Parties '].substring(0,70)} 
+                      { cat.meta_info['Parties: '].substring(0,70)} 
                 </a></h4> 
-                        <p>Judge(s): <span class="item">{cat.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
-                        <p>Citation: <span class="item">{cat.meta_info['Citation']}</span> </p>
-                        <p>County: <span class="item">{cat.meta_info['County']}</span></p>
-                        <p>Date: <span class="item">{cat.meta_info['Date Delivered ']}</span></p>
+                        <p>Judge(s): <span class="item">{cat.meta_info['Judge(s): ']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p>Citation: <span class="item">{cat.meta_info['Citation:']}</span> </p>
+                        <p>County: <span class="item">{cat.meta_info['County:']}</span></p>
+                        <p>Date: <span class="item">{cat.meta_info['Date Delivered: ']}</span></p>
                         <p>Tags:&nbsp;&nbsp;   
                                     <span class="badge badge-success light">{cat.resolved_acts.slice(0,4)}</span>
                                     <span class="badge badge-success light">{cat.resolved_acts}</span>
@@ -475,12 +475,12 @@ rt of the asnwer //////// */}
                     <div class="col-md-12 col-xxl-12">
                       <div class="new-arrival-content position-relative">
                       <h4><a href={"/Case?id="+item._id}>
-                      { item.meta_info['Parties '].substring(0,70)} 
+                      { item.meta_info['Parties: '].substring(0,70)} 
                 </a></h4> 
-                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s) ']}<i class="fa fa-check-circle text-success"></i></span></p>
-                        <p>Citation: <span class="item">{item.meta_info['Citation']}</span> </p>
-                        <p>County: <span class="item">{item.meta_info['County']}</span></p>
-                        <p>Date: <span class="item">{item.meta_info['Date Delivered ']}</span></p>
+                        <p>Judge(s): <span class="item">{item.meta_info['Judge(s): ']}<i class="fa fa-check-circle text-success"></i></span></p>
+                        <p>Citation: <span class="item">{item.meta_info['Citation:']}</span> </p>
+                        <p>County: <span class="item">{item.meta_info['County:']}</span></p>
+                        <p>Date: <span class="item">{item.meta_info['Date Delivered: ']}</span></p>
                         <p>Tags:&nbsp;&nbsp;   
                                     {/* <span class="badge badge-success light">{item.resolved_acts.slice(0,4)}</span> */}
                                     <span class="badge badge-success light">{item.resolved_acts}</span>
